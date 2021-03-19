@@ -1,3 +1,9 @@
+            # meta_coder (Gary Miller) =)
+            # gmiller052611@gmail.com
+            # https://github.com/metacoder87/AAClasswork
+
+
+
 class Stack
 
 
@@ -16,4 +22,10 @@ class Stack
     def peek
       @ivar.first # returns, but doesn't remove, the top element in the stack
     end
+
   end
+
+
+            # meta_coder (Gary Miller) =)
+            # gmiller052611@gmail.com
+            # https://github.com/metacoder87/AAClasswork
