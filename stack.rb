@@ -9,3 +9,6 @@ class Stack
       @ivar.push(el)# adds an element to the stack
     end
 
+    def pop
+      @ivar.shift # removes one element from the stack
+    end
