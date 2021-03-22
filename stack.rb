@@ -5,6 +5,7 @@
 
 
 class Stack
+    #LIFO
 
 
     def initialize
@@ -16,11 +17,11 @@ class Stack
     end
 
     def pop
-      @ivar.shift # removes one element from the stack
+      @ivar.pop # removes one element from the stack
     end
 
     def peek
-      @ivar.first # returns, but doesn't remove, the top element in the stack
+      @ivar.last # returns, but doesn't remove, the top element in the stack
     end
 
   end
