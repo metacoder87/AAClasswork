@@ -33,4 +33,15 @@ class PolyTreeNode
         child.parent.children.delete_if { |kid| kid == child } && child.parent=(nil)
     end
 
+#Searchable
+
+    def dfs(target_value)
+        return nil if self.parent = nil
+        return self if self.value == target_value
+        self.children.each do |child| 
+            result = child.dfs(target_value)
+            return result unless result.nil?
+        end
+        nil
+    end
 end
