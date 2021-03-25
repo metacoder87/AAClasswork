@@ -28,4 +28,9 @@ class PolyTreeNode
         child.parent=(self)
     end
 
+    def remove_child(child)
+        raise if !child.parent.children.include?(child)
+        child.parent.children.delete_if { |kid| kid == child } && child.parent=(nil)
+    end
+
 end
