@@ -18,7 +18,13 @@ class KnightPathFinder
     end
 
     def build_move_tree(pos)
-
+        root_node = @starting_position
+        queue = [pos]
+        next_moves = new_move_positions(pos)
+        until queue.empty?
+        next_node = queue.unshift
+        queue << next_moves.unshift
+        bfs(next_node)
     end
 
 end
