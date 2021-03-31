@@ -1,7 +1,6 @@
 
 
 
-require 'byebug'
 require_relative '00_tree_node'
 
 class KnightPathFinder
@@ -17,12 +16,11 @@ class KnightPathFinder
         valid_moves
     end
 
-    attr_reader :considered, :root, :tree
+    attr_reader :considered, :root
 
     def initialize(pos)
         @considered = [pos]
         @root = PolyTreeNode.new(pos)
-        @tree = [root]
         build_move_tree
     end
 
@@ -34,18 +32,15 @@ class KnightPathFinder
 
     def build_move_tree
         queue = [@root]
-        # debugger
         until queue.empty?
         move = queue.shift
             next_moves = new_move_positions(move.value)
             next_moves.each do |next_move| 
                 new_node = PolyTreeNode.new(next_move)
                 new_node.parent = move
-                @tree << new_node
                 queue << new_node
             end
         end
-        tree
     end
 
 end
