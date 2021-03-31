@@ -4,13 +4,11 @@
 class KnightPathFinder
 
     def self.valid_moves(pos)
-        x = pos[0]
-        y = pos[1]
         valid_moves = []
         knight_moves = [[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]]
         knight_moves.each do |move|
-            x += move[0] 
-            y += move[1] 
+            x = pos[0] + move[0]
+            y = pos[1] + move[1] 
             valid_moves << [x,y] if (0..7).include?(x) && (0..7).include?(y)
         end
         valid_moves
