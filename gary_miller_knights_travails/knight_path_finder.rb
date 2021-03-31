@@ -1,6 +1,8 @@
 
 
 
+require_relative '00_tree_node'
+
 class KnightPathFinder
 
     def self.valid_moves(pos)
@@ -14,9 +16,11 @@ class KnightPathFinder
         valid_moves
     end
 
+    attr_reader :considered, :root
+
     def initialize(pos)
         @considered = [pos]
-        @starting_position = pos
+        @root = PolyTreeNode.new(pos)
         # build_move_tree
     end
 
