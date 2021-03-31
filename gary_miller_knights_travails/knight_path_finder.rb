@@ -16,11 +16,12 @@ class KnightPathFinder
         valid_moves
     end
 
-    attr_reader :considered, :root
+    attr_reader :considered, :start, :root
 
     def initialize(pos)
         @considered = [pos]
-        @root = PolyTreeNode.new(pos)
+        @start = pos
+        @root = PolyTreeNode.new(@start)
         build_move_tree
     end
 
@@ -30,13 +31,19 @@ class KnightPathFinder
         moves
     end
 
-    def build_move_tree(pos)
-        queue = [pos]
+    def build_move_tree
+        tree = [@root]
+        queue = [@root]
         until queue.empty?
-        next_node = queue.unshift
-        queue << new_move_positions(next_node)
-        bfs(next_node)
+        node = queue.unshift
+            new_move_positions(node.value).each do |next_move| 
+                new_node = PolyTreeNode.new(next_move)
+                new_node.parent = move
+                tree << node
+                queue << node
+            end
         end
+        tree
     end
 
 end
