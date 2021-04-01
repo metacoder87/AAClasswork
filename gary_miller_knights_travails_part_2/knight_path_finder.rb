@@ -19,6 +19,7 @@ class KnightPathFinder
     attr_reader :considered, :root
 
     def initialize(pos)
+        @start_pos = pos
         @considered = [pos]
         @root_node = PolyTreeNode.new(pos)
         build_move_tree
@@ -41,6 +42,10 @@ class KnightPathFinder
                 queue << new_node
             end
         end
+    end
+
+    def find_path(end_pos)
+        @root_node.bfs(end_pos)
     end
 
 end
