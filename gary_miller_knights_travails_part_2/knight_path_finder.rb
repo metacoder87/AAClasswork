@@ -52,11 +52,11 @@ class KnightPathFinder
     def trace_path_back
         current_node = @end_node
         path = []
-        if current_node
-            path.unshift(current_node.value)
+        until current_node.nil?
+            path << current_node.value
             current_node = current_node.parent
-        else return path
         end
+        path
     end
 
 end
