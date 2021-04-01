@@ -1,4 +1,6 @@
-
+            # meta_coder (Gary Miller) =)
+            # gmiller052611@gmail.com
+            # https://github.com/metacoder87/AAClasswork
 
 
 require_relative '00_tree_node'
@@ -56,7 +58,7 @@ class KnightPathFinder
             path << current_node.value
             current_node = current_node.parent
         end
-        path
+        path.reverse
     end
 
 end
