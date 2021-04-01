@@ -13,7 +13,8 @@ class TicTacToeNode
   end
 
   def losing_node?(evaluator)
-    
+    if @board.over?
+
   end
 
   def winning_node?(evaluator)
@@ -22,5 +23,9 @@ class TicTacToeNode
   # This method generates an array of all moves that can be made after
   # the current move.
   def children
+    day_care = []
+      @board.each { |child| day_care << child } 
+    day_care
   end
+
 end
