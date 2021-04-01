@@ -7,6 +7,8 @@ require_relative '00_tree_node'
 
 class KnightPathFinder
 
+    # Finds the various moves a knight may make in chess from a given position
+
     def self.valid_moves(pos)
         valid_moves = []
         knight_moves = [[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]]
@@ -20,6 +22,10 @@ class KnightPathFinder
 
     attr_reader :considered, :start_pos, :root_node, :end_node
 
+    # Saves the starting position creates a box to store all considered moves
+    # Creates the root node of a Poly Tree and launches a method to build a
+    # Tree of moves
+
     def initialize(pos)
         @start_pos = pos
         @considered = [pos]
@@ -27,11 +33,15 @@ class KnightPathFinder
         build_move_tree
     end
 
+    # Finds all potential immediate moves from a given position
+
     def new_move_positions(pos)
         moves = KnightPathFinder.valid_moves(pos).select { |move| !@considered.include?(move) }
         moves.each { |move| @considered << move }
         moves
     end
+
+    # Builds the Poly Tree of moves
 
     def build_move_tree
         queue = [@root_node]
@@ -46,10 +56,16 @@ class KnightPathFinder
         end
     end
 
+    # Finds a path of moves from the starting position to a given end position
+    # By searching the Poly Tree with a Breadth First Search and launching a 
+    # Helper method to seperate the node values
+
     def find_path(end_pos)
         @end_node = @root_node.bfs(end_pos)
         trace_path_back
     end
+
+    # This is the helper method the sorts out the node values from the path
 
     def trace_path_back
         current_node = @end_node
@@ -62,3 +78,11 @@ class KnightPathFinder
     end
 
 end
+
+
+
+ # test cases
+
+kpf = KnightPathFinder.new([0, 0])
+kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
