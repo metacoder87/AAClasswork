@@ -16,7 +16,7 @@ class KnightPathFinder
         valid_moves
     end
 
-    attr_reader :considered, :root
+    attr_reader :considered, :start_pos, :root_node, :end_node
 
     def initialize(pos)
         @start_pos = pos
@@ -45,7 +45,18 @@ class KnightPathFinder
     end
 
     def find_path(end_pos)
-        @root_node.bfs(end_pos)
+        @end_node = @root_node.bfs(end_pos)
+        trace_path_back
+    end
+
+    def trace_path_back
+        current_node = @end_node
+        path = []
+        if current_node
+            path.unshift(current_node.value)
+            current_node = current_node.parent
+        else return path
+        end
     end
 
 end
