@@ -14,7 +14,7 @@ class TicTacToeNode
 
   def losing_node?(evaluator)
     if @board.over?
-
+    end
   end
 
   def winning_node?(evaluator)
@@ -24,8 +24,8 @@ class TicTacToeNode
   # the current move.
   def children
     day_care = []
-      @board.each { |child| day_care << child } 
-    day_care
+      @board.rows.each { |row| row.each { |child| day_care << child } }
+    p day_care
   end
 
 end
