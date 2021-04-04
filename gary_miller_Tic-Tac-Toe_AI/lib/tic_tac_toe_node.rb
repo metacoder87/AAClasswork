@@ -24,8 +24,16 @@ class TicTacToeNode
   # the current move.
   def children
     day_care = []
-      @board.rows.each { |row| row.each { |child| day_care << child } }
-    p day_care
+      @board.rows.each_with_index do |row, idx| 
+        row.each_with_index do |child, i|
+          child_node = []
+          grid = @board.dup 
+          child_node << grid[idx, i] = next_mover_mark
+          child_node << @prev_move_pos = [idx, i]
+          day_care << child_node
+        end
+      end
+      p day_care
   end
 
 end
