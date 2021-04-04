@@ -7,6 +7,10 @@ class TicTacToeNode
   def initialize(board, next_mover_mark, prev_move_pos = nil)
     @board = board
     @next_mover_mark = next_mover_mark
+    if next_mover_mark == :x
+      @current_mark = :o
+    else @current_mark = :x
+    end
     if prev_move_pos
       @prev_move_pos = prev_move_pos
     end
@@ -26,11 +30,8 @@ class TicTacToeNode
     day_care = []
       @board.rows.each_with_index do |row, idx| 
         row.each_with_index do |child, i|
-          child_node = []
-          grid = @board.dup 
-          child_node << grid[idx, i] = next_mover_mark
-          child_node << @prev_move_pos = [idx, i]
-          day_care << child_node
+          grid = @board.dup.[]=([idx, i], next_mover_mark)
+          day_care << TicTacToeNode.new(grid, next_mover_mark, prev_move_pos = [idx, i])
         end
       end
       p day_care
