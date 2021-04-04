@@ -31,10 +31,10 @@ class TicTacToeNode
       @board.rows.each_with_index do |row, idx| 
         row.each_with_index do |child, i|
           grid = @board.dup.[]=([idx, i], next_mover_mark)
-          day_care << TicTacToeNode.new(grid, next_mover_mark, prev_move_pos = [idx, i])
+          day_care << TicTacToeNode.new(grid, @current_mark, prev_move_pos = [idx, i])
         end
       end
-      p day_care
+      day_care
   end
 
 end
