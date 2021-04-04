@@ -30,7 +30,8 @@ class TicTacToeNode
     day_care = []
       @board.rows.each_with_index do |row, idx| 
         row.each_with_index do |child, i|
-          grid = @board.dup.[]=([idx, i], next_mover_mark)
+          grid = @board.dup
+          grid.[]=([idx, i], next_mover_mark)
           day_care << TicTacToeNode.new(grid, @current_mark, prev_move_pos = [idx, i])
         end
       end
