@@ -8,8 +8,8 @@ class TicTacToeNode
     @board = board
     @next_mover_mark = next_mover_mark
     if next_mover_mark == :x
-      @current_mark = :o
-    else @current_mark = :x
+      @prev_mark = :o
+    else @prev_mark = :x
     end
     if prev_move_pos
       @prev_move_pos = prev_move_pos
@@ -18,11 +18,15 @@ class TicTacToeNode
 
   def losing_node?(evaluator)
     if @board.over?
-      if @board.winner != evaluator
+      if @board.winner != evaluator 
         return true
-      else false
+      elsif @board.winner == evaluator
+        return false
+      elsif @board.tied?
+        return false
       end
     end
+    return true if children.any? { |child| child.losing_node?(evaluator) == true }
   end
 
   def winning_node?(evaluator)
@@ -37,7 +41,7 @@ class TicTacToeNode
           if @board.empty?([idx, i])
             grid = @board.dup
             grid.[]=([idx, i], next_mover_mark)
-            day_care << TicTacToeNode.new(grid, @current_mark, prev_move_pos = [idx, i])
+            day_care << TicTacToeNode.new(grid, @prev_mark, prev_move_pos = [idx, i])
           else next
           end
         end
