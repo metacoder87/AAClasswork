@@ -5,13 +5,11 @@ class SuperComputerPlayer < ComputerPlayer
   def move(game, mark)
     moves = []
     node = TicTacToeNode.new(game.board, mark)
-    tree = node.children
-    tree.each do |child|
-      moves << child.prev_move_pos if child.winning_node?(mark)
+    if node.children.none? { |child| child.winning_node?(mark) }
+        return node.children.select { |child| !child.losing_node?(mark) ? child.prev_move_pos : next }.first
+    else node.children.each { |child| moves << child.prev_move_pos if child.winning_node?(mark) }
     end
-    return moves if !moves.empty?
-
-    raise "No winning moves, I quit"
+    moves
   end
   
 end
