@@ -26,7 +26,10 @@ class TicTacToeNode
         return false
       end
     end
-    return true if children.any? { |child| child.losing_node?(evaluator) == true }
+    if @next_mover_mark != evaluator
+      return true if children.any? { |child| child.losing_node?(@prev_mark) == true }
+    end
+    false
   end
 
   def winning_node?(evaluator)
