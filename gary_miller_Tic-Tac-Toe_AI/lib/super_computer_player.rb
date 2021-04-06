@@ -1,11 +1,17 @@
 require_relative 'tic_tac_toe_node'
 
 class SuperComputerPlayer < ComputerPlayer
+
   def move(game, mark)
-    node = Tic_Tac_Toe_Node.new(game, mark)
-    winner = node.children.select { |child| node.winning_node?(mark) }
-    return winner.prev_move_pos
+    moves = []
+    node = TicTacToeNode.new(game.board, mark)
+    node.children.each do |child|
+      moves << child.prev_move_pos if child.winning_node?(mark)
+    end
+    return moves.first if moves.count == 1
+    return moves
   end
+  
 end
 
 if __FILE__ == $PROGRAM_NAME
