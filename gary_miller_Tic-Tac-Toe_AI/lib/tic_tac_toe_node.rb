@@ -28,9 +28,7 @@ class TicTacToeNode
 
   def winning_node?(evaluator)
     return true if @board.over? && @board.winner == evaluator
-    if @next_mover_mark == evaluator
-      return true if children.any? { |child| child.winning_node?(evaluator) }
-    end
+    return true if children.any? { |child| child.winning_node?(evaluator) }
     false
   end
 
