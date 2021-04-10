@@ -1,11 +1,13 @@
 require_relative 'tic_tac_toe_node'
-require 'byebug'
 
 class SuperComputerPlayer < ComputerPlayer
 
   def move(game, mark)
     @node = TicTacToeNode.new(game.board, mark)
-    not_losing_node(mark)
+    if winning_node(mark).nil?
+      return not_losing_node(mark)
+    end
+    return winning_node(mark)
   end
 
   def winning_node(mark)
@@ -13,7 +15,7 @@ class SuperComputerPlayer < ComputerPlayer
   end
 
   def not_losing_node(mark)
-    @node.children.select { |child| child.losing_node?(child.prev_mark) ? next : child }
+    @node.children.select { |child| child.losing_node?(child.prev_mark) ? next : child }.first.prev_move_pos
   end
 
 end
