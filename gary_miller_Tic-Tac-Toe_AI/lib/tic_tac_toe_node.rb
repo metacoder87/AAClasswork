@@ -4,12 +4,16 @@ class TicTacToeNode
 
   attr_reader :board, :next_mover_mark, :prev_move_pos, :prev_mark
 
+  # Builds the node for determining the outcome of each position.
+
   def initialize(board, next_mover_mark, prev_move_pos = nil)
     @board = board
     @next_mover_mark = next_mover_mark
     next_mover_mark == :x ? @prev_mark = :o : @prev_mark = :x
     @prev_move_pos = prev_move_pos
   end
+
+  # Determines if the node will lose the game for a player.
 
   def losing_node?(evaluator)
     return board.won? && @board.winner != evaluator if @board.over?
@@ -19,6 +23,8 @@ class TicTacToeNode
       children.any? { |child| child.losing_node?(evaluator) }  
     end
   end
+
+  # Determines if the node will win the game for a player.
 
   def winning_node?(evaluator)
     return @board.winner == evaluator if @board.over? 
