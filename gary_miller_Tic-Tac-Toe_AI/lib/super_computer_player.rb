@@ -11,6 +11,8 @@ class SuperComputerPlayer < ComputerPlayer
 
     node = not_losing_node(mark)
     return node.prev_move_pos if node
+
+    raise "No winning path found. You will lose."
   end
 
   def winning_node(mark)
