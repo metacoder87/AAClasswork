@@ -1,3 +1,8 @@
+            # meta_coder (Gary Miller) =)
+            # gmiller052611@gmail.com
+            # https://github.com/metacoder87/AAClasswork
+
+
 require_relative 'tic_tac_toe_node'
 
 class SuperComputerPlayer < ComputerPlayer
@@ -27,3 +32,7 @@ if __FILE__ == $PROGRAM_NAME
 
   TicTacToe.new(hp, cp).run
 end
+
+            # meta_coder (Gary Miller) =)
+            # gmiller052611@gmail.com
+            # https://github.com/metacoder87/AAClasswork
