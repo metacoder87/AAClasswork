@@ -15,13 +15,12 @@ def reaction(maybe_fruit)
 end
 
 def feed_me_a_fruit
-  rescue 
   puts "Hello, I am a friendly monster. :)"
   puts "Feed me a fruit! (Enter the name of a fruit:)"
-    maybe_fruit = gets.split().join.downcase
-      if maybe_fruit == "coffee"
-        retry
-      end
+  maybe_fruit = gets.split().join.downcase
+  rescue 
+    maybe_fruit == "coffee"
+      retry
   else 
     reaction(maybe_fruit)
 end  
