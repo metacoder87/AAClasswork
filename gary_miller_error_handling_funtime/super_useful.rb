@@ -6,24 +6,30 @@ end
 # PHASE 3
 FRUITS = ["apple", "banana", "orange"]
 
+class CoffeeError << StandardError
+end
+
 def reaction(maybe_fruit)
   if FRUITS.include? maybe_fruit
     return "OMG, thanks so much for the #{maybe_fruit}!"
   else 
-    raise StandardError 
+    raise CoffeeError
   end 
+ensure
+  puts maybe_fruit
 end
 
 def feed_me_a_fruit
   puts "Hello, I am a friendly monster. :)"
   puts "Feed me a fruit! (Enter the name of a fruit:)"
-  maybe_fruit = gets.split().join.downcase
+  maybe_fruit = gets.chomp.downcase
   rescue 
-    maybe_fruit == "coffee"
-      retry
-  else 
     reaction(maybe_fruit)
-end  
+      puts "it's coffee"
+      retry
+  else
+    reaction(maybe_fruit)
+end 
 
 # PHASE 4
 class BestFriend
