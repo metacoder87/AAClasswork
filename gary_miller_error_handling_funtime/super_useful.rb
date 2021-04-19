@@ -10,13 +10,11 @@ class CoffeeError << StandardError
 end
 
 def reaction(maybe_fruit)
-  if FRUITS.include? maybe_fruit
-    return "OMG, thanks so much for the #{maybe_fruit}!"
+  unless FRUITS.include? maybe_fruit
+    raise ArgumentError.new "That's not a fruit."
   else 
-    raise CoffeeError
+    return "OMG, thanks so much for the #{maybe_fruit}!"
   end 
-ensure
-  puts maybe_fruit
 end
 
 def feed_me_a_fruit
