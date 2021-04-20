@@ -21,12 +21,14 @@ def feed_me_a_fruit
   puts "Hello, I am a friendly monster. :)"
   puts "Feed me a fruit! (Enter the name of a fruit:)"
   maybe_fruit = gets.chomp.downcase
-  rescue 
-    reaction(maybe_fruit)
-      puts "it's coffee"
-      retry
-  else
-    reaction(maybe_fruit)
+  reaction(maybe_fruit)
+  rescue ArgumentError
+    if maybe_fruit == "coffee"
+      puts "I love coffee, but it ain't fruit!"
+      retry 
+    else puts "I asked for fruit and you give me, #{maybe_fruit}. I quit"
+      return
+    end
 end 
 
 # PHASE 4
