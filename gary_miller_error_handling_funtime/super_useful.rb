@@ -1,6 +1,78 @@
 # PHASE 2
 def convert_to_int(str)
-  Integer(str)
+  num_arr = str.split(" ")
+  if num_arr.count == 1
+    return num_word(num_arr.first)
+  elsif num_arr.count == 2
+    return num_arr.map! { |word| word == num_arr.first ? dub_num_word(word) : num_word(word) }.join.to_i
+  else   
+    return "That there number is too big for me. I would have to take off my shoes to count that high, but I forgot to bring my feet to work today."
+  end
+end
+
+def num_word(word)
+  case word
+  when "zero"
+    0
+  when "one"
+    1
+  when "two"
+    2
+  when "three"
+    3
+  when "four"
+    4
+  when "five"
+    5
+  when "six"
+    6
+  when "seven"
+    7
+  when "eight"
+    8
+  when "nine"
+    9
+  when "ten"
+    10
+  when "twenty"
+    20
+  when "thirty"
+    30 
+  when "forty"
+    40
+  when "fifty"
+    50
+  when "sixty"
+    60
+  when "seventy"
+    70
+  when "eighty"
+    80
+  when "ninety"
+    90
+  else "That is not a number"
+  end
+end
+
+def dub_num_word(word)
+  case word
+  when "twenty"
+    2 
+  when "thirty"
+    3 
+  when "forty"
+    4
+  when "fifty"
+    5 
+  when "sixty"
+    6 
+  when "seventy"
+    7
+  when "eighty"
+    8
+  when "ninety"
+    9
+  end
 end
 
 # PHASE 3
@@ -33,6 +105,7 @@ class BestFriend
   def initialize(name, yrs_known, fav_pastime)
     @name = name
     @yrs_known = yrs_known
+     raise ArgumentError.new "Friendships need to mature for at least 5 years before they can be BEST friends." unless @yrs_known > 4
     @fav_pastime = fav_pastime
   end
 
