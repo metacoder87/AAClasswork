@@ -6,9 +6,6 @@ end
 # PHASE 3
 FRUITS = ["apple", "banana", "orange"]
 
-class CoffeeError << StandardError
-end
-
 def reaction(maybe_fruit)
   unless FRUITS.include? maybe_fruit
     raise ArgumentError.new "That's not a fruit."
