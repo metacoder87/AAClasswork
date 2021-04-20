@@ -4,7 +4,7 @@ puts "'five' == #{convert_to_int('five')}"
 
 feed_me_a_fruit
 
-sam = BestFriend.new('', 5, '')
+sam = BestFriend.new('Sam', 5, 'golf')
 
 sam.talk_about_friendship
 sam.do_friendstuff

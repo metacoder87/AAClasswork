@@ -80,7 +80,7 @@ FRUITS = ["apple", "banana", "orange"]
 
 def reaction(maybe_fruit)
   unless FRUITS.include? maybe_fruit
-    raise ArgumentError.new "That's not a fruit."
+    raise ArgumentError.new "That's not a fruit I like."
   else 
     return "OMG, thanks so much for the #{maybe_fruit}!"
   end 
@@ -104,9 +104,11 @@ end
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
     @name = name
+      raise ArgumentError.new "Best friends know each others names." unless @name.length > 0
     @yrs_known = yrs_known
-     raise ArgumentError.new "Friendships need to mature for at least 5 years before they can be BEST friends." unless @yrs_known > 4
+      raise ArgumentError.new "Friendships need to mature for at least 5 years before they can be BEST friends." unless @yrs_known > 4
     @fav_pastime = fav_pastime
+      raise ArgumentError.new "Best friends do things together." unless @fav_pastime.length > 0
   end
 
   def talk_about_friendship
