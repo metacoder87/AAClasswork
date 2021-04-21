@@ -3,11 +3,11 @@
 
 require_relative 'employee'
 
-class Manager << Employee
+class Manager < Employee
 
-    def initialize(employees)
+    def initialize(name, title, salary, boss, employees)
         @employees = employees
-        super
+        super(name, title, salary, boss)
     end
 
 end
