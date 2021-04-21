@@ -1,7 +1,7 @@
 class Board
 
     def initialize
-        Array.new()
+        Array.new(8) { Array.new() }
     end
 
 end
