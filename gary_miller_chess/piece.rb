@@ -1,9 +1,10 @@
 class Piece
 
-    attr_accessor :position
+    attr_accessor :position, :board, :color
 
-    def initialize(position)
-        @position = position
+    def initialize(color, board, position)
+        @board, @color, @position = board, color, position
     end
 
 end
+
