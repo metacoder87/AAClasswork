@@ -11,7 +11,13 @@ class Board
 
     def populate
         @rows.each_with_index do |row, idx|
-            row.map!.with_index { |col, i| col = Piece.new([idx, i]) } if idx == 0 || idx == 1 || idx == 6 || idx == 7 
+            row.map!.with_index do |col, i| 
+                if idx == 0 || idx == 1 
+                    col = Piece.new("black", @rows, [idx, i]) 
+                elsif idx == 6 || idx == 7 
+                    col = Piece.new("white", @rows, [idx, i])
+                end
+            end
         end
     end
 
