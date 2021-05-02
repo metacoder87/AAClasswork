@@ -50,8 +50,7 @@ class Board
     end
 
     def []=(pos_x, pos_y, val)
-        x, y = pos_x, pos_y
-        @rows[x][y].position = val
+       move_piece([pos_x, pos_y], val)
     end
 
     def render
