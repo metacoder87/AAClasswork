@@ -6,6 +6,10 @@ class Piece
         @board, @color, @position = board, color, position
     end
 
+    def moves
+
+    end
+
     def to_s
 
     end

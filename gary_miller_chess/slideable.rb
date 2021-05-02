@@ -1,14 +1,16 @@
 module Slideable
 
-    def horizontal_dirs
+    def horizontal_dirs(pos)
 
     end
 
-    def diaganol_dirs
-
+    def diaganol_dirs(pos)
+        x, y = pos
+        dirs = [1,1], [1,-1], [-1,-1], [-1,1]
+        
     end
 
-    def moves
+    def moves(direction)
 
     end
 
