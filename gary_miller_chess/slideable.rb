@@ -1,17 +1,22 @@
 module Slideable
 
-    def horizontal_dirs(pos)
-
+    def horizontal_dirs
+        [[0,1], [0,-1], [1,0], [-1,0]].each { |dir| HORIZONTAL_DIRS << dir }
+        return HORIZONTAL_DIRS
     end
 
-    def diaganol_dirs(pos)
-        x, y = pos
-        dirs = [1,1], [1,-1], [-1,-1], [-1,1]
-        
+    def diaganol_dirs
+        [[1,1], [1,-1], [-1,-1], [-1,1]].each { |dir| DIAGANOL_DIRS << dir }
+        return DIAGANOL_DIRS
     end
 
-    def moves(direction)
-
+    def moves
+        all_moves = []
+        move_dirs.each do |move|
+            x, y = move
+            all_moves << grow_unblocked_moves_in_dir(dx, dy)
+        end
+        return all_moves
     end
 
 private
@@ -21,11 +26,21 @@ private
     DIAGANOL_DIRS = []
 
     def move_dirs
-
+        return diaganol_dirs if self.is_a?(Bishop)
+        return horizontal_dirs if self.is_a?(Rook)
+        return diaganol_dirs && horizontal_dirs if self.is_a?(Queen)
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)
-
+        clear_path = []
+        x, y = self.position
+        until x == 7 || y == 7 || x == 0 || y == 0
+            x += dx && y += dy
+            if self[x, y].empty?
+                clear_path << [x, y]
+            end
+        end
+        return clear_path
     end
 
 end
