@@ -2,12 +2,13 @@ class Piece
 
     attr_accessor :position, :board, :color
 
-    def initialize(color, board, position)
+    def initialize(board, position)
         @board, @color, @position = board, symbol, position
     end
 
     def moves
         # Each subclass moves differently.
+        puts "No moves available."
     end
 
     def to_s
@@ -29,12 +30,12 @@ class Piece
         @position = val
     end
 
-    def symbol
+    def symbol(color = nil)
         return :_
     end
 
     def move_into_check?(end_pos)
-        
+
     end
 
 end
