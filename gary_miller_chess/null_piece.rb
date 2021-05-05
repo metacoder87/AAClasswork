@@ -3,9 +3,11 @@
 
 class NullPiece < Piece
     include Singleton
+
+    attr_reader :color
     
     def initialize
-
+        @color = symbol
     end
 
     def moves
@@ -13,7 +15,7 @@ class NullPiece < Piece
     end
 
     def symbol
-
+        return :_
     end
 
 end
