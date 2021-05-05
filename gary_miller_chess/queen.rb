@@ -5,13 +5,14 @@ class Queen < Piece
     include Slideable
 
     def symbol
-        return :Q
+        return :BQ if @position.first == 0
+        return :WQ
     end
 
 private
 
     def move_dirs
-        return "both"
+        
     end
 
 end
