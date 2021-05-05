@@ -5,7 +5,8 @@ class King < Piece
     include Stepable
 
     def symbol
-        return :K
+        return :BK if @position.first == 0
+        return :WK
     end
 
 protected
