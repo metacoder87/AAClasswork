@@ -5,13 +5,14 @@ class Bishop < Piece
     include Slideable
 
     def symbol
-        return :B
+        return :BB if @position.first == 0
+        return :WB
     end
 
 private
 
     def move_dirs
-        return "diaganol"
+        
     end
 
 end
