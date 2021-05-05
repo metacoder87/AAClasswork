@@ -15,29 +15,29 @@ class Board
             row.map!.with_index do |col, i| 
                 if idx == 0
                     if i == 0 || i == 7
-                        col = Piece.new(:BR, board, [idx, i])
+                        col = Rook.new(board, [idx, i])
                     elsif i == 1 || i == 6
-                        col = Piece.new(:Bk, board, [idx, i])
+                        col = Knight.new(board, [idx, i])
                     elsif i == 2 || i == 5
-                        col = Piece.new(:BB, board, [idx, i])
+                        col = Bishop.new(board, [idx, i])
                     elsif i == 3 
-                        col = Piece.new(:BQ, board, [idx, i])
-                    else col = Piece.new(:BK, board, [idx, i])
+                        col = Queen.new(board, [idx, i])
+                    else col = King.new(board, [idx, i])
                     end
                 elsif idx == 1
-                    col = Piece.new(:BP, board, [idx, i])
+                    col = Pawn.new(board, [idx, i])
                 elsif idx == 6
-                    col = Piece.new(:WP, board, [idx, i])
+                    col = Pawn.new(board, [idx, i])
                 elsif idx == 7
                     if i == 0 || i == 7
-                        col = Piece.new(:WR, board, [idx, i])
+                        col = Rook.new(board, [idx, i])
                     elsif i == 1 || i == 6
-                        col = Piece.new(:Wk, board, [idx, i])
+                        col = Knight.new(board, [idx, i])
                     elsif i == 2 || i == 5
-                        col = Piece.new(:WB, board, [idx, i])
+                        col = Bishop.new(board, [idx, i])
                     elsif i == 3
-                        col = Piece.new(:WQ, board, [idx, i])
-                    else col = Piece.new(:WK, board, [idx, i])
+                        col = Queen.new(board, [idx, i])
+                    else col = King.new(board, [idx, i])
                     end
                 end
             end
