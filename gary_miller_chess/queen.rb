@@ -11,7 +11,7 @@ class Queen < Piece
 
     def symbol
         x, y = @position
-        return :BQ if @position == 0
+        return :BQ if x == 0
         return :WQ
     end
 
