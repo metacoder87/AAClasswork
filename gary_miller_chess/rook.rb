@@ -1,11 +1,17 @@
-
+require_relative 'slideable'
 
 
 class Rook < Piece
     include Slideable
 
+    def initialize(board, position)
+        super
+        @color = symbol
+    end
+
     def symbol
-        return :BR if @position.first == 0
+        x, y = @position
+        return :BR if x == 0
         return :WR
     end
 

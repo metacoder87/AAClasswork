@@ -1,11 +1,17 @@
-
+require_relative 'stepable'
 
 
 class King < Piece
     include Stepable
 
+    def initialize(board, position)
+        super
+        @color = symbol
+    end
+
     def symbol
-        return :BK if @position.first == 0
+        x, y = @position
+        return :BK if x == 0
         return :WK
     end
 

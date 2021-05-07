@@ -3,8 +3,14 @@
 
 class Pawn < Piece
 
+    def initialize(board, position)
+        super
+        @color = symbol
+    end
+
     def symbol
-        return :BP if @position.first == 1
+        x, y = @position
+        return :BP if x == 1
         return :WP 
     end
 

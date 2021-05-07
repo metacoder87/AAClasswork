@@ -3,7 +3,7 @@ class Piece
     attr_accessor :position, :board, :color
 
     def initialize(board, position)
-        @board, @color, @position = board, symbol, position
+        @board, @position, @color = board, position, symbol
     end
 
     def moves
@@ -16,7 +16,7 @@ class Piece
     end
 
     def empty?
-        @color == :_
+        @color == :__
     end
 
     def valid_moves

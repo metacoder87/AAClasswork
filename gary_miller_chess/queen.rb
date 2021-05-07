@@ -1,11 +1,17 @@
-
+require_relative 'slideable'
 
 
 class Queen < Piece
     include Slideable
 
+    def initialize(board, position)
+        super
+        @color = symbol
+    end
+
     def symbol
-        return :BQ if @position.first == 0
+        x, y = @position
+        return :BQ if @position == 0
         return :WQ
     end
 

@@ -1,8 +1,9 @@
-require_relative 'piece'
+files = ['piece', 'rook', 'knight', 'bishop', 'pawn', 'king', 'queen', 'null_piece']
+files.each { |file| require_relative file }
 
 class Board
 
-    attr_reader :rows
+    attr_reader :rows, :blank
 
     def initialize
         @rows = Array.new(8) { Array.new(8) }
@@ -12,8 +13,8 @@ class Board
     def populate
         board = @rows.dup
         @rows.each_with_index do |row, idx|
-            row.map!.with_index do |col, i| 
-                if idx == 0
+            row.map!.with_index do |col, i|
+                if idx == 0 || idx == 7
                     if i == 0 || i == 7
                         col = Rook.new(board, [idx, i])
                     elsif i == 1 || i == 6
@@ -24,21 +25,9 @@ class Board
                         col = Queen.new(board, [idx, i])
                     else col = King.new(board, [idx, i])
                     end
-                elsif idx == 1
+                elsif idx == 1 || idx == 6
                     col = Pawn.new(board, [idx, i])
-                elsif idx == 6
-                    col = Pawn.new(board, [idx, i])
-                elsif idx == 7
-                    if i == 0 || i == 7
-                        col = Rook.new(board, [idx, i])
-                    elsif i == 1 || i == 6
-                        col = Knight.new(board, [idx, i])
-                    elsif i == 2 || i == 5
-                        col = Bishop.new(board, [idx, i])
-                    elsif i == 3
-                        col = Queen.new(board, [idx, i])
-                    else col = King.new(board, [idx, i])
-                    end
+                else col = NullPiece.instance
                 end
             end
         end

@@ -1,4 +1,4 @@
-
+require 'singleton'
 
 
 class NullPiece < Piece
@@ -15,7 +15,7 @@ class NullPiece < Piece
     end
 
     def symbol
-        return :_
+        return :__
     end
 
 end

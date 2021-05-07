@@ -1,11 +1,17 @@
-
+require_relative 'slideable'
 
 
 class Bishop < Piece
     include Slideable
 
+    def initialize(board, position)
+        super
+        @color = symbol
+    end
+
     def symbol
-        return :BB if @position.first == 0
+        x, y = @position
+        return :BB if x == 0
         return :WB
     end
 
