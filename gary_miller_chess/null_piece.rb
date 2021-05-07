@@ -9,11 +9,7 @@ class NullPiece < Piece
     def initialize
         @color = symbol
     end
-
-    def moves
-        
-    end
-
+    
     def symbol
         return :__
     end
