@@ -58,12 +58,13 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        raise "That space is between pieces at the moment. Try again." unless @rows[start_pos[0]][start_pos[1]].instance_of?(Piece)
-        raise "Can't move there." unless @rows[end_pos[0]][end_pos[1]].nil? || end_pos[0] > 7 || end_pos[1] > 7
+        raise "That space is between pieces at the moment. Try again." unless @rows[start_pos[0]][start_pos[1]].is_a?(Piece)
+        raise "Can't move there." unless !@rows[end_pos[0]][end_pos[1]].empty? || end_pos[0] < 8 && end_pos[1] < 8
         piece = @rows[start_pos[0]][start_pos[1]]
         piece.position = end_pos
         @rows[end_pos[0]][end_pos[1]] = piece
-        @rows[start_pos[0]][start_pos[1]] = nil 
+        @rows[start_pos[0]][start_pos[1]] = NullPiece.instance
+        return render
     end
 
 end
