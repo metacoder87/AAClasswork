@@ -42,21 +42,6 @@ class Board
        move_piece([pos_x, pos_y], val)
     end
 
-    def render
-        grid = []
-        @rows.each do |row|
-            arr = []
-            row.each do |col|
-                    if col
-                        arr << col.color
-                    else arr << col
-                    end
-                end
-                grid << arr
-            end
-        grid.each { |row| puts row.join(" ") }
-    end
-
     def move_piece(start_pos, end_pos)
         raise "That space is between pieces at the moment. Try again." unless @rows[start_pos[0]][start_pos[1]].is_a?(Piece)
         raise "Can't move there." unless !@rows[end_pos[0]][end_pos[1]].empty? || end_pos[0] < 8 && end_pos[1] < 8
@@ -65,6 +50,12 @@ class Board
         @rows[end_pos[0]][end_pos[1]] = piece
         @rows[start_pos[0]][start_pos[1]] = NullPiece.instance
         return render
+    end
+
+    def valid_pos(pos)
+        x, y = pos
+        return true if (0..7).include?(x) && (0..7).include?(y)
+        false
     end
 
 end
