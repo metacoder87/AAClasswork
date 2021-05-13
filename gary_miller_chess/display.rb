@@ -28,6 +28,7 @@ class Display
                 grid << arr
             end
         grid.each { |row| puts row.join(" ") }
+        return 
     end
 
 end
