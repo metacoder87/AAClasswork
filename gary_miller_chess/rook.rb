@@ -11,8 +11,8 @@ class Rook < Piece
 
     def symbol
         x, y = @position
-        return :BR if x == 0
-        return :WR
+        return :♜R if x == 0
+        return :♖R
     end
 
 private

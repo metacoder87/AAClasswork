@@ -3,7 +3,7 @@ class Piece
     attr_accessor :position, :board, :color
 
     def initialize(board, position)
-        @board, @position, @color = board, position, symbol
+        @board, @position, @color, @symbol = board, position, color, symbol
     end
 
     def moves
@@ -30,7 +30,13 @@ class Piece
         @position = val
     end
 
-    def symbol(color = nil)
+    def color
+        x, y = @position
+        return "black" if x == 0 || x == 1
+        return "white" if x == 6 || x == 7
+    end
+
+    def symbol
         return :_
     end
 

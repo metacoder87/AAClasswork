@@ -11,8 +11,8 @@ class Knight < Piece
 
     def symbol
         x, y = @position
-        return :BN if x == 0
-        return :WN
+        return :♞k if x == 0
+        return :♘k
     end
 
 protected

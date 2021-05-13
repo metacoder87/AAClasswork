@@ -10,8 +10,8 @@ class Pawn < Piece
 
     def symbol
         x, y = @position
-        return :BP if x == 1
-        return :WP 
+        return :♟p if x == 1
+        return :♙p 
     end
 
     def moves

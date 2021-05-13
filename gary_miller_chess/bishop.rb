@@ -11,8 +11,8 @@ class Bishop < Piece
 
     def symbol
         x, y = @position
-        return :BB if x == 0
-        return :WB
+        return :♝B if x == 0
+        return :♗B
     end
 
 private

@@ -15,9 +15,14 @@ class Display
         @board.rows.each do |row|
             arr = []
             row.each do |col|
-                    if col
-                        arr << col.color
-                    else arr << col
+                    unless col.position == cursor.cursor_pos
+                        if col.color == "black"
+                            arr << col.symbol.to_s.black.on_white
+                        elsif col.color == "white" 
+                            arr << col.symbol.to_s.white.on_black
+                        else arr << col.symbol.to_s.black.on_black
+                        end
+                    else arr << col.symbol.to_s.red.on_light_yellow
                     end
                 end
                 grid << arr

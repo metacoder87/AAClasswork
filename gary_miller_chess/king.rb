@@ -11,8 +11,8 @@ class King < Piece
 
     def symbol
         x, y = @position
-        return :BK if x == 0
-        return :WK
+        return :♚K if x == 0
+        return :♔K
     end
 
 protected
