@@ -4,11 +4,6 @@ require_relative 'stepable'
 class Knight < Piece
     include Stepable
 
-    def initialize(board, position)
-        super
-        @color = symbol
-    end
-
     def symbol
         x, y = @position
         return :♞k if x == 0
