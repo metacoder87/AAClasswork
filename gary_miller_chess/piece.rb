@@ -16,7 +16,7 @@ class Piece
     end
 
     def empty?
-        @color == :__
+        @color == nil
     end
 
     def valid_moves
@@ -37,7 +37,7 @@ class Piece
     end
 
     def symbol
-        return :_
+        return :__
     end
 
     def move_into_check?(end_pos)
