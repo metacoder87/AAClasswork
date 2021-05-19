@@ -3,7 +3,7 @@ files.each { |file| require_relative file }
 
 class Board
 
-    attr_reader :rows, :blank
+    attr_reader :rows
 
     def initialize
         @rows = Array.new(8) { Array.new(8) }
@@ -56,6 +56,17 @@ class Board
         x, y = pos
         return true if (0..7).include?(x) && (0..7).include?(y)
         false
+    end
+
+    def in_check?(color)
+        king = @rows.each { |row| row.select { |space| space.is_a?(King) && space.color == color }.position }
+        return true if @rows.each { |row| row.select { |space| space.color != color ? space.valid_moves : next } }.select { |move| move == king }
+        return false
+    end
+
+    def checkmate?(color)
+        @rows.each { |row| row.each { |piece| piece.color && piece.color == color ? return true if piece.valid_moves : piece } }
+        return false
     end
 
 end
