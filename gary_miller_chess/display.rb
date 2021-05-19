@@ -13,10 +13,10 @@ class Display
 
     def render
         grid = []
-        @board.rows.each do |row|
+        @board.rows.each_with_index do |row, idx|
             arr = []
-            row.each do |col|
-                    unless col.position == cursor.cursor_pos
+            row.each_with_index do |col, i|
+                    unless col.position == cursor.cursor_pos || [idx, i] == cursor.cursor_pos && col.position.nil?
                         if col.color == "black"
                             arr << col.symbol.to_s.black.on_white
                         elsif col.color == "white" 
