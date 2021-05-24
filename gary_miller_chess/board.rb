@@ -35,7 +35,7 @@ class Board
 
     def [](pos_x, pos_y)
         x, y = pos_x, pos_y
-        @rows[x][y].color
+        @rows[x][y].symbol
     end
 
     def []=(pos_x, pos_y, val)
@@ -49,7 +49,6 @@ class Board
         piece.position = end_pos
         @rows[end_pos[0]][end_pos[1]] = piece
         @rows[start_pos[0]][start_pos[1]] = NullPiece.instance
-        return render
     end
 
     def valid_pos(pos)
@@ -65,7 +64,7 @@ class Board
     end
 
     def checkmate?(color)
-        @rows.each { |row| row.each { |piece| piece.color && piece.color == color ? return true if piece.valid_moves : piece } }
+        @rows.each { |row| row.each { |piece| piece.color && piece.color == color && piece.valid_moves ? true : piece } }
         return false
     end
 

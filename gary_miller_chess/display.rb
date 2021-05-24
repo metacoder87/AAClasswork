@@ -46,5 +46,5 @@ class Display
 
 end
 
-dis = Display.new
-dis.free_move
+# dis = Display.new
+# dis.free_move
