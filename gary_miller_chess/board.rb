@@ -3,10 +3,11 @@ files.each { |file| require_relative file }
 
 class Board
 
-    attr_reader :rows
+    attr_reader :rows, :picked
 
     def initialize
         @rows = Array.new(8) { Array.new(8) }
+        @picked = []
         populate
     end
 

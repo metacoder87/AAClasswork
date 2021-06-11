@@ -25,8 +25,9 @@ class Display
                         else arr << col.symbol.to_s.black.on_black
                         end
                     else 
-                        if cursor.selected
+                        if @cursor.selected
                             arr << col.symbol.to_s.blue.on_green
+                            @board.picked << [idx, i]
                         else arr << col.symbol.to_s.red.on_light_yellow
                         end
                     end
@@ -36,7 +37,7 @@ class Display
         grid.each { |row| puts row.join(" ") }
         return 
     end
-
+    
     def free_move
         x = 1
         while x
@@ -47,5 +48,5 @@ class Display
 
 end
 
-# dis = Display.new
-# dis.free_move
+dis = Display.new
+dis.free_move

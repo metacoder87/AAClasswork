@@ -88,6 +88,7 @@ class Cursor
         return @cursor_pos
     when :left, :right, :up, :down
         update_pos(MOVES[key])
+        toggle_selected if @selected
         return nil
     when :ctrl_c
         Process.exit!(0)
