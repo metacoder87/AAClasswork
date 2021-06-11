@@ -1,4 +1,5 @@
 require 'colorize'
+
 files = ['board', 'cursor']
 files.each { |file| require_relative file }
 
