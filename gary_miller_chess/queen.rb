@@ -24,7 +24,8 @@ class Queen < Piece
 private
 
     def move_dirs
-        
+        both = diaganol_dirs + horizontal_dirs
+        return both
     end
 
 end

@@ -21,16 +21,21 @@ module Slideable
         return all_moves
     end
 
-# private
+private
 
     HORIZONTAL_DIRS = []
 
     DIAGANOL_DIRS = []
 
     def move_dirs
-        return diaganol_dirs if self.is_a?(Bishop)
-        return horizontal_dirs if self.is_a?(Rook)
-        return diaganol_dirs && horizontal_dirs if self.is_a?(Queen)
+        both = []
+        both << diaganol_dirs && horizontal_dirs
+        if self.is_a?(Bishop)
+            return diaganol_dirs 
+        elsif self.is_a?(Rook)
+            return horizontal_dirs 
+        else return both
+        end
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)
