@@ -12,55 +12,33 @@ class Display
         @cursor = Cursor.new([0,0], board)
     end
 
-    # def render
-    #     grid = []
-    #     @board.rows.each_with_index do |row, idx|
-    #         arr = []
-    #         row.each_with_index do |col, i|
-    #                 unless col.position == cursor.cursor_pos || [idx, i] == cursor.cursor_pos && col.position.nil?
-    #                     if col.color == "black"
-    #                         arr << col.symbol.to_s.black.on_white
-    #                     elsif col.color == "white" 
-    #                         arr << col.symbol.to_s.white.on_black
-    #                     else arr << col.symbol.to_s.black.on_black
-    #                     end
-    #                 else 
-    #                     if @board.picked.count == 1
-    #                         arr << col.symbol.to_s.blue.on_green
-    #                         @board.picked << [idx, i]
-    #                     else arr << col.symbol.to_s.red.on_light_yellow
-    #                     end
-    #                 end
-    #             end
-    #             grid << arr
-    #         end
-    #     grid.each { |row| puts row.join(" ") }
-    #     return 
-    # end
-
     def render
-        moves = []
-        grid = []
-
-        cursed = @cursor.cursor_pos
-        @board.picked << cursed if @cursor.selected
-        chosen = 0 || chosen = @board.picked[0] if @board.picked
+        spots, grid, moves, chosen = [], [], [], []
+        chosen = @cursor.selected[0] if @cursor.selected.first
+        x, y = chosen
+        @board.rows[x][y].moves.each { |move| moves << move } if chosen.first && @board.rows[x][y].moves
 
         @board.rows.each_with_index do |row, idx|
             arr = []
             row.each_with_index do |col, i|
-                if col.position == chosen 
-                    arr << col.symbol.to_s.green.on_blue
-                elsif col.position == cursed && col.position != chosen || col.position.nil?
-                    arr << col.symbol.to_s.black.on_blue
-                elsif moves.include?(col.position)
+                if [idx, i] == chosen
                     arr << col.symbol.to_s.blue.on_green
-                elsif col.position.nil? && col.position != cursed && !moves.include?(col.position)
+                    spots << [idx, i]
+                elsif [idx, i] == @cursor.cursor_pos && !spots.include?([idx, i])
+                    arr << col.symbol.to_s.blue.on_white
+                    spots << [idx, i]
+                elsif moves.include?([idx, i]) && !spots.include?([idx, i])
+                    arr << col.symbol.to_s.green.on_black
+                    spots << [idx, i]
+                elsif col.color.nil? && !spots.include?([idx, i])
                     arr << col.symbol.to_s.black.on_black
-                elsif col.color == "black" && !moves.include?(col.position) && col.position != chosen || col.position != cursed
-                    arr << col.symbol.to_s.white.on_black
-                elsif col.color == "white" && !moves.include?(col.position) && col.position != chosen || col.position != cursed
-                    arr << col.symbol.to_s.black.on_white
+                    spots << [idx, i]
+                elsif col.color == "black" && !spots.include?([idx, i])
+                    arr << col.symbol.to_s.black.on_red
+                    spots << [idx, i] 
+                elsif col.color == "white" && !spots.include?([idx, i])
+                    arr << col.symbol.to_s.white.on_red
+                    spots << [idx, i]
                 end
             end
           grid << arr
@@ -72,6 +50,7 @@ class Display
     def free_move
         x = 1
         while x
+        system 'clear'
         render
         @cursor.get_input
         end

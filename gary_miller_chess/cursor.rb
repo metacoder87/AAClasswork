@@ -36,13 +36,13 @@ class Cursor
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
-    @selected = false
+    @selected = []
     @board = board
   end
 
   def toggle_selected
-      return @selected = false if @selected
-      return @selected = true
+    return @selected.clear if @selected[0]
+    @selected << @cursor_pos
   end
 
   def get_input
@@ -85,11 +85,8 @@ class Cursor
     case key
     when :return, :space
         toggle_selected
-        return @cursor_pos
     when :left, :right, :up, :down
         update_pos(MOVES[key])
-        toggle_selected if @selected
-        return nil
     when :ctrl_c
         Process.exit!(0)
     end
