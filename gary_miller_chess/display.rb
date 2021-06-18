@@ -13,10 +13,10 @@ class Display
     end
 
     def render
-        spots, grid, moves, chosen = [], [], [], []
+        spots, grid, avail_moves, chosen = [], [], [], []
         chosen = @cursor.selected[0] if @cursor.selected.first
         x, y = chosen
-        @board.rows[x][y].moves.each { |move| moves << move } if chosen.first && @board.rows[x][y].moves
+        @board[x,y].moves.each { |move| avail_moves << move } if chosen.first && @board[x,y].moves
 
         @board.rows.each_with_index do |row, idx|
             arr = []
@@ -27,7 +27,7 @@ class Display
                 elsif [idx, i] == @cursor.cursor_pos && !spots.include?([idx, i])
                     arr << col.symbol.to_s.blue.on_white
                     spots << [idx, i]
-                elsif moves.include?([idx, i]) && !spots.include?([idx, i])
+                elsif avail_moves.include?([idx, i]) && !spots.include?([idx, i])
                     arr << col.symbol.to_s.green.on_black
                     spots << [idx, i]
                 elsif col.color.nil? && !spots.include?([idx, i])
@@ -59,4 +59,9 @@ class Display
 end
 
 dis = Display.new
+dis.board.move_piece([1,0],[3,0])
+dis.board.move_piece([1,1],[3,1])
+dis.board.move_piece([1,2],[3,2])
+dis.board.move_piece([1,3],[3,3])
+dis.board.move_piece([1,4],[3,4])
 dis.free_move

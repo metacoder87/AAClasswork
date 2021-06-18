@@ -35,7 +35,7 @@ class Board
 
     def [](pos_x, pos_y)
         x, y = pos_x, pos_y
-        @rows[x][y].symbol
+        @rows[x][y]
     end
 
     def []=(pos_x, pos_y, val)

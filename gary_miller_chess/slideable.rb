@@ -1,5 +1,4 @@
 
-
 module Slideable
 
     def horizontal_dirs
@@ -21,7 +20,7 @@ module Slideable
         return all_moves
     end
 
-private
+# private
 
     HORIZONTAL_DIRS = []
 
@@ -41,11 +40,11 @@ private
     def grow_unblocked_moves_in_dir(dx, dy)
         clear_path = []
         x, y = @position
-        until x == 7 || y == 7 || x == 0 || y == 0
+        while (0..7).to_a.include?(x) && (0..7).to_a.include?(y)
             x += dx
             y += dy
-            if @board.rows[x][y].empty?
-                clear_path << [x, y]
+            if @board
+                clear_path << [x, y] 
             end
         end
         return clear_path

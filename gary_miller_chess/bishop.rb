@@ -21,7 +21,7 @@ class Bishop < Piece
         return :♗B
     end
 
-# private
+private
 
     def move_dirs
         diaganol_dirs
