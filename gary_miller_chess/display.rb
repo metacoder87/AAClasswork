@@ -28,7 +28,7 @@ class Display
                     arr << col.symbol.to_s.blue.on_white
                     spots << [idx, i]
                 elsif avail_moves.include?([idx, i]) && !spots.include?([idx, i])
-                    arr << col.symbol.to_s.green.on_black
+                    arr << col.symbol.to_s.black.on_blue
                     spots << [idx, i]
                 elsif col.color.nil? && !spots.include?([idx, i])
                     arr << col.symbol.to_s.black.on_black
@@ -37,7 +37,7 @@ class Display
                     arr << col.symbol.to_s.black.on_red
                     spots << [idx, i] 
                 elsif col.color == "white" && !spots.include?([idx, i])
-                    arr << col.symbol.to_s.white.on_red
+                    arr << col.symbol.to_s.white.on_black
                     spots << [idx, i]
                 end
             end
@@ -62,6 +62,6 @@ dis = Display.new
 dis.board.move_piece([1,0],[3,0])
 dis.board.move_piece([1,1],[3,1])
 dis.board.move_piece([1,2],[3,2])
-dis.board.move_piece([1,3],[3,3])
-dis.board.move_piece([1,4],[3,4])
+dis.board.move_piece([1,3],[3,4])
+dis.board.move_piece([1,4],[3,5])
 dis.free_move
