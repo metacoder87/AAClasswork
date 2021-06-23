@@ -41,10 +41,9 @@ module Slideable
         end
     end
 
-    def opposite_color(colour)
-        return true if @color == "white" && colour == "black"
-        return true if @color == "black" && colour == "white"
-        return false
+    def opposite_color
+        return "black" if @color == "white" 
+        return "white" if @color == "black"
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)
@@ -56,10 +55,12 @@ module Slideable
             y += dy
             if (0..7).include?(x) && (0..7).include?(y) && board[x][y].symbol == :__
                 clear_path << [x,y]
-            elsif (0..7).include?(x) && (0..7).include?(y) && board[x][y].color == opposite_color(self.color)
+            elsif (0..7).include?(x) && (0..7).include?(y) && board[x][y].color == opposite_color
                 clear_path << [x,y]
                 break
             elsif (0..7).include?(x) && (0..7).include?(y) && board[x][y].color == self.color
+                break
+            end
         end
         
         return clear_path
