@@ -69,3 +69,6 @@ class Board
     end
 
 end
+
+# board.move_piece([1,4],[2,5])
+# board.move_piece([1,3],[2,6])

@@ -67,6 +67,3 @@ module Slideable
     end
 
 end
-
-# board.move_piece([1,0],[2,1])
-# board[0,0].grow_unblocked_moves_in_dir(1,0)

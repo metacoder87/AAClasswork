@@ -1,17 +1,29 @@
+require 'byebug'
 module Stepable
 
     def moves
+        #debugger
         all_moves = []
         move_diffs.each do |move|
             x, y = @position
-            x1, y1 = move
-                x += x1 && y += y1
-                all_moves << [x,y] if (0..7).include?(x) && (0..7).include?(y)
+            a, g = move
+                x += a 
+                y += g
+                if @board[x][y].color == @color
+                    next
+                else 
+                    all_moves << [x,y] if (0..7).include?(x) && (0..7).include?(y)
+                end 
         end
         return all_moves
     end
 
-private
+    def opposite_color
+        return "black" if @color == "white" 
+        return "white" if @color == "black"
+    end
+
+#private
 
     SINGLE_STEPS = [[0,1], [0,-1], [1,0], [-1,0], [1,1], [1,-1], [-1,-1], [-1,1]]
 
