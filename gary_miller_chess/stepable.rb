@@ -9,10 +9,12 @@ module Stepable
             a, g = move
                 x += a 
                 y += g
-                if @board[x][y].color == @color
+                if x > 7 || x < 0 || y < 0 || y > 7
                     next
-                else 
-                    all_moves << [x,y] if (0..7).include?(x) && (0..7).include?(y)
+                elsif @board[x][y].color == @color
+                    next
+                elsif (0..7).include?(x) && (0..7).include?(y)
+                    all_moves << [x,y]
                 end 
         end
         return all_moves
@@ -27,7 +29,7 @@ module Stepable
 
     SINGLE_STEPS = [[0,1], [0,-1], [1,0], [-1,0], [1,1], [1,-1], [-1,-1], [-1,1]]
 
-    LONG_STEPS = [[1,-2], [2,-1],  [2,1],  [1,2], [-1,-2] [-2,-1], [-2,1], [-1,2]]
+    LONG_STEPS = [[1,-2], [2,-1],  [2,1],  [1,2], [-1,-2], [-2,-1], [-2,1], [-1,2]]
 
     def move_diffs
         return LONG_STEPS if self.is_a?(Knight)
