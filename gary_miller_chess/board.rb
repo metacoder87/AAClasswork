@@ -46,6 +46,10 @@ class Board
         end
         return @pieces
     end
+
+    def find_king(color)
+        all_pieces[color].select { |piece| piece.include?(King) }.first.last
+    end
     def [](pos_x, pos_y)
         x, y = pos_x, pos_y
         @rows[x][y]
