@@ -94,7 +94,13 @@ class Board
     end
 
     def checkmate?(color)
-        @rows.each { |row| row.each { |piece| piece.color && piece.color == color && piece.valid_moves ? true : piece } }
+        
+    end
+
+    def on_board(pos)
+        x, y = pos
+        deck = (0..7)
+        return true if deck.include?(x) && deck.include?(y)
         return false
     end
 
