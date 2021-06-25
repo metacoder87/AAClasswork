@@ -90,9 +90,7 @@ class Board
     end
 
     def in_check?(color)
-        king = @rows.each { |row| row.select { |space| space.is_a?(King) && space.color == color }.position }
-        return true if @rows.each { |row| row.select { |space| space.color != color ? space.valid_moves : next } }.select { |move| move == king }
-        return false
+        all_moves(opposite_color(color)).include?(find_king(color))
     end
 
     def checkmate?(color)
