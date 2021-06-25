@@ -1,8 +1,6 @@
-require 'byebug'
 module Stepable
 
     def moves
-        #debugger
         all_moves = []
         move_diffs.each do |move|
             x, y = @position
