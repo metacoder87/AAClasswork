@@ -50,6 +50,16 @@ class Board
     def find_king(color)
         all_pieces[color].select { |piece| piece.include?(King) }.first.last
     end
+
+    def all_moves(color)
+        moves = []
+        all_pieces[color].each do |piece| 
+            x, y = piece.last
+            @rows[x][y].moves.each { |move| moves << move unless @rows[x][y].moves.empty? || moves.include?(move) }
+        end
+        return moves
+    end
+
     def [](pos_x, pos_y)
         x, y = pos_x, pos_y
         @rows[x][y]
