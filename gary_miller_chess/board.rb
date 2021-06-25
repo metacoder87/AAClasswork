@@ -1,12 +1,13 @@
 files = ['piece', 'rook', 'knight', 'bishop', 'pawn', 'king', 'queen', 'null_piece']
 files.each { |file| require_relative file }
-
+require 'byebug'
 class Board
 
-    attr_reader :rows
+    attr_reader :rows, :pieces
 
     def initialize
         @rows = Array.new(8) { Array.new(8) }
+        @pieces = { "white" => [], "black" => [] }
         populate
     end
 
@@ -33,6 +34,18 @@ class Board
         end
     end
 
+    def all_pieces
+        @rows.each do |row|
+            row.each do |piece|
+                if piece.symbol == :__
+                    next
+                else 
+                    @pieces[piece.color] << [piece.class, piece.position]
+                end
+            end
+        end
+        return @pieces
+    end
     def [](pos_x, pos_y)
         x, y = pos_x, pos_y
         @rows[x][y]
