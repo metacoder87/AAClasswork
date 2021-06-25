@@ -3,11 +3,10 @@ files.each { |file| require_relative file }
 require 'byebug'
 class Board
 
-    attr_reader :rows, :pieces
+    attr_reader :rows
 
     def initialize
         @rows = Array.new(8) { Array.new(8) }
-        @pieces = { "white" => [], "black" => [] }
         populate
     end
 
@@ -35,16 +34,17 @@ class Board
     end
 
     def all_pieces
+        pieces = { "white" => [], "black" => [] }
         @rows.each do |row|
             row.each do |piece|
                 if piece.symbol == :__
                     next
                 else 
-                    @pieces[piece.color] << [piece.class, piece.position]
+                    pieces[piece.color] << [piece.class, piece.position]
                 end
             end
         end
-        return @pieces
+        return pieces
     end
 
     def find_king(color)
@@ -94,16 +94,13 @@ class Board
     end
 
     def checkmate?(color)
-        
-    end
-
-    def on_board(pos)
-        x, y = pos
-        deck = (0..7)
-        return true if deck.include?(x) && deck.include?(y)
+        if in_check?(color)
+            x, y = find_king(color)
+            return @rows[x][y].moves.all? { |move| all_moves(opposite_color(color)).include?(move) }                
+        end
         return false
     end
-
+    
 end
 
 # board.move_piece([1,4],[2,5])
@@ -115,3 +112,4 @@ board.move_piece([1,2],[3,2])
 board.move_piece([1,3],[3,4])
 board.move_piece([1,4],[3,5])
 board.move_piece([7,3],[2,2])
+board.move_piece([7,2],[2,3])
