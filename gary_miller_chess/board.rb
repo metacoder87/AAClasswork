@@ -84,6 +84,11 @@ class Board
         false
     end
 
+    def opposite_color(color)
+        return "black" if color == "white" 
+        return "white" if color == "black"
+    end
+
     def in_check?(color)
         king = @rows.each { |row| row.select { |space| space.is_a?(King) && space.color == color }.position }
         return true if @rows.each { |row| row.select { |space| space.color != color ? space.valid_moves : next } }.select { |move| move == king }
