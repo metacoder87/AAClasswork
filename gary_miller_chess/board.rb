@@ -11,7 +11,7 @@ class Board
     end
 
     def populate
-        board = @rows.dup
+        board = @rows
         @rows.each_with_index do |row, idx|
             row.map!.with_index do |col, i|
                 if idx == 0 || idx == 7
@@ -47,6 +47,13 @@ class Board
         return pieces
     end
 
+    def all_piece_pos
+        all_positions = []
+        all_pieces.values.last.each { |p| all_positions << p.last }
+        all_pieces.values.first.each { |p| all_positions << p.last }
+        return all_positions
+    end
+
     def find_king(color)
         all_pieces[color].select { |piece| piece.include?(King) }.first.last
     end
@@ -70,12 +77,14 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        raise "That space is between pieces at the moment. Try again." unless @rows[start_pos[0]][start_pos[1]].is_a?(Piece)
-        raise "Can't move there." unless !@rows[end_pos[0]][end_pos[1]].empty? || end_pos[0] < 8 && end_pos[1] < 8
-        piece = @rows[start_pos[0]][start_pos[1]]
+        x, y = start_pos
+        a, b = end_pos
+        raise "That space is between pieces at the moment. Try again." unless @rows[x][y].is_a?(Piece)
+        raise "Can't move there." unless !@rows[a][b].empty? || a < 8 && b < 8
+        piece = @rows[x][y]
         piece.position = end_pos
-        @rows[end_pos[0]][end_pos[1]] = piece
-        @rows[start_pos[0]][start_pos[1]] = NullPiece.instance
+        @rows[a][b] = piece
+        @rows[x][y] = NullPiece.instance
     end
 
     def valid_pos(pos)
@@ -105,11 +114,14 @@ end
 
 # board.move_piece([1,4],[2,5])
 # board.move_piece([1,3],[2,6])
-# board = Board.new
-# board.move_piece([1,0],[3,0])
-# board.move_piece([1,1],[3,1])
-# board.move_piece([1,2],[3,2])
-# board.move_piece([1,3],[3,4])
-# board.move_piece([1,4],[3,5])
-# board.move_piece([7,3],[2,2])
+board = Board.new
+board.move_piece([1,0],[3,0])
+board.move_piece([1,1],[3,1])
+board.move_piece([1,2],[3,2])
+board.move_piece([1,3],[3,4])
+board.move_piece([1,4],[3,5])
+board.move_piece([7,3],[2,2])
+board.move_piece([0,3],[1,3])
 # board.move_piece([7,2],[2,3])
+
+# board[1,3].move_into_check?([1,4])
