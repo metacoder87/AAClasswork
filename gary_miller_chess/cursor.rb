@@ -43,6 +43,14 @@ class Cursor
   def toggle_selected
     return @selected.clear if @selected[0]
     @selected << @cursor_pos
+  def toggle_helper
+    if @helper == false
+        @helper = true
+        x, y = @selected[0]
+        puts board[x,y].valid_moves 
+        return
+    end 
+    return @helper = false
   end
 
   def get_input
