@@ -3,9 +3,9 @@
 
 class Pawn < Piece
 
-    def initialize(board, position)
+    def initialize(board, position, color = nil)
         super
-        @color = set_color
+        @color = color || set_color
     end
 
     def set_color
