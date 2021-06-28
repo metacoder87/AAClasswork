@@ -97,6 +97,8 @@ class Cursor
         update_pos(MOVES[key])
     when :ctrl_c
         Process.exit!(0)
+    when :tab
+        toggle_helper
     end
   end
 
