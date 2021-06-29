@@ -1,9 +1,10 @@
+require 'byebug'
 class Piece
 
     attr_accessor :position, :board, :color, :symbol
 
-    def initialize(board, position)
-        @board, @position, @color, @symbol = board, position, set_color, symbol
+    def initialize(board, position, color = nil)
+        @board, @position, @color, @symbol = board, position, color || set_color, symbol
     end
 
     def moves
@@ -20,10 +21,14 @@ class Piece
     end
 
     def valid_moves
-        moves.select do |move|
-            x, y = move 
-            @board[x, y].empty?
+        valid = []
+        moves.each do |move|
+            if move_into_check?(move)
+                next
+            else valid << move
+            end
         end
+        return valid
     end
 
     def pos=(val)
@@ -52,7 +57,6 @@ class Piece
     end
 
     def move_into_check?(end_pos)
-        # debugger
         x, y = end_pos
         start = @position
         color = @board[x][y].color
