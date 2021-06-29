@@ -55,6 +55,14 @@ class Piece
         return pieces
     end
 
+    def all_m(color)
+        moves = []
+        all_p[color].each do |piece| 
+            x, y = piece.last
+            @board[x][y].moves.each { |move| moves << move unless @board[x][y].moves.empty? || moves.include?(move) }
+        end
+        return moves
+    end
     end
 
 end
