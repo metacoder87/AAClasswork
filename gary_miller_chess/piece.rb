@@ -63,6 +63,10 @@ class Piece
         end
         return moves
     end
+
+    def find_boss(color)
+        all_p[color].select { |piece| piece.include?(King) }.first.last
+    end
     end
 
 end
