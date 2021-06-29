@@ -65,5 +65,6 @@ dis.board.move_piece([1,2],[3,2])
 dis.board.move_piece([1,3],[3,4])
 dis.board.move_piece([1,4],[3,5])
 dis.board.move_piece([7,3],[2,2])
-dis.board.move_piece([7,2],[2,3])
+dis.board.move_piece([0,3],[1,3])
+# dis.board.move_piece([7,2],[2,3])
 dis.free_move       
