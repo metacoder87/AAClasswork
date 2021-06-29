@@ -52,6 +52,18 @@ class Piece
     end
 
     def move_into_check?(end_pos)
+        # debugger
+        x, y = end_pos
+        start = @position
+        color = @board[x][y].color
+        hold_piece = @board[x][y].class unless @board[x][y].is_a?(NullPiece)
+        small_move(end_pos)
+        check = checked?
+        small_move(start)
+        @board[x][y] = hold_piece.new(@board, end_pos, color) if hold_piece
+        return check
+    end
+
     def all_p
         pieces = { "white" => [], "black" => [] }
         @board.each do |row|
