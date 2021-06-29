@@ -38,11 +38,21 @@ class Cursor
     @cursor_pos = cursor_pos
     @selected = []
     @board = board
+    @helper = false
   end
 
   def toggle_selected
-    return @selected.clear if @selected[0]
-    @selected << @cursor_pos
+    if @selected.count == 1 && @selected[0] != @cursor_pos
+      @selected << @cursor_pos
+      board.move_piece(@selected[0],@selected[1])
+      return @selected.clear
+    elsif @selected.count == 0
+      @selected << @cursor_pos
+    elsif @selected.count == 1 && @selected[0] == @cursor_pos
+      @selected.clear
+    end
+  end
+
   def toggle_helper
     if @helper == false
         @helper = true
