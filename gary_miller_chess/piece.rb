@@ -67,6 +67,9 @@ class Piece
     def find_boss(color)
         all_p[color].select { |piece| piece.include?(King) }.first.last
     end
+
+    def checked?
+        all_m(opposite_color).include?(find_boss(color))
     end
 
 end
