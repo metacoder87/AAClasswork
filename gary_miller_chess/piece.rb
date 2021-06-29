@@ -40,6 +40,17 @@ class Piece
         return :__
     end
 
+    def small_move(end_pos)
+        x, y = @position
+        a, b = end_pos
+        raise "That space is between pieces at the moment. Try again." unless @board[x][y].is_a?(Piece)
+        raise "Can't move there." unless !@board[a][b].empty? || a < 8 && b < 8
+        piece = @board[x][y]
+        piece.position = end_pos
+        @board[a][b] = piece
+        @board[x][y] = NullPiece.instance
+    end
+
     def move_into_check?(end_pos)
     def all_p
         pieces = { "white" => [], "black" => [] }
