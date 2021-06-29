@@ -41,6 +41,19 @@ class Piece
     end
 
     def move_into_check?(end_pos)
+    def all_p
+        pieces = { "white" => [], "black" => [] }
+        @board.each do |row|
+            row.each do |piece|
+                if piece.symbol == :__ 
+                    next
+                else 
+                    pieces[piece.color] << [piece.class, piece.position]
+                end
+            end
+        end
+        return pieces
+    end
 
     end
 
