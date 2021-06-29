@@ -21,14 +21,7 @@ class Piece
     end
 
     def valid_moves
-        valid = []
-        moves.each do |move|
-            if move_into_check?(move)
-                next
-            else valid << move
-            end
-        end
-        return valid
+        moves.select { |move| move unless move_into_check?(move) }
     end
 
     def pos=(val)
