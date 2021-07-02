@@ -26,7 +26,7 @@ class Piece
     end
 
     def valid_moves
-        moves.select { |move| move unless move_into_check?(move) }
+        moves.select { |move| move unless move_into_check?(move) } if moves
     end
 
     def pos=(val)
