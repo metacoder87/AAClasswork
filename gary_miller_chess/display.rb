@@ -18,7 +18,7 @@ class Display
         chosen = @cursor.selected[0] if @cursor.selected.first
         x, y = chosen
         @board[x,y].moves.each { |move| avail_moves << move } if chosen.first && @board[x,y].moves
-        @board[x,y].valid_moves.each { |move| safe_moves << move } if chosen && @cursor.helper == true && @board[x,y].valid_moves
+        @board[x,y].valid_moves.each { |move| safe_moves << move } if chosen.first && @cursor.helper == true && @board[x,y].valid_moves
 
         @board.rows.each_with_index do |row, idx|
             arr = []
@@ -29,6 +29,7 @@ class Display
                 elsif [idx, i] == @cursor.cursor_pos && !spots.include?([idx, i])
                     arr << col.symbol.to_s.blue.on_white
                     spots << [idx, i]
+                    puts "This spot leaves you in check..." if chosen.first && @board[x, y].move_into_check?([idx, i])
                 elsif safe_moves.include?([idx, i]) && !spots.include?([idx, i])
                     arr << col.symbol.to_s.black.on_green
                     spots << [idx, i]
