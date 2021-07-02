@@ -32,7 +32,7 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :cursor_pos, :board, :selected
+  attr_reader :cursor_pos, :board, :selected, :helper
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
@@ -54,10 +54,9 @@ class Cursor
   end
 
   def toggle_helper
-    if @helper == false
+    if @helper == false && @selected.first
         @helper = true
         x, y = @selected[0]
-        puts board[x,y].valid_moves 
         return
     end 
     return @helper = false
