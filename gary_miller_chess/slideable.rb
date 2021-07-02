@@ -22,7 +22,7 @@ module Slideable
         return all_moves
     end
 
-# private
+private
 
     HORIZONTAL_DIRS = []
 
@@ -39,11 +39,6 @@ module Slideable
             both << horizontal_dirs
             return both
         end
-    end
-
-    def opposite_color
-        return "black" if @color == "white" 
-        return "white" if @color == "black"
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)

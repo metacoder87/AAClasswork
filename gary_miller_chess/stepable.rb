@@ -18,12 +18,7 @@ module Stepable
         return all_moves
     end
 
-    def opposite_color
-        return "black" if @color == "white" 
-        return "white" if @color == "black"
-    end
-
-#private
+private
 
     SINGLE_STEPS = [[0,1], [0,-1], [1,0], [-1,0], [1,1], [1,-1], [-1,-1], [-1,1]]
 

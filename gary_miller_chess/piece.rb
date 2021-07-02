@@ -7,6 +7,11 @@ class Piece
         @board, @position, @color, @symbol = board, position, color || set_color, symbol
     end
 
+    def opposite_color
+        return "black" if @color == "white" 
+        return "white" if @color == "black"
+    end
+
     def moves
         # Each subclass moves differently.
         puts "No moves available."
