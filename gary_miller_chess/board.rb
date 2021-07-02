@@ -122,17 +122,3 @@ class Board
     end
 
 end
-
-# board.move_piece([1,4],[2,5])
-# board.move_piece([1,3],[2,6])
-# board = Board.new
-# board.move_piece([1,0],[3,0])
-# board.move_piece([1,1],[3,1])
-# board.move_piece([1,2],[3,2])
-# board.move_piece([1,3],[3,4])
-# board.move_piece([1,4],[3,5])
-# board.move_piece([7,3],[2,2])
-# board.move_piece([0,3],[1,3])
-# board.move_piece([7,2],[2,3])
-
-# board[1,3].move_into_check?([1,4])
