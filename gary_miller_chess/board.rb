@@ -89,6 +89,15 @@ class Board
          rescue RuntimeError
     end
 
+    def move_piece!(start_pos, end_pos)
+        x, y = start_pos
+        a, b = end_pos
+        piece = @rows[x][y]
+        piece.position = end_pos 
+        @rows[a][b] = piece
+        @rows[x][y] = NullPiece.instance
+    end
+
     def valid_pos(pos)
         x, y = pos
         return true if (0..7).include?(x) && (0..7).include?(y)
