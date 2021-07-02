@@ -79,12 +79,14 @@ class Board
     def move_piece(start_pos, end_pos)
         x, y = start_pos
         a, b = end_pos
-        raise "That space is between pieces at the moment. Try again." unless @rows[x][y].is_a?(Piece)
-        raise "Can't move there." unless !@rows[a][b].empty? || a < 8 && b < 8
         piece = @rows[x][y]
-        piece.position = end_pos
-        @rows[a][b] = piece
-        @rows[x][y] = NullPiece.instance
+        plays = piece.moves
+        if plays.include?(end_pos)
+            piece.position = end_pos 
+            @rows[a][b] = piece
+            @rows[x][y] = NullPiece.instance
+        end
+         rescue RuntimeError
     end
 
     def valid_pos(pos)
