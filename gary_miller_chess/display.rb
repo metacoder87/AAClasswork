@@ -1,4 +1,5 @@
 require 'colorize'
+require 'byebug'
 
 files = ['board', 'cursor']
 files.each { |file| require_relative file }
@@ -13,10 +14,11 @@ class Display
     end
 
     def render
-        spots, grid, avail_moves, chosen = [], [], [], []
+        spots, grid, avail_moves, safe_moves, chosen = [], [], [], [], []
         chosen = @cursor.selected[0] if @cursor.selected.first
         x, y = chosen
         @board[x,y].moves.each { |move| avail_moves << move } if chosen.first && @board[x,y].moves
+        @board[x,y].valid_moves.each { |move| safe_moves << move } if chosen && @cursor.helper == true && @board[x,y].valid_moves
 
         @board.rows.each_with_index do |row, idx|
             arr = []
@@ -26,6 +28,9 @@ class Display
                     spots << [idx, i]
                 elsif [idx, i] == @cursor.cursor_pos && !spots.include?([idx, i])
                     arr << col.symbol.to_s.blue.on_white
+                    spots << [idx, i]
+                elsif safe_moves.include?([idx, i]) && !spots.include?([idx, i])
+                    arr << col.symbol.to_s.black.on_green
                     spots << [idx, i]
                 elsif avail_moves.include?([idx, i]) && !spots.include?([idx, i])
                     arr << col.symbol.to_s.black.on_blue
@@ -59,12 +64,12 @@ class Display
 end
 
 dis = Display.new
-dis.board.move_piece([1,0],[3,0])
-dis.board.move_piece([1,1],[3,1])
-dis.board.move_piece([1,2],[3,2])
-dis.board.move_piece([1,3],[3,4])
-dis.board.move_piece([1,4],[3,5])
-dis.board.move_piece([7,3],[2,2])
-dis.board.move_piece([0,3],[1,3])
+# dis.board.move_piece([1,0],[3,0])
+# dis.board.move_piece([1,1],[3,1])
+# dis.board.move_piece([1,2],[3,2])
+# dis.board.move_piece([1,3],[3,4])
+# dis.board.move_piece([1,4],[3,5])
+# dis.board.move_piece([7,3],[2,2])
+# dis.board.move_piece([0,3],[1,3])
 # dis.board.move_piece([7,2],[2,3])
 dis.free_move       

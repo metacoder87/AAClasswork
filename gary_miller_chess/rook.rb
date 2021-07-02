@@ -21,7 +21,7 @@ class Rook < Piece
         return :♖R
     end
 
-#private
+private
 
     def move_dirs
         horizontal_dirs
