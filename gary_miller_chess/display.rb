@@ -8,8 +8,8 @@ class Display
 
     attr_accessor :board, :cursor
 
-    def initialize
-        @board = Board.new
+    def initialize(board)
+        @board = board
         @cursor = Cursor.new([0,0], board)
     end
 
@@ -64,5 +64,4 @@ class Display
 
 end
 
-dis = Display.new
-dis.free_move       
+#dis.free_move       
