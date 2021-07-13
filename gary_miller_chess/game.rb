@@ -46,10 +46,16 @@ class Game
 
 
     def play
+        boo = boop
         until @board.checkmate?(@current_color)
-            system 'clear'
-            @display.render
-            @current_player.make_move
+            if @board.rows == boo
+                system 'clear'
+                @display.render
+                @current_player.make_move
+            else
+                swap_turn!
+                boo = boop
+            end
         end
     end
 
