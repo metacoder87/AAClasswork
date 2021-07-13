@@ -52,16 +52,5 @@ class Display
        grid.each { |row| puts row.join(" ") }
       return 
     end
-        
-    def free_move
-        x = 1
-        while x
-        system 'clear'
-        render
-        @cursor.get_input
-        end
-    end
 
-end
-
-#dis.free_move       
+end    
