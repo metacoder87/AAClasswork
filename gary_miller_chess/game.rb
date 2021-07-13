@@ -62,6 +62,7 @@ class Game
         until @board.checkmate?(@current_color)
             if @board.rows == boo
                 system 'clear'
+                notify_players
                 @display.render
                 @current_player.make_move
             else
