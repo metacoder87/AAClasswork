@@ -20,8 +20,7 @@ class Game
     end
 
     def make_player(type)
-        #debugger
-        return HumanPlayer.new(@display) if type == 'human'
+        return HumanPlayer.new(@display) if type == 'human'    
         return ComputerPlayer.new(@display) if type == 'computer'
     end
 
@@ -85,5 +84,4 @@ class Game
 
 end
 
-# game = Game.new
-# game.play
+Game.new.play
