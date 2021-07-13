@@ -44,6 +44,18 @@ class Game
         @current_color = @colors.first
     end
 
+    def boop
+        duplicate_board = []
+        @board.rows.each do |row|
+            ro = []
+            row.each do |spot|
+                ro << spot
+            end
+            duplicate_board << ro
+        end
+        return duplicate_board
+    end
+
 
     def play
         boo = boop
