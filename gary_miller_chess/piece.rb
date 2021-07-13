@@ -35,8 +35,8 @@ class Piece
 
     def set_color
         x, y = @position
-        return "black" if x == 0 || x == 1
-        return "white" if x == 6 || x == 7
+        return "white" if x == 0 || x == 1
+        return "black" if x == 6 || x == 7
     end
 
     def symbol
