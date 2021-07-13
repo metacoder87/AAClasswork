@@ -78,6 +78,8 @@ class Game
     def swap_turn!
         @players.rotate!
         @colors.rotate!
+        @current_player = @players.first
+        @current_color = @colors.first
     end
 
 end
