@@ -1,6 +1,3 @@
-require_relative 'game'
-
-
 class Player
 
     attr_accessor :display
