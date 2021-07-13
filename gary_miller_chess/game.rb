@@ -72,8 +72,7 @@ class Game
     end
 
     def notify_players
-        puts "#{@current_color.capitalize} it is your turn."
-        sleep(3)
+        p "#{@current_color.capitalize} it is your turn."
     end
 
     def swap_turn!
