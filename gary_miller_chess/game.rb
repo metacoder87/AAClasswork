@@ -26,12 +26,11 @@ class Game
         if num_players == 1
             puts 'Do you want to be White or Black?'
             color_choice = gets.chomp.to_s.downcase until color_choice == "white" || color_choice == "black"
-            @players_hash[color_choice] = make_player('human')
-            @players_hash[opposite_color(color_choice)] = make_player('computer')
+            @players_hash[color_choice] = make_player('human', color_choice)
+            @players_hash[opposite_color(color_choice)] = make_player('computer', opposite_color(color_choice))
         else 
-            player_1 = make_player('human')
-            @players_hash["white"] = player_1
-            @players_hash["black"] = make_player('human')
+            @players_hash["white"] = make_player('human', "white")
+            @players_hash["black"] = make_player('human', "black")
         end
         @players = [@players_hash.values.first, @players_hash.values.last]
         @colors = [@players_hash.keys.first, @players_hash.keys.last]
