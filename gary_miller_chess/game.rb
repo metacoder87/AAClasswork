@@ -15,9 +15,9 @@ class Game
         return "white" if color == "black"
     end
 
-    def make_player(type)
-        return HumanPlayer.new(@display) if type == 'human'    
-        return ComputerPlayer.new(@display) if type == 'computer'
+    def make_player(type, color)
+        return HumanPlayer.new(@display, color) if type == 'human'    
+        return ComputerPlayer.new(@display, color) if type == 'computer'
     end
 
     def player_prompt
