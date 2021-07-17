@@ -1,4 +1,4 @@
-require 'byebug'
+
 class Piece
 
     attr_accessor :position, :board, :color, :symbol
@@ -90,7 +90,13 @@ class Piece
     end
 
     def find_boss(color)
-        all_p[color].select { |piece| piece.include?(King) }.first.last
+        all_p[color].select do |piece| 
+            if piece.include?(King) 
+                piece.first.last
+            end
+        rescue NoMethodError => e
+            raise "A bug deleted the King, fix it."
+        end
     end
 
     def checked?
