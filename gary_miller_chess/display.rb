@@ -1,5 +1,5 @@
 require 'colorize'
-require 'byebug'
+
 
 files = ['board', 'cursor']
 files.each { |file| require_relative file }
@@ -13,7 +13,7 @@ class Display
         @cursor = Cursor.new([0,0], board)
     end
 
-    def render
+    def render # Displays the game board with pieces and cursor using color
         spots, grid, avail_moves, safe_moves, chosen = [], [], [], [], []
         chosen = @cursor.selected[0] if @cursor.selected.first
         x, y = chosen
