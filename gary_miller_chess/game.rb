@@ -1,11 +1,7 @@
-require 'byebug'
-require_relative 'board'
-require_relative 'display'
-require_relative 'player'
+files = ['board', 'display', 'player']
+files.each { |file| require_relative file }
 
 class Game
-    
-    attr_accessor :board, :display, :players_hash, :players, :colors, :current_color, :current_player, :player
 
     def initialize
         @board = Board.new
