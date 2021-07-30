@@ -32,24 +32,40 @@ MOVES = {
 
 class Cursor
 
-  attr_accessor :cursor_pos, :board, :selected, :helper
+  attr_accessor :cursor_pos, :board, :selected, :helper, :number_of_white_moves, :number_of_black_moves
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @selected = []
     @board = board
     @helper = false
+    @number_of_white_moves = 0
+    @number_of_black_moves = 0
   end
 
   def toggle_selected
-    if @selected.count == 1 && @selected[0] != @cursor_pos
+    x, y = @selected.first
+    if @selected.count == 1 && @selected[0] != @cursor_pos && @board[x,y].valid_moves.include?(@cursor_pos)
       @selected << @cursor_pos
+      count_the_players_move
       board.move_piece(@selected[0],@selected[1])
       return @selected.clear
     elsif @selected.count == 0
       @selected << @cursor_pos
     elsif @selected.count == 1 && @selected[0] == @cursor_pos
       @selected.clear
+    end
+  end
+
+  def count_the_players_move
+    x, y = @selected.first
+
+    if @selected.first 
+      if @board[x, y].color == "white"
+        @number_of_white_moves += 1
+      elsif @board[x, y].color == "black"
+        @number_of_black_moves += 1
+      end
     end
   end
 
