@@ -95,7 +95,7 @@ class Piece
                 piece.first.last
             end
         rescue NoMethodError => e
-            raise "A bug deleted the King, fix it."
+        ensure 
         end
     end
 
