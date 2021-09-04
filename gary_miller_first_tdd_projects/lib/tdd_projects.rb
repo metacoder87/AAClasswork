@@ -35,6 +35,10 @@
 # Write your own version of this method called my_uniq; 
 # it should take in an Array and return a new array.
 
+    def self.my_uniq
+        
+    end
+
 
 # Two sum
 
@@ -48,6 +52,10 @@
 # [-1, 0, 2, -2, 1].two_sum # => [[0, 4], [2, 3]]
 # [0, 2] before [2, 1] (smaller first elements come first)
 # [0, 1] before [0, 2] (then smaller second elements come first)
+
+    def two_sum
+
+    end
 
 
 # My Transpose
@@ -72,8 +80,7 @@
 #     [2, 5, 8]
 #   ]
 
-# my_transpose
-# Write a method, which will convert between 
+# Write a method, my_transpose, which will convert between 
 # the row-oriented and column-oriented representations. 
 # You may assume square matrices for simplicity's sake. 
 # Usage will look like the following:
@@ -87,12 +94,20 @@
 #  #    [1, 4, 7],
 #  #    [2, 5, 8]]
 
+    def my_transpose
+
+    end
+
 
 # Stock Picker
 
 # Write a method that takes an array of stock prices (prices on days 0, 1, ...), 
 # and outputs the most profitable pair of days on which to first buy the stock 
 # and then sell the stock. Remember, you can't sell stock before you buy it!
+
+    def stock_picker
+
+    end
 
 
 # Towers of Hanoi
