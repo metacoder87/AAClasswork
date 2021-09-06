@@ -72,4 +72,16 @@ end
 
 describe 'stock_picker' do
     
+    it 'picks the most profitable time to have bought and sold a stock' do
+        expect([615,14,225,25,333,369,7,21,768,24,760,88].stock_picker).to eq([1,8])
+    end
+    it 'can only buy before it sells' do
+        expect([768,764,801,24,88].stock_picker).to eq([3,4])
+    end
+    it 'throws an error if given anything other than an array of numbers' do
+        expect([1,2,3,'a',5,6,7].stock_picker).to raise_error(TypeError)
+    end
+    it 'throws an error if given anything other than an array' do
+        expect('not an array'.stock_picker).to raise_error(TypeError)
+    end
 end
