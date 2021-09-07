@@ -128,5 +128,43 @@
 # Focus on:
 # #move
 # #won?
+
+class HanoiTowers
+
+    def self.get_discs
+
+    end
+
+    def initialize(n)
+    
+    end
+
+    def get_pile
+
+    end
+
+    def get_destination
+
+    end
+
+    def move
+
+    end
+
+    def won?
+
+    end
+
+    def print
+
+    end
+
+    def play
+
+    end
+
+end
+
+
 # Get a code review from a TA
 # Resources
