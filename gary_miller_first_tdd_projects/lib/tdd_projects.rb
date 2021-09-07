@@ -53,7 +53,7 @@
 # [0, 2] before [2, 1] (smaller first elements come first)
 # [0, 1] before [0, 2] (then smaller second elements come first)
 
-    def two_sum
+    def self.two_sum
 
     end
 
@@ -135,7 +135,7 @@ class HanoiTowers
 
     end
 
-    def initialize(n)
+    def initialize
     
     end
 
