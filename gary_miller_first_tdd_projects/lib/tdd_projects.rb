@@ -25,7 +25,7 @@
 # Write the method you now have tests for. 
 # Follow the red-green-refactor approach until all specs pass.
 
-
+class Array
 # Remove dups
 
 # Array has a uniq method that removes duplicates from an array. 
@@ -35,8 +35,12 @@
 # Write your own version of this method called my_uniq; 
 # it should take in an Array and return a new array.
 
-    def self.my_uniq
-        
+    def my_uniq # f(n) = 0(n)
+        # This array is a store for one of each of the elements of self
+        one_of_each = []
+        # This iterates through each of the elements and saves that element if it hasn't already
+        self.each { |ele| one_of_each.include?(ele) ? next : one_of_each << ele }
+        return one_of_each
     end
 
 
@@ -53,10 +57,11 @@
 # [0, 2] before [2, 1] (smaller first elements come first)
 # [0, 1] before [0, 2] (then smaller second elements come first)
 
-    def self.two_sum
+    def two_sum
 
     end
 
+end
 
 # My Transpose
 
