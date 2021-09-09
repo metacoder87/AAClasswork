@@ -1,6 +1,7 @@
 require 'rspec'
+require 'tdd_projects'
 
-describe 'my_uniq' do
+describe '#my_uniq' do
 
     it 'works on the given test to return an array of unique elements' do
         expect([1, 2, 1, 3, 3].my_uniq).to eq([1, 2, 3])
@@ -24,12 +25,12 @@ describe 'my_uniq' do
         expect([7,16,1,7,7,7,1,1,1].my_uniq).to eq([7,16,1])
     end
     it 'throws an error if used on anything other than an array' do
-        expect('not an array'.my_uniq).to raise_error(TypeError)
+        expect { 'not an array'.my_uniq }.to raise_error(NoMethodError)
     end
 
 end
 
-describe 'two_sum' do
+describe '#two_sum' do
     
     it 'passes the given test' do
         expect([-1, 0, 2, -2, 1].two_sum).to eq([[0, 4], [2, 3]])
