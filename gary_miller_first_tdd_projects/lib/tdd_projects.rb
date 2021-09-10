@@ -111,8 +111,24 @@ end
 #  #    [1, 4, 7],
 #  #    [2, 5, 8]]
 
-    def my_transpose
-
+    def my_transpose(arr) # This solution is in Quadratic time f(n) = 0(n^2)
+        # This array will house the transposition of the given array
+        converse = []
+        # This variable is the index which will be transposed each loop
+        i = 0
+        # This loop will run until i is equal with the number of elements in the sub-arrays
+        until i == arr.first.count
+            # This array will save each transposed element
+            new_sub = []
+            # This iterates through the sub-arrays and shovels the element at the specified index
+            arr.each { |sub| new_sub << sub[i] }
+            # This shovels the newly created sub-array into converse
+            converse << new_sub
+            # This increases the index for the next new sub-array
+            i += 1
+        end
+        
+        return converse
     end
 
 
