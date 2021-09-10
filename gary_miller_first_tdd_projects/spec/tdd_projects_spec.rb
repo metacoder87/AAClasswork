@@ -67,7 +67,7 @@ describe 'my_transpose' do
                                                      ['c','f','i']])
     end
     it 'throws an error when given anything but an array of arrays' do
-        expect { my_transpose(['not an array of arrays']) }.to raise_error(TypeError)
+        expect { my_transpose(['not an array of arrays']) }.to raise_error(ArgumentError)
     end
 end
 
