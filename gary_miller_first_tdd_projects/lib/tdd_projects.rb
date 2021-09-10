@@ -57,36 +57,17 @@ class Array
 # [0, 2] before [2, 1] (smaller first elements come first)
 # [0, 1] before [0, 2] (then smaller second elements come first)
 
-    def two_sum
+    def two_sum # This solution is in linear 0(n) time
         # This array is a place to hold the pairs of indices 
         indices = []
-        # Sets a pointer at the start of the array
-        comp_index = 0
-        # Sets another pointer at the end of the array
-        comp_index2 = self.count - 1
-        # loops until the pointers meet in the middle
-        until comp_index == self.count / 2
-            # iterates through each element to compare with the elements at each pointer
-            self.each_with_index do |ele, idx|
-                # checks the current element against the first pointer
-                if self[comp_index] + ele == 0 # if the sum of these two elements is equal to zero
-                    # verifies the indices does not already contain this pair
-                    if !indices.include?([comp_index, idx]) && !indices.include?([idx, comp_index])
-                        # verifies the pointer is not on the current element and shovels the sorted pair of indices into indices
-                        indices << [comp_index, idx].sort if idx != comp_index
-                    end
-                # checks the current element against the second pointer
-                elsif self[comp_index2] + ele == 0 # if the sum of these two elements is equal to zero
-                    # verifies the indices does not already contain this pair
-                    if !indices.include?([comp_index2, idx]) && !indices.include?([idx, comp_index2])
-                        # verifies the pointer is not on the current element and shovels the sorted pair of indices into indices
-                        indices << [comp_index2, idx].sort if idx != comp_index2
-                    end
-                end
-            end
-            # moves the pointers towards the center
-          comp_index += 1
-          comp_index2 -= 1
+        # Iterates through each element
+        self.each_with_index do |ele, idx|
+            # Creates the inverse of element that will sum to zero
+            opposite = ele * - 1
+            # Saves the index of that number if it exists in self
+            opp_idx = self.index(opposite) if self.include?(opposite)
+            # Shovels the index of the original element and its opposite into indices array once if the two are not equal 
+            indices << [idx, opp_idx].sort if opp_idx && !indices.include?([idx, opp_idx].sort) && idx != opp_idx
         end
         # outputs an array of sorted indices
       return indices.sort
