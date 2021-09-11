@@ -89,53 +89,23 @@ end
 
 describe 'HanoiTowers' do
     let(:towers_of_hanoi) do
-        discs = HanoiTowers.get_discs
-        HanoiTowers.new(discs)
+        HanoiTowers.new(3)
     end
     
     describe '#initialize' do
         
         it 'sets the three piles of discs' do
-            expect(towers_of_hanoi.discs.count).to eq(3)
-        end
-        it 'calls the method #get_discs' do
-            expect(HanoiTower.new(5)).to receive(get_discs)
+            expect(towers_of_hanoi.pile1.count).to eq(3)
         end
 
-    end
-
-    describe '#move' do
-
-        it 'calls the method #get_pile' do
-            expect(towers_of_hanoi.move).to receive(get_pile)
-        end
-        it 'calls the method #get_destination' do
-            expect(towers_of_hanoi.move).to receive(get_pile)
-        end
-        
     end
 
     describe '#won?' do
 
         it 'checks to see if all of the discs are moved to third pile' do
-            (0..1).each do |pile|
-                towers_of_hanoi.discs[pile].each { |disc| towers_of_hanoi.discs[2] << disc }
-            end
+            towers_of_hanoi.pile3 = towers_of_hanoi.pile1
+            towers_of_hanoi.pile1.clear
             expect(towers_of_hanoi.won?).to be(true)
-        end
-        
-    end
-
-    describe '#play' do
-
-        it 'calls the move method' do
-            expect(towers_of_hanoi.play).to receive(move)
-        end
-        it 'calls the print method' do
-            expect(towers_of_hanoi.play).to receive(print)
-        end
-        it 'calls the won? method' do
-            expect(towers_of_hanoi.play).to receive(won?)
         end
         
     end
