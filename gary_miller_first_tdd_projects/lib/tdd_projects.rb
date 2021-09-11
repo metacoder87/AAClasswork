@@ -138,14 +138,22 @@ end
 # and outputs the most profitable pair of days on which to first buy the stock 
 # and then sell the stock. Remember, you can't sell stock before you buy it!
 class Array
-    def stock_picker
+    def stock_picker # Solution in quadratic time f(n) = 0(n^2)
+        # This array houses the best pick
         pick = []
+        # This variable keeps track of the day/index we are looking at as the best potential buy 
         i = 0
+        # This keeps track of the most profit from all of the potential trades
         profit = 0
+        # Loops until is equal with the last index
         until i == self.count - 1
+            # Iterates through each price
             self.each_with_index do |price, idx|
+                # Checks if i is less than current index and if this potential profit is the new highest
                 if i < idx && profit < self[idx] - self[i]
+                    # Saves a new highest profit
                     profit = self[idx] - self[i]
+                    # Saves a new best pick
                     pick = [i, idx]
                 end
             end
