@@ -187,60 +187,82 @@ class HanoiTowers
 
     attr_accessor :pile1, :pile2, :pile3
 
-    def get_discs(n)
-        (1..n).each { |disc| @pile1.unshift disc }
-    end
-
     def initialize(n)
         @pile1 = []
         @pile2 = []
         @pile3 = []
-        get_discs(n)
+        (1..n).each { |disc| @pile1.unshift disc }
     end
 
     def get_pile
+        puts "Choose a pile to draw from..."
         pile = gets.chomp.to_i
         if pile == 1
             return @pile1
         elsif pile == 2
             return @pile2
-        else return @pile3
+        elsif pile == 3 
+            return @pile3
+        else get_pile
         end
     end
 
     def get_destination
+        puts "Choose a place to put the disc..."
         choice = gets.chomp.to_i
         if choice == 1
-            return @pile1
+            if @pile1.empty? || @pile1.last > @pile.last
+                return @pile1
+            else get_destination
+            end
         elsif choice == 2
-            return @pile2
-        else return @pile3
+            if @pile2.empty? || @pile2.last > @pile.last
+                return @pile2
+            else get_destination
+            end
+        elsif choice == 3 
+            if @pile3.empty? || @pile3.last > @pile.last
+                return @pile3
+            else get_destination
+            end
+        else get_destination
         end
     end
 
     def move
-        pile = get_pile
+        @pile = get_pile
         choice = get_destination
-        choice << pile.pop
+        choice << @pile.pop
     end
 
     def won?
-        return true if @pile1.empty? && @pile2.empty?
+        if @pile1.empty? && @pile2.empty?
+            puts 'Congrats you have defeated the Towers of Hanoi!'
+            return true
+        end
         return false
     end
 
-    def print
-        puts @pile1 && @pile2 && @pile3
+    def display
+        i = 1
+        arr = [@pile1, @pile2, @pile3]
+        arr.each do |pile| 
+            print " #{i} = #{pile} "
+            i += 1
+        end
     end
 
     def play
-        unless won?
-            print
+        until won?
+            display
             move
         end
     end
 
 end
+
+ht = HanoiTowers.new(3)
+ht.play
 
 
 # Get a code review from a TA
