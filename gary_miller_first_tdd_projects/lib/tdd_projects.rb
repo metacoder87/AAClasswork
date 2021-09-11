@@ -127,7 +127,7 @@ end
             # This increases the index for the next new sub-array
             i += 1
         end
-        
+
         return converse
     end
 
@@ -137,10 +137,23 @@ end
 # Write a method that takes an array of stock prices (prices on days 0, 1, ...), 
 # and outputs the most profitable pair of days on which to first buy the stock 
 # and then sell the stock. Remember, you can't sell stock before you buy it!
-
+class Array
     def stock_picker
-
+        pick = []
+        i = 0
+        profit = 0
+        until i == self.count - 1
+            self.each_with_index do |price, idx|
+                if i < idx && profit < self[idx] - self[i]
+                    profit = self[idx] - self[i]
+                    pick = [i, idx]
+                end
+            end
+            i += 1
+        end
+        return pick
     end
+end
 
 
 # Towers of Hanoi
@@ -164,12 +177,12 @@ end
 
 class HanoiTowers
 
-    def self.get_discs
-
+    def get_discs
+        # number_discs = gets.chomp.to_i
     end
 
     def initialize
-    
+
     end
 
     def get_pile
