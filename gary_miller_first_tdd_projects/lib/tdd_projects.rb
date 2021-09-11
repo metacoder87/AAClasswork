@@ -185,36 +185,59 @@ end
 
 class HanoiTowers
 
-    def get_discs
-        # number_discs = gets.chomp.to_i
+    attr_accessor :pile1, :pile2, :pile3
+
+    def get_discs(n)
+        (1..n).each { |disc| @pile1.unshift disc }
     end
 
-    def initialize
-
+    def initialize(n)
+        @pile1 = []
+        @pile2 = []
+        @pile3 = []
+        get_discs(n)
     end
 
     def get_pile
-
+        pile = gets.chomp.to_i
+        if pile == 1
+            return @pile1
+        elsif pile == 2
+            return @pile2
+        else return @pile3
+        end
     end
 
     def get_destination
-
+        choice = gets.chomp.to_i
+        if choice == 1
+            return @pile1
+        elsif choice == 2
+            return @pile2
+        else return @pile3
+        end
     end
 
     def move
-
+        pile = get_pile
+        choice = get_destination
+        choice << pile.pop
     end
 
     def won?
-
+        return true if @pile1.empty? && @pile2.empty?
+        return false
     end
 
     def print
-
+        puts @pile1 && @pile2 && @pile3
     end
 
     def play
-
+        unless won?
+            print
+            move
+        end
     end
 
 end
