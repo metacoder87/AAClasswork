@@ -183,20 +183,26 @@ end
 # #move
 # #won?
 
+# Creates a class for the Towers of Hanoi game
 class HanoiTowers
-
+    # Allows access to instance variable
     attr_accessor :pile1, :pile2, :pile3
-
+    # Takes in a number and sets the 3 piles
     def initialize(n)
         @pile1 = []
         @pile2 = []
         @pile3 = []
+        # Fills the first pile with the number of discs given
         (1..n).each { |disc| @pile1.unshift disc }
     end
 
-    def get_pile
+    def get_pile # Gets user input for a draw pile
+        # User instructions
         puts "Choose a pile to draw from..."
+        # Gets user input
         pile = gets.chomp.to_i
+        # Returns the pile corresponding to the user input 
+        # or asks again if not given 1,2, or 3
         if pile == 1
             return @pile1
         elsif pile == 2
@@ -207,9 +213,14 @@ class HanoiTowers
         end
     end
 
-    def get_destination
+    def get_destination # Gets user input about where to place the drawn disc
+        # User instructions
         puts "Choose a place to put the disc..."
+        # Gets the user input
         choice = gets.chomp.to_i
+        # Returns the pile corresponding to the user input
+        # if the given piles top disc is larger than the one drawn
+        # or asks again if not given 1,2, or 3
         if choice == 1
             if @pile1.empty? || @pile1.last > @pile.last
                 return @pile1
@@ -230,12 +241,15 @@ class HanoiTowers
     end
 
     def move
+        # Chooses a disc pile from which to draw
         @pile = get_pile
+        # Chooses a disc pile to place that disc
         choice = get_destination
+        # Picks up the disc and moves it to chosen pile
         choice << @pile.pop
     end
 
-    def won?
+    def won? # Checks if all of the discs have moved to the third pile
         if @pile1.empty? && @pile2.empty?
             puts 'Congrats you have defeated the Towers of Hanoi!'
             return true
@@ -243,26 +257,32 @@ class HanoiTowers
         return false
     end
 
-    def display
-        i = 1
+    def display # Outputs the board
+        i = 1 # User input requested
+        # An array of the piles
         arr = [@pile1, @pile2, @pile3]
+        # Iterates throught the array
         arr.each do |pile| 
+            # Outputs the input request with it's associated pile
             print " #{i} = #{pile} "
+            # Increases the input request for the next pile
             i += 1
         end
     end
 
-    def play
-        until won?
-            display
-            move
+    def play # Loops game-play until game is won
+        until won? # Checks if the game is won
+            display # Outputs the board
+            move # Moves another disc
         end
     end
 
 end
 
-ht = HanoiTowers.new(3)
-ht.play
+# Comment this out if you do not want the game to run automatically
+# or change the input to a higher number to increase difficulty of game-play
+ht = HanoiTowers.new(3) # Creates a new game with three discs
+ht.play # Runs the Towers of Hanoi game
 
 
 # Get a code review from a TA
