@@ -38,7 +38,23 @@
 # Classes you will want:
 # Card
 
+class Card
+
+    def initialize(suit, value)
+
+    end
+
+end
+
 # Deck
+
+class Deck
+
+    def initialize
+
+    end
+
+end
 
     # Request a TA Code review
 
@@ -46,13 +62,37 @@
     # The logic of calculating pair, three-of-a-kind, two-pair, etc. goes here.
     # Logic of which hand beats which would go here.
 
+class Hand
+
+    def initialize
+
+    end
+
+end
+
 # Player
     # Each player has a hand, plus a pot
     # Player has methods to ask the user:
         # Which cards they wish to discard
         # Whether they wish to fold, see, or raise.
 
+class Player
+
+    def initialize
+
+    end
+
+end
+
 # Game
     # Holds the deck
     # Keeps track of whose turn it is
     # Keeps track of the amount in the pot.
+
+class Game
+
+    def initialize
+
+    end
+
+end
