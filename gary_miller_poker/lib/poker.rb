@@ -64,7 +64,7 @@ end
 
 class Hand
 
-    def initialize
+    def initialize(cards)
 
     end
 
@@ -92,7 +92,7 @@ end
 class Game
 
     def initialize
-        
+
     end
 
 end
