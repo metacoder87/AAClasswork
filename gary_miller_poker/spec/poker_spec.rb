@@ -11,7 +11,7 @@ describe Card do
         end
 
         it "holds value" do
-            expect(card.suit).to be(:Queen)
+            expect(card.value).to be(:Queen)
         end
 
 end
@@ -22,7 +22,7 @@ describe Deck do
     end
 
         it 'has fifty-two cards' do
-            expect(deck.cards.count).to eq(52)
+            expect(deck.cards.values.flatten.count).to eq(52)
         end
 
         it 'has four suits' do
