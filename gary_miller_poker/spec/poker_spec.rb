@@ -111,9 +111,20 @@ describe Hand do
 end
 
 describe Player do
-    let(:player) do
-        Player.new
+    let(:hand) do
+        Hand.new([:D4,:S4,:DJ,:C4,:HJ])
     end
+    let(:player) do
+        Player.new(hand, 100000)
+    end
+
+        it 'has a hand' do
+            expect(player.hand.rank).to be(:full_house)
+        end
+
+        it 'has a pot' do
+            expect(player.pot).to be(100000)
+        end
 end
 
 describe Game do
