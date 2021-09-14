@@ -65,16 +65,21 @@ class Deck
         return base_vals + face_vals
     end
 
-    def deck_builder
+    def suit_hasher
         suits = [:hearts,:clubs,:diamonds,:spaids]
         cards = {}
         suits.each do |suit|
             cards[suit] = []
         end
-            cards.keys.each do |suit|
-                value_array.each do |val|
-                    cards[suit] << Card.new(suit, val)
-                end
+        return cards
+    end
+
+    def deck_builder
+        cards = suit_hasher
+        cards.keys.each do |suit|
+            value_array.each do |val|
+                cards[suit] << Card.new(suit, val)
+            end
         end
         return cards
     end
