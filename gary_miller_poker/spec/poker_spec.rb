@@ -3,8 +3,21 @@ require 'poker'
 
 describe Card do
     let(:card) do
-        Card.new
+        Card.new(:hearts, :Queen)
     end
+
+        describe initialize do
+            
+            it 'holds suit' do
+                expect(card.suit).to be(:hearts)
+            end
+
+            it "holds value" do
+                expect(card.suit).to be(:Queen)
+            end
+
+        end
+
 end
 
 describe Deck do
