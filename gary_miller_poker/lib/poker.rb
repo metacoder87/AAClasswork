@@ -40,8 +40,11 @@
 
 class Card
 
-    def initialize(suit, value)
+    attr_reader :suit, :value
 
+    def initialize(suit, value)
+        @suit = suit
+        @value = value
     end
 
 end
@@ -50,8 +53,30 @@ end
 
 class Deck
 
-    def initialize
+    attr_reader :cards
 
+    def initialize
+        @cards = deck_builder
+    end
+
+    def value_array
+        base_vals = [2,3,4,5,6,7,8,9,10]
+        face_vals = [:Jack,:Queen,:King,:Ace]
+        return base_vals + face_vals
+    end
+
+    def deck_builder
+        suits = [:hearts,:clubs,:diamonds,:spaids]
+        cards = {}
+        suits.each do |suit|
+            cards[suit] = []
+        end
+            cards.keys.each do |suit|
+                value_array.each do |val|
+                    cards[suit] << Card.new(suit, val)
+                end
+        end
+        return cards
     end
 
 end
