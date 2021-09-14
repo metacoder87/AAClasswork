@@ -131,4 +131,21 @@ describe Game do
     let(:game) do
         Game.new
     end
+
+        it 'has a deck' do
+            expect(game.deck.count).to eq(52)
+        end
+
+        it 'knows how many players' do
+            expect(game.player_count).to eq(3)
+        end
+
+        it 'can find the dealer_chip' do
+            expect(game.dealer_chip).to eq(1)
+        end
+
+        it 'knows how much is in the pot' do
+            expect(game.pot).to eq(15000)
+        end
+
 end
