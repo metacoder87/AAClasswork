@@ -36,83 +36,81 @@ describe Deck do
 end
 
 describe Hand do
-    let(:hand) do
-        Hand.new([:D4,:S2,:DJ,:CQ,:HA])
+    let(:deck) do
+        Deck.new
     end
-
-        it 'should know it has nothing' do
-            expect(hand.rank).to be(:ace_high)
+        
+        describe "#high_card" do
+            subject(:hand) { Hand.new([deck.cards.values[0][3],deck.cards.values[0][9],deck.cards.values[3][0],deck.cards.values[1][7],deck.cards.values[2][12]]) }
+            it 'should know it has nothing' do
+                expect(hand.rank).to eq(:ace_high)
+            end
         end
 
-    let(:hand) do
-        Hand.new([:D4,:SJ,:DJ,:CQ,:HA])
-    end
-
-        it 'should know it has a pair' do
-            expect(hand.rank).to be(:a_pair)
+        describe "#pair?" do
+            subject(:hand) { Hand.new([deck.cards.values[0][3],deck.cards.values[0][1],deck.cards.values[3][3],deck.cards.values[1][2],deck.cards.values[2][12]]) }
+            it 'should know it has a pair' do
+                expect(hand.rank).to be(:pair)
+            end
         end
 
-    let(:hand) do
-        Hand.new([:D4,:S4,:DQ,:CQ,:HA])
-    end
-
-        it 'should know it has two-pair' do
-            expect(hand.rank).to be(:two_pair)
+        describe "#three_of_kind?" do
+            subject(:hand) { Hand.new([deck.cards.values[0][3],deck.cards.values[0][1],deck.cards.values[3][3],deck.cards.values[1][3],deck.cards.values[2][12]]) }
+            it 'should know it has three of a kind' do
+                expect(hand.rank).to be(:three_of_kind)
+            end
         end
 
-    let(:hand) do
-        Hand.new([:HQ,:HA,:C10,:SA,:DA])
-    end
-
-        it 'should know it has three of a kind' do
-            expect(hand.rank).to be(:three_of_kind)
+        describe "#full_house?" do
+            subject(:hand) { Hand.new([deck.cards.values[0][3],deck.cards.values[0][12],deck.cards.values[3][3],deck.cards.values[1][3],deck.cards.values[2][12]]) }
+            it 'should know it has a full-house' do
+                expect(hand.rank).to be(:full_house)
+            end
         end
 
-    let(:hand) do
-        Hand.new([:D4,:S5,:D6,:C7,:H8])
-    end
-
-        it 'should know it has a straight' do
-            expect(hand.rank).to be(:straight)
+        describe "#two_pair?" do
+            subject(:hand) { Hand.new([deck.cards.values[0][0],deck.cards.values[0][1],deck.cards.values[1][0],deck.cards.values[1][1],deck.cards.values[0][9]]) }
+            it 'should know it has two-pair' do
+                expect(hand.rank).to be(:two_pair)
+            end
         end
 
-    let(:hand) do
-        Hand.new([:D4,:D2,:DJ,:DQ,:DA])
-    end
-
-        it 'should know it has a flush' do
-            expect(hand.rank).to be(:flush)
+        describe "#straight?" do
+            subject(:hand) { Hand.new([deck.cards.values[1][0],deck.cards.values[0][1],deck.cards.values[2][2],deck.cards.values[0][3],deck.cards.values[0][4]]) }
+            it 'should know it has a straight' do
+                expect(hand.rank).to be(:straight)
+            end
         end
 
-    let(:hand) do
-        Hand.new([:D4,:S4,:DJ,:C4,:HJ])
-    end
-
-        it 'should know it has a full-house' do
-            expect(hand.rank).to be(:full_house)
+        describe "#flush?" do
+            subject(:hand) { Hand.new([deck.cards.values[0][10],deck.cards.values[0][1],deck.cards.values[0][12],deck.cards.values[0][7],deck.cards.values[0][4]]) }
+            it 'should know it has a flush' do
+                expect(hand.rank).to be(:flush)
+            end
         end
 
-    let(:hand2) do
-        Hand.new([:D8,:D9,:D10,:DJ,:DQ])
-    end
-
-        it 'should know it has a straight-flush' do
-            expect(hand2.rank).to be(:straight_flush)
+        describe "#straight_flush?" do
+            subject(:hand) { Hand.new([deck.cards.values[0][0],deck.cards.values[0][1],deck.cards.values[0][2],deck.cards.values[0][3],deck.cards.values[0][4]]) }
+            it 'should know it has a straight-flush' do
+                expect(hand.rank).to be(:straight_flush)
+            end
         end
 
-    let(:hand) do
-        Hand.new([:D4,:S4,:H4,:C4,:HA])
-    end
-
-        it 'should know it has four-of-a-kind' do
-            expect(hand.rank).to be(:four_of_a_kind)
+        describe "#four_of_a_kind?" do
+            subject(:hand) { Hand.new([deck.cards.values[0][10],deck.cards.values[1][10],deck.cards.values[2][10],deck.cards.values[3][10],deck.cards.values[0][4]]) }
+            it 'should know it has four-of-a-kind' do
+                expect(hand.rank).to be(:four_of_a_kind)
+            end
         end
 
 end
 
 describe Player do
+    let(:deck) do
+        Deck.new
+    end
     let(:hand) do
-        Hand.new([:D4,:S4,:DJ,:C4,:HJ])
+        Hand.new([deck.cards.values[0][3],deck.cards.values[0][12],deck.cards.values[3][3],deck.cards.values[1][3],deck.cards.values[2][12]])
     end
     let(:player) do
         Player.new(hand, 100000)
