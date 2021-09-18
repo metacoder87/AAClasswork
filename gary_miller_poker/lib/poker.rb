@@ -43,8 +43,7 @@ class Card
     attr_reader :suit, :value
 
     def initialize(suit, value)
-        @suit = suit
-        @value = value
+        @suit, @value = suit, value
     end
 
 end
@@ -94,8 +93,121 @@ end
 
 class Hand
 
-    def initialize(cards)
+    attr_accessor :cards, :values
 
+    def initialize(cards)
+        @cards = cards
+        @values = []
+    end
+
+    def sort_vals
+        @cards.each do |card|
+            if card.value.class == Integer
+                @values << card.value
+            elsif card.value == :Jack
+                @values << 11
+            elsif card.value == :Queen
+                @values << 12
+            elsif card.value == :King
+                @values << 13
+            elsif card.value == :Ace
+                @values << 1
+                @values << 14
+            end
+        end
+    end
+
+    def card_count
+        cnt = {}
+        @cards.each { |card| cnt[card.value] = 0 }
+        @cards.each { |card| cnt[card.value] += 1 }
+        return cnt
+    end
+
+    def high_card
+        if @values.count > 5
+            puts "you've got an Ace"
+            return :ace_high
+        end
+        if @values.sort.last < 11
+            puts "you've got nothing"
+            return :got_nothing
+        else 
+            if @values.sort.last == 13
+                puts "King High"
+                return :king_high
+            elsif @values.sort.last == 12
+                puts "Queen High"
+                return :queen_high
+            elsif @values.sort.last == 11
+                puts "Jack High"
+                return :jack_high
+            end
+        end
+    end
+
+
+    def pair?
+        card_count.any? { |card, count| count == 2 }
+    end
+
+    def two_pair?
+        card_count.select { |card, count| count == 2 }.count == 2
+    end
+
+    def three_of_kind?
+        card_count.any? { |card, count| count == 3 }
+    end
+
+    def straight?
+        @values.sort[-1] - @values.sort[0] == 4
+    end
+
+    def flush?
+        @cards.all? { |card| card.suit == @cards[0].suit }
+    end
+
+    def full_house?
+        return three_of_kind? && pair?
+    end
+
+    def straight_flush?
+        return straight? && flush?
+    end
+
+    def four_of_a_kind?
+        card_count.any? { |card, count| count == 4 }
+    end
+
+    def rank
+        sort_vals
+        if four_of_a_kind?
+            puts 'four of a kind'
+            return :four_of_a_kind
+        elsif straight_flush?
+            puts 'straight flush'
+            return :straight_flush
+        elsif full_house?
+            puts 'full house'
+            return :full_house
+        elsif flush?
+            puts 'flush'
+            return :flush
+        elsif straight?
+            puts 'straight'
+            return :straight
+        elsif three_of_kind?
+            puts 'three of a kind'
+            return :three_of_kind
+        elsif two_pair?
+            puts 'two pair'
+            return :two_pair
+        elsif pair?
+            puts 'pair'
+            return :pair
+        else
+            return high_card
+        end
     end
 
 end
@@ -108,8 +220,16 @@ end
 
 class Player
 
-    def initialize
+    attr_accessor :hand, :pot
 
+    def initialize(hand, pot)
+        @hand, @pot = hand, pot
+    end
+
+    def bet
+        "Bet?"
+        n = gets.chomp.to_i
+        @pot -= n
     end
 
 end
