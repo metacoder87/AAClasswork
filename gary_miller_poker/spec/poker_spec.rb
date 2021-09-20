@@ -113,37 +113,31 @@ describe Player do
         Hand.new([deck.cards.values[0][3],deck.cards.values[0][12],deck.cards.values[3][3],deck.cards.values[1][3],deck.cards.values[2][12]])
     end
     let(:player) do
-        Player.new(hand, 100000)
+        Player.new(100000, hand)
     end
 
         it 'has a hand' do
             expect(player.hand.rank).to be(:full_house)
         end
 
-        it 'has a pot' do
-            expect(player.pot).to be(100000)
+        it 'has a chips' do
+            expect(player.chips).to be(100000)
         end
 end
 
 describe Game do
-    let(:game) do
-        Game.new
-    end
+    subject(:game) { Game.new(4) }
 
         it 'has a deck' do
-            expect(game.deck.count).to eq(52)
+            expect(game.deck.cards.values.flatten.count).to eq(52)
         end
 
         it 'knows how many players' do
-            expect(game.player_count).to eq(3)
-        end
-
-        it 'can find the dealer_chip' do
-            expect(game.dealer_chip).to eq(1)
+            expect(game.players.count).to eq(4)
         end
 
         it 'knows how much is in the pot' do
-            expect(game.pot).to eq(15000)
+            expect(game.pot).to eq(0)
         end
 
 end
