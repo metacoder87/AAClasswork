@@ -1,4 +1,4 @@
-
+require 'byebug'
 
 
 # Poker
@@ -237,33 +237,33 @@ end
 
 class Player
 
-    attr_accessor :hand, :chips, :bet, :rating 
+    attr_accessor :hand, :chips, :players_bet, :rating 
 
     def initialize(chips, hand = [])
-        @chips, @hand, @bet = chips, hand, 0
+        @chips, @hand, @players_bet = chips, hand, 0
     end
 
     def see_hand
-        cards = []
+        c = []
         @hand.cards.each do |card|
             if card.suit == :hearts
-                cards << [card.value,:H]
+                c << [card.value,:H]
             elsif card.suit == :spaids
-                cards << [card.value,:S]
+                c << [card.value,:S]
             elsif card.suit == :diamonds
-                cards << [card.value,:D]
-            else cards << [card.value,:C]
+                c << [card.value,:D]
+            else c << [card.value,:C]
             end
         end
-        cards.each { |card| print card }
+        c.each { |card| print card }
     end
 
     def fold
-        @hand = []
+        @hand.cards = []
     end
 
     def has_hand?
-        return false if @hand.empty?
+        return false if @hand.cards.empty?
         return true
     end
 
@@ -297,34 +297,32 @@ class Player
         n = trades.count
         if n > 0 
             trades.each do |trade|
-                val = 0
-                sut = ""
-                if trade.length > 2
+                val = trade.strip.split("").first
+                sut = trade.strip.split("").last.downcase
+                if trade.strip.length > 2
                     val = 10
-                elsif trade.split("").first.downcase == "a"
+                elsif val.downcase == "a"
                     val = :Ace
-                elsif trade.split("").first.downcase == "k"
+                elsif val.downcase == "k"
                     val = :King
-                elsif trade.split("").first.downcase == "q"
+                elsif val.downcase == "q"
                     val = :Queen
-                elsif trade.split("").first.downcase == "j"
+                elsif val.downcase == "j"
                     val = :Jack
-                elsif (2..9).include?(trade.split("").first.to_i)
-                    val = trade.split("").first.to_i
+                elsif (2..9).include?(val.to_i)
+                    val = val.to_i
                 end
-                if trade.split("").last.downcase == "h"
-                    sut = :Hearts
-                elsif trade.split("").last.downcase == "s"
-                    sut = :Spaids
-                elsif trade.split("").last.downcase == "d"
-                    sut = :Diamonds
-                elsif trade.split("").last.downcase == "c"
-                    sut = :Clubs
+                if sut == "h"
+                    sut = :hearts
+                elsif sut == "s"
+                    sut = :spaids
+                elsif sut == "d"
+                    sut = :diamonds
+                elsif sut == "c"
+                    sut = :clubs
                 end
 
-                trade? if val = 0 || sut = ""
-                
-                @cards.delete_if { |card| card.suit == sut && card.value == val }
+                @hand.cards.delete_if { |card| card.suit == sut && card.value == val }
             end
         end
         return n
@@ -338,6 +336,7 @@ class Player
             puts "fold, check, or bet?"
         elsif current_bet > 0
             puts "fold, call, or raise?"
+            puts "Current bet is #{current_bet}"
         end
         see_hand
         response = gets.chomp.to_s
@@ -359,11 +358,11 @@ class Player
 
     def bet(min)
         system 'clear'
-        puts "What would you like to bet from #{min} to #{@pot}?"
-        @bet = gets.chomp.to_i
-        if (min..@pot).include?(@bet)
-            @chips -= @bet
-            return @bet
+        puts "What would you like to bet from #{min} to #{@chips}?"
+        @players_bet = gets.chomp.to_i
+        if (min..@chips).include?(@players_bet)
+            @chips -= @players_bet
+            return @players_bet
         else bet(min)
         end
     end
@@ -430,7 +429,9 @@ class Game
 
     def trade_cards
         @players.each do |player|
-            player.hand.push player.trade?
+            trades = player.trade?
+            player.hand.cards.push @cards.pop trades if trades > 0
+            player.hand.cards.flatten!
         end
     end
 
@@ -452,7 +453,7 @@ class Game
     end
 
     def settled?
-        @players.all? { |player| player.bet == @bet if player.has_hand? }
+        @players.all? { |player| player.players_bet == @bet if player.has_hand? }
     end
 
     def show_cards
@@ -483,6 +484,7 @@ class Game
 
     def award_pot(player)
         puts "#{determine_winner} has won #{@pot} chips"
+        sleep(3)
         player.award(@pot)
         @pot = 0
     end
@@ -500,9 +502,11 @@ class Game
             @bet = 0
             shuffle_cards
             deal_cards
+            #debugger
             antie_up
             trade_cards
-            option until settled?
+            option
+            option unless settled?
             show_cards
             award_pot(determine_winner)
             remove_losers
