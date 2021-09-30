@@ -95,7 +95,7 @@ class Hand
 
     attr_accessor :cards, :values
 
-    def initialize(cards)
+    def initialize(cards = [])
         @cards = cards
         @values = []
     end
@@ -239,8 +239,8 @@ class Player
 
     attr_accessor :hand, :chips, :players_bet, :rating 
 
-    def initialize(chips, hand = [])
-        @chips, @hand, @players_bet = chips, hand, 0
+    def initialize(chips)
+        @chips, @hand, @players_bet = chips, Hand.new, 0
     end
 
     def see_hand
@@ -286,16 +286,14 @@ class Player
     def trade?
         system 'clear'
         puts "You can trade up to 3 cards..."
-        puts "If you don't want to trade just press ENTER"
-        puts "Enter cards in format..."
+        puts "Don't want to trade? Press ENTER"
+        puts "Enter cards in format, 3H, AD, 10S"
         puts "3 of Hearts as 3H, Ace of Diamonds as AD"
-        puts "Enter cards together use commas..."
-        puts "3H, AD, 10S"
         see_hand
         puts "\n"
         trades = gets.chomp.to_s.split(",")
         n = trades.count
-        if n > 0 
+        if n > 0 && n < 4
             trades.each do |trade|
                 val = trade.strip.split("").first
                 sut = trade.strip.split("").last.downcase
@@ -324,7 +322,9 @@ class Player
 
                 @hand.cards.delete_if { |card| card.suit == sut && card.value == val }
             end
+        else trade?
         end
+
         return n
     end
 
@@ -410,7 +410,7 @@ class Game
     end
 
     def deal_cards
-        @players.each { |player| player.hand = Hand.new(@cards.pop(5)) }
+        @players.each { |player| player.hand.cards = @cards.pop(5) }
     end
 
     def antie_up
@@ -432,6 +432,9 @@ class Game
             trades = player.trade?
             player.hand.cards.push @cards.pop trades if trades > 0
             player.hand.cards.flatten!
+            puts "Your new hand is..."
+            player.see_hand
+            sleep(5)
         end
     end
 
@@ -447,9 +450,11 @@ class Game
             elsif decision == "call"
                 player.called(@bet)
                 @pot += @bet
+                next
             else option
             end
         end
+        option unless settled?
     end
 
     def settled?
@@ -497,21 +502,31 @@ class Game
         @players.each { |player| player.hand = [] }
     end
 
+    def players_in_game
+        @players.select { |player| player.has_hand? }
+    end
+
+    def number_of_players
+        players_in_game.count
+    end
+
     def play
-        until @players.count == 1
+        while @players.count > 1 do
             @bet = 0
             shuffle_cards
             deal_cards
-            #debugger
             antie_up
-            trade_cards
-            option
-            option unless settled?
-            show_cards
-            award_pot(determine_winner)
-            remove_losers
-            clear_cards
-            new_dealer
+
+            while number_of_players > 1 do
+                trade_cards
+                option 
+                show_cards
+                award_pot(determine_winner)
+                remove_losers
+                clear_cards
+                new_dealer
+            end
+            award_pot(players_in_game.first)
         end
     end
 
