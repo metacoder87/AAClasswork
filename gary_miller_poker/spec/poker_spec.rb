@@ -1,6 +1,5 @@
 require 'rspec'
 require 'poker'
-require 'byebug'
 
 describe Card do
     let(:card) do
