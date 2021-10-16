@@ -101,6 +101,7 @@ class Hand
     end
 
     def sort_vals
+        @values.clear
         @cards.each do |card|
             if card.value.class == Integer
                 @values << card.value
@@ -292,6 +293,7 @@ class Player
         see_hand
         puts "\n"
         trades = gets.chomp.to_s.split(",")
+        return 0 if trades.empty?
         n = trades.count
         if n > 0 && n < 4
             trades.each do |trade|
@@ -331,6 +333,8 @@ class Player
     def action?(current_bet)
         @bet = 0
         system 'clear'
+        puts "Your bet is #{@players_bet}"
+        puts "You have #{@chips} chips"
         puts "Would you like to..."
         if current_bet == 0
             puts "fold, check, or bet?"
@@ -340,18 +344,10 @@ class Player
         end
         see_hand
         response = gets.chomp.to_s
-        if response == "fold"
-            fold
-            return response
-        elsif response == "check"
-            return response
-        elsif response == "bet"
-            return response
-        elsif response == "call"
-            return response
-        elsif response == "raise"
-            return response
-        else action?
+        responses = ["fold", "check", "bet", "raise", "call"]
+        if responses.include?(response) 
+            return response 
+        else action?(current_bet)
         end
     end
 
@@ -368,7 +364,14 @@ class Player
     end
 
     def called(current_bet)
-        @chips -= current_bet
+        if current_bet <= @chips
+            @chips -= current_bet
+            @players_bet = current_bet
+            puts "You called the bet"
+            puts "and have #{@chips} chips remaining."
+        else puts "You can't afford to call that bet."
+        end
+        sleep(3)
     end
 
     def strength_rating
@@ -414,7 +417,8 @@ class Game
     end
 
     def antie_up
-        @players.each do |player| 
+        @players.each do |player|
+            player.players_bet = 0
             if player.antie_up?
                 if player.chips >= 15
                     player.chips -= 15
@@ -439,26 +443,32 @@ class Game
     end
 
     def option
-        @players.each do |player|
-            decision = player.action?(@bet)
-            if decision == "check" || decision == "fold"
-                next
-            elsif decision == "bet" || decision == "raise"
-                n = player.bet(@bet)
-                @bet = n if n > @bet
-                @pot += n
-            elsif decision == "call"
-                player.called(@bet)
-                @pot += @bet
-                next
-            else option
+        players_in_game.each do |player|
+            if @bet == 0 || player.players_bet != @bet
+                decision = player.action?(@bet)
+                if decision == "bet" || decision == "raise"
+                    n = player.bet(@bet)
+                    if n > @bet
+                        @bet = n
+                        @pot += n
+                    end
+                elsif decision == "call"
+                    player.called(@bet)
+                    @pot += @bet
+                elsif decision == "fold"
+                    player.fold
+                end
+                if number_of_players == 1
+                    return
+                end
             end
         end
-        option unless settled?
+        return if settled?
+        option
     end
 
     def settled?
-        @players.all? { |player| player.players_bet == @bet if player.has_hand? }
+        players_in_game.all? { |player| player.players_bet == @bet if player.has_hand? }
     end
 
     def show_cards
@@ -474,6 +484,7 @@ class Game
     end
 
     def determine_winner
+        return players_in_game.first if number_of_players == 1
         winner = []
         @players.each do |player|
             player.strength_rating
@@ -499,7 +510,7 @@ class Game
     end
 
     def clear_cards
-        @players.each { |player| player.hand = [] }
+        @players.each { |player| player.hand.cards = [] }
     end
 
     def players_in_game
@@ -511,22 +522,28 @@ class Game
     end
 
     def play
-        while @players.count > 1 do
+        until @players.count == 1
+            @pot = 0
             @bet = 0
             shuffle_cards
             deal_cards
             antie_up
-
-            while number_of_players > 1 do
+            if number_of_players == 1
+                award_pot(players_in_game.first) 
+            else 
                 trade_cards
-                option 
-                show_cards
-                award_pot(determine_winner)
-                remove_losers
-                clear_cards
-                new_dealer
+            #debugger
+                option
+                if number_of_players == 1
+                    award_pot(players_in_game.first)
+                else
+                    show_cards
+                    award_pot(determine_winner)
+                end
             end
-            award_pot(players_in_game.first)
+            remove_losers
+            clear_cards
+            new_dealer
         end
     end
 
