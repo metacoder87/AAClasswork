@@ -200,31 +200,32 @@ class Hand
     end
 
     def weight
+        tie_breaker = @values.sort.last
         if rank == :pair
-            return 15
+            return 15 + tie_breaker
         elsif rank == :two_pair
-            return 16
+            return 16 + tie_breaker
         elsif rank == :three_of_kind
-            return 17
+            return 17 + tie_breaker
         elsif rank == :straight
-            return 18
+            return 18 + tie_breaker
         elsif rank == :flush
-            return 19
+            return 19 + tie_breaker
         elsif rank == :full_house
-            return 20
+            return 20 + tie_breaker
         elsif rank == :straight_flush
-            return 21
+            return 21 + tie_breaker
         elsif rank == :four_of_a_kind
-            return 22
+            return 22 + tie_breaker
         elsif high_card == :ace_high
-            return 14
+            return 14 + tie_breaker
         elsif high_card == :king_high
-            return 13
+            return 13 + tie_breaker
         elsif high_card == :queen_high
-            return 12
+            return 12 + tie_breaker
         elsif high_card == :jack_high
-            return 11
-        else return high_card
+            return 11 + tie_breaker
+        else return high_card + tie_breaker
         end
     end
 
@@ -238,25 +239,26 @@ end
 
 class Player
 
-    attr_accessor :hand, :chips, :players_bet, :rating 
+    attr_accessor :hand, :chips, :players_bet, :rating, :name 
 
-    def initialize(chips)
-        @chips, @hand, @players_bet = chips, Hand.new, 0
+    def initialize(chips, name)
+        @chips, @name, @hand, @players_bet = chips, name, Hand.new, 0
     end
 
     def see_hand
         c = []
         @hand.cards.each do |card|
             if card.suit == :hearts
-                c << [card.value,:H]
+                c << [card.value,"\u2661"]
             elsif card.suit == :spaids
-                c << [card.value,:S]
+                c << [card.value,"\u2660"]
             elsif card.suit == :diamonds
-                c << [card.value,:D]
-            else c << [card.value,:C]
+                c << [card.value,"\u2662"]
+            else c << [card.value,"\u2663"]
             end
         end
-        c.each { |card| print card }
+        c.map! { |card| card.join() }.join(',')
+        c.sort.each { |card| print card + " " }
     end
 
     def fold
@@ -271,7 +273,7 @@ class Player
     def antie_up?
         system 'clear'
         see_hand
-        puts @hand.rank
+        puts "\n#{@name} you have #{@chips} chips."
         puts "15 chips to play your hand."
         puts "Do you want to play? (y/n)"
         response = gets.chomp.to_s
@@ -333,7 +335,7 @@ class Player
     def action?(current_bet)
         @bet = 0
         system 'clear'
-        puts "Your bet is #{@players_bet}"
+        puts "#{@name}'s bet is #{@players_bet}"
         puts "You have #{@chips} chips"
         puts "Would you like to..."
         if current_bet == 0
@@ -367,11 +369,20 @@ class Player
         if current_bet <= @chips
             @chips -= current_bet
             @players_bet = current_bet
-            puts "You called the bet"
-            puts "and have #{@chips} chips remaining."
-        else puts "You can't afford to call that bet."
+            puts "#{@name}, called the bet"
+            puts "and has #{@chips} chips remaining."
+            sleep(3)
+            return @players_bet
+        elsif current_bet > @chips
+            @players_bet = current_bet
+            b = @chips
+            @chips = 0
+            puts "#{@name}, called the bet"
+            puts "and has #{@chips} chips remaining."
+            sleep(3)
+            return b
         end
-        sleep(3)
+        
     end
 
     def strength_rating
@@ -402,9 +413,12 @@ class Game
     end
 
     def make_players(n)
+        p = 1
         until n == 0
-            @players << Player.new(1500)
+            player_name = "Player" + p.to_s
+            @players << Player.new(1500, player_name)
             n -= 1
+            p += 1
         end
     end
 
@@ -453,8 +467,7 @@ class Game
                         @pot += n
                     end
                 elsif decision == "call"
-                    player.called(@bet)
-                    @pot += @bet
+                    @pot += player.called(@bet)
                 elsif decision == "fold"
                     player.fold
                 end
@@ -468,14 +481,15 @@ class Game
     end
 
     def settled?
+        # equal_bets = players_in_game.delete_if { |player| player.chips == 0 }
         players_in_game.all? { |player| player.players_bet == @bet if player.has_hand? }
     end
 
     def show_cards
         @players.each do |player|
-            puts "#{player} has a #{player.hand.rank}" if player.has_hand?
+            puts "#{player.name} has a #{player.hand.rank}" if player.has_hand?
         end
-            puts "#{determine_winner} has won this hand."
+            puts "#{determine_winner.name} has won this hand."
     end
 
     def new_dealer
@@ -499,8 +513,8 @@ class Game
     end
 
     def award_pot(player)
-        puts "#{determine_winner} has won #{@pot} chips"
-        sleep(3)
+        puts "#{player.name} has won #{@pot} chips"
+        sleep(5)
         player.award(@pot)
         @pot = 0
     end
