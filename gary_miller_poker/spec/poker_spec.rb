@@ -1,5 +1,6 @@
 require 'rspec'
 require 'poker'
+require 'byebug'
 
 describe Card do
     let(:card) do
@@ -109,12 +110,10 @@ describe Player do
     let(:deck) do
         Deck.new
     end
-    let(:hand) do
-        Hand.new([deck.cards.values[0][3],deck.cards.values[0][12],deck.cards.values[3][3],deck.cards.values[1][3],deck.cards.values[2][12]])
-    end
     let(:player) do
-        Player.new(100000, hand)
+        Player.new(100000, "player_sim", Hand.new([deck.cards.values[0][3],deck.cards.values[0][12],deck.cards.values[3][3],deck.cards.values[1][3],deck.cards.values[2][12]]))
     end
+    
 
         it 'has a hand' do
             expect(player.hand.rank).to be(:full_house)
