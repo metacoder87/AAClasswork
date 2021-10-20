@@ -23,6 +23,7 @@
         # element to every other element of the list. 
         # Return the element if all other elements in the array are larger.
         # What is the time complexity for this function?
+                # O(n^2) time complexity to compare each element to each element.
 
 
     # Phase II
