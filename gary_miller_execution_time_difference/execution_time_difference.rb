@@ -82,6 +82,25 @@
         # Then find the sums of each sub-array and return the max.
 
         # Discuss the time complexity of this solution.
+                
+
+        def largest_contiguous_subsum(arr)
+            subs = []
+            arr.each_with_index do |num, idx| # O(n^3)
+
+                ranj = (idx...arr.count).to_a # O(n)
+
+                ranj.each { |i| subs << arr[idx..i] } # O(n)
+            end
+
+            sums = subs.map do |sub| # O(n)
+                sub.inject(:+)
+            end
+            
+            largest = sums.select { |sum| sum if sums.all? { |num| sum >= num } } # O(n^2)
+            
+            return largest
+        end
 
     # Phase II
 
