@@ -83,22 +83,20 @@
 
         # Discuss the time complexity of this solution.
                 
+                
 
-        def largest_contiguous_subsum(arr)
-            subs = []
-            arr.each_with_index do |num, idx| # O(n^3)
+        def largest_contiguous_subsum(arr) # O(n^3)
+            largest = -999999999999999999
+            arr.each_with_index do |num, idx| # O(n)
 
                 ranj = (idx...arr.count).to_a # O(n)
 
-                ranj.each { |i| subs << arr[idx..i] } # O(n)
+                ranj.each do |i| # O(n)
+                    sub_sum = arr[idx..i].inject(:+)
+                    largest = sub_sum if sub_sum > largest 
+                end
             end
 
-            sums = subs.map do |sub| # O(n)
-                sub.inject(:+)
-            end
-            
-            largest = sums.select { |sum| sum if sums.all? { |num| sum >= num } } # O(n^2)
-            
             return largest
         end
 
