@@ -39,6 +39,12 @@
         # What is the time complexity?
                 # O(n) time complexity to iterate through a list once.
 
+                def my_min(arr) # O(n)
+                    mini = arr.first 
+                    arr.each { |num| mini = num if num < mini }
+                    return mini
+                end
+
         # Largest Contiguous Sub-sum
             # You have an array of integers and you want to find the 
             # largest contiguous (together in sequence) sub-sum. 
