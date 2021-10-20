@@ -37,6 +37,7 @@
         # Now rewrite the function to iterate through the 
         # list just once while keeping track of the minimum. 
         # What is the time complexity?
+                # O(n) time complexity to iterate through a list once.
 
         # Largest Contiguous Sub-sum
             # You have an array of integers and you want to find the 
