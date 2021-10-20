@@ -25,6 +25,12 @@
         # What is the time complexity for this function?
                 # O(n^2) time complexity to compare each element to each element.
 
+                def my_min(arr) # O(n^2)
+                    arr.each do |ele|
+                        return ele if arr.all? { |num| ele <= num }
+                    end
+                end
+
 
     # Phase II
 
