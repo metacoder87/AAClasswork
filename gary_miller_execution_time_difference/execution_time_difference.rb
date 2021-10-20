@@ -117,6 +117,3 @@
         # Get your story straight, and then explain
         # your solution's time complexity to your TA.
 
-list = [5, 3, -7]
-
-puts largest_contiguous_subsum(list) # => 8
