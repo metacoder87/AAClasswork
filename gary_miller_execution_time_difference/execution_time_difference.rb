@@ -82,7 +82,10 @@
         # Then find the sums of each sub-array and return the max.
 
         # Discuss the time complexity of this solution.
-                
+
+                # This method uses a linear iteration with two nested loops 
+                # also with linear time complexities so it has an
+                # O(n^3) 
                 
 
         def largest_contiguous_subsum(arr) # O(n^3)
@@ -114,3 +117,6 @@
         # Get your story straight, and then explain
         # your solution's time complexity to your TA.
 
+list = [5, 3, -7]
+
+puts largest_contiguous_subsum(list) # => 8
