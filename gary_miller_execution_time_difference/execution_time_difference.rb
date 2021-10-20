@@ -88,20 +88,20 @@
                 # O(n^3) 
                 
 
-        def largest_contiguous_subsum(arr) # O(n^3)
-            largest = -999999999999999999
-            arr.each_with_index do |num, idx| # O(n)
+            def largest_contiguous_subsum(arr) # O(n^3)
+                largest = -999999999999999999
+                arr.each_with_index do |num, idx| # O(n)
 
-                ranj = (idx...arr.count).to_a # O(n)
+                    ranj = (idx...arr.count).to_a # O(n)
 
-                ranj.each do |i| # O(n)
-                    sub_sum = arr[idx..i].inject(:+)
-                    largest = sub_sum if sub_sum > largest 
+                    ranj.each do |i| # O(n)
+                        sub_sum = arr[idx..i].inject(:+)
+                        largest = sub_sum if sub_sum > largest 
+                    end
                 end
-            end
 
-            return largest
-        end
+                return largest
+            end
 
     # Phase II
 
