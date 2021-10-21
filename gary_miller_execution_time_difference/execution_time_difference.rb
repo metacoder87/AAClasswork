@@ -30,7 +30,8 @@
                         return ele if arr.all? { |num| ele <= num }
                     end
                 end
-
+list = [ 0, 3, 5, 4, -5, 10, 1, 90 ]
+puts my_min_slow(list)  # =>  -5
 
     # Phase II
 
