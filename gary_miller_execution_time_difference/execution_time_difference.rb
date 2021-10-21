@@ -40,7 +40,7 @@ puts my_min_slow(list)  # =>  -5
         # What is the time complexity?
                 # O(n) time complexity to iterate through a list once.
 
-                def my_min(arr) # O(n)
+                def my_min_lin(arr) # O(n)
                     mini = arr.first 
                     arr.each { |num| mini = num if num < mini }
                     return mini
