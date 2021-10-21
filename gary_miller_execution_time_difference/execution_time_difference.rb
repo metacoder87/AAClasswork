@@ -45,6 +45,7 @@ puts my_min_slow(list)  # =>  -5
                     arr.each { |num| mini = num if num < mini }
                     return mini
                 end
+puts my_min_lin(list)  # =>  -5
 
         # Largest Contiguous Sub-sum
             # You have an array of integers and you want to find the 
