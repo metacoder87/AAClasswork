@@ -35,7 +35,7 @@
 # What happens if you increase the size of the strings?
         # With larger strings the methods ability to generate 
         # all possible permutations gets exponentially slower.
-        
+
     def first_anagram?(str1, str2)
         str1.split('').permutation(str1.length).any? do |str|
             str.join('') == str2
@@ -47,8 +47,9 @@
     puts first_anagram?("cat", "act") # => true
     puts first_anagram?("theeyes", "theysee") # => true
     puts first_anagram?("blue", "clue") # => false
-    puts first_anagram?("hippopotamus", "hippo") # => false
-    puts first_anagram?("twelveplusone", "elevenplustwo") # => true
+    # Commented out these last tests because they take a few minutes each test
+    # puts first_anagram?("hippopotamus", "hippo") # => false
+    # puts first_anagram?("twelveplusone", "elevenplustwo") # => true
 
 
 
