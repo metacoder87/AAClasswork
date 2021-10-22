@@ -114,6 +114,21 @@ puts my_min_lin(list)  # =>  -5
         # so far and another to track the current sum. 
         # We'll leave the rest to you.
 
+            def largest_contiguous_subsum_linear(arr) # O(n)
+                largest = arr.first
+                current = arr.first
+                arr.each do |num|
+                    largest = num if num > largest 
+                    
+                    current += num unless num == arr.first
+
+                    largest = current if current > largest
+                end
+                return largest
+            end
+                        
+                    
+
         # Get your story straight, and then explain
         # your solution's time complexity to your TA.
 
