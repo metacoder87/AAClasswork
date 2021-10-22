@@ -42,6 +42,16 @@
         end
     end
 
+    puts first_anagram?("gizmo", "sally")    #=> false
+    puts first_anagram?("elvis", "lives")    #=> true
+    puts first_anagram?("cat", "act") # => true
+    puts first_anagram?("theeyes", "theysee") # => true
+    puts first_anagram?("blue", "clue") # => false
+    puts first_anagram?("hippopotamus", "hippo") # => false
+    puts first_anagram?("twelveplusone", "elevenplustwo") # => true
+
+
+
 # Phase II:
 # Write a method #second_anagram? 
 # That iterates over the first string.
