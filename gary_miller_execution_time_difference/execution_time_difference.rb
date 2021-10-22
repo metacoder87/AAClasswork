@@ -132,3 +132,14 @@ puts my_min_lin(list)  # =>  -5
         # Get your story straight, and then explain
         # your solution's time complexity to your TA.
 
+list = [5, 3, -7]
+puts largest_contiguous_subsum_slow(list) # => 8
+puts largest_contiguous_subsum_linear(list) # => 8
+
+list = [2, 3, -6, 7, -6, 7]
+puts largest_contiguous_subsum_slow(list) # => 8
+puts largest_contiguous_subsum_linear(list) # => 8
+
+list = [-5, -1, -3]
+puts largest_contiguous_subsum_slow(list) # => -1
+puts largest_contiguous_subsum_linear(list) # => -1
