@@ -114,14 +114,13 @@ puts my_min_lin(list)  # =>  -5
         # so far and another to track the current sum. 
         # We'll leave the rest to you.
 
+            # I had to peak at the solution to fix this one on this last commit.
             def largest_contiguous_subsum_linear(arr) # O(n)
                 largest = arr.first
                 current = arr.first
-                arr.each do |num|
-                    largest = num if num > largest 
-                    
-                    current += num unless num == arr.first
-
+                (1...arr.length).each do |idx|
+                    current = 0 if current < 0
+                    current += arr[idx] 
                     largest = current if current > largest
                 end
                 return largest
