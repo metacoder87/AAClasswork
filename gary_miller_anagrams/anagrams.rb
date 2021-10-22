@@ -31,7 +31,10 @@
 # otherwise you might wait a while. If you're having trouble 
 # generating the possible anagrams, look into this method.
 # What is the time complexity of this solution? 
+        # The time complexity of first_anagram? is O(n!)
 # What happens if you increase the size of the strings?
+        # With larger strings the methods ability to generate 
+        # all possible permutations gets exponentially slower.
 
 # Phase II:
 # Write a method #second_anagram? 
