@@ -36,7 +36,12 @@
         # With larger strings the methods ability to generate 
         # all possible permutations gets exponentially slower.
 
-    def first_anagram?(str1, str2)
+        # Takes str1, the first string, and splits it into and array
+        # Then it generates all possible permutations 
+        # Last it checks to see if any permutations match the second string
+        # O(1) Space
+        # 0(n!) Time
+    def first_anagram?(str1, str2) 
         str1.split('').permutation(str1.length).any? do |str|
             str.join('') == str2
         end
