@@ -35,6 +35,12 @@
 # What happens if you increase the size of the strings?
         # With larger strings the methods ability to generate 
         # all possible permutations gets exponentially slower.
+        
+    def first_anagram?(str1, str2)
+        str1.split('').permutation(str1.length).any? do |str|
+            str.join('') == str2
+        end
+    end
 
 # Phase II:
 # Write a method #second_anagram? 
