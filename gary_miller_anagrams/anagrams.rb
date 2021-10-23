@@ -67,6 +67,16 @@
 # index is found for every letter and the second string is 
 # empty at the end of the iteration.
 
+    def second_anagram?(str1, str2)
+        str1.each do |char|
+            if str2.index(char)
+                str2.split("").delete_at(str2.index(char))
+            end
+        end
+        return true if str2.empty?
+        return false
+    end
+
 # Try varying the length of the input strings. 
 # What are the differences between #first_anagram? and #second_anagram??
 
