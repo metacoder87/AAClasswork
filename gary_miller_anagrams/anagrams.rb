@@ -68,9 +68,11 @@
 # empty at the end of the iteration.
 
     def second_anagram?(str1, str2)
-        str1.each do |char|
+        str1.split("").each do |char|
+            str2 = str2.split("")
             if str2.index(char)
-                str2.split("").delete_at(str2.index(char))
+                str2.delete_at(str2.index(char))
+                str2 = str2.join("")
             else return false
             end
         end
