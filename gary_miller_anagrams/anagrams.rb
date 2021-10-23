@@ -116,6 +116,10 @@
 
 # What is the time complexity of this solution? 
 # Is it better or worse than #second_anagram??
+    # The time complexity of this solution is going to O(n log(n))
+    # Because that is the best sorting complexity merge_sort
+    # O(n log(n)) is not as good as O(n)
+    # third_anagram? is worse than second_anagram? but still effective
     
     def third_anagram?(str1, str2) # => O(n log(n))
         merge_sort(str1) == merge_sort(str2)
