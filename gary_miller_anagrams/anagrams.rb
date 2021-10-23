@@ -67,7 +67,7 @@
 # index is found for every letter and the second string is 
 # empty at the end of the iteration.
 
-    def second_anagram?(str1, str2)
+    def second_anagram?(str1, str2) # => O(n)
         str1.split("").each do |char|
             str2 = str2.split("")
             if str2.index(char)
