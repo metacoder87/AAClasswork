@@ -116,6 +116,11 @@
 
 # What is the time complexity of this solution? 
 # Is it better or worse than #second_anagram??
+    
+    def third_anagram?(str1, str2) # => O(n log(n))
+        merge_sort(str1) == merge_sort(str2)
+    end
+
       # Merge Sort: O(n*lg(n))
     def merge_sort (string, &prc)
         return string if string.length <= 1
