@@ -81,6 +81,13 @@
 
 # Try varying the length of the input strings. 
 # What are the differences between #first_anagram? and #second_anagram??
+        # The main difference is that second_anagram? runs in linear time 
+        # Making it way faster and capable of computing larger strings
+        # in a reasonable amount of time
+
+        # first_anagram? must first generate all the possible permutations 
+        # the possible permutations grow exponentially with the size of the 
+        # string making first_anagram? unsuitable for checking large strings
 
 # Phase III:
 # Write a method #third_anagram? 
