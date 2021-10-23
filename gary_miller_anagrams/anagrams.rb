@@ -71,10 +71,10 @@
         str1.each do |char|
             if str2.index(char)
                 str2.split("").delete_at(str2.index(char))
+            else return false
             end
         end
         return true if str2.empty?
-        return false
     end
 
 # Try varying the length of the input strings. 
