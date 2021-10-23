@@ -89,6 +89,25 @@
         # the possible permutations grow exponentially with the size of the 
         # string making first_anagram? unsuitable for checking large strings
 
+    puts second_anagram?("gizmo", "sally")    #=> false
+    puts second_anagram?("elvis", "lives")    #=> true
+    puts second_anagram?("b", "c") # => false
+    puts second_anagram?("i", "i") # => true
+    puts second_anagram?("to", "it") # => false
+    puts second_anagram?("ok", "ko") # => true
+    puts second_anagram?("bee", "see") # => false
+    puts second_anagram?("cat", "act") # => true
+    puts second_anagram?("blue", "clue") # => false
+    puts second_anagram?("know", "wonk") # => true
+    puts second_anagram?("phone", "penot") # => false
+    puts second_anagram?("theeyes", "theysee") # => true
+    puts second_anagram?("hippopotamus", "hippo") # => false
+    puts second_anagram?("twelveplusone", "elevenplustwo") # => true
+    puts second_anagram?("notananagramer", "butyougettheidea") # => false
+    puts second_anagram?("electionresults", "liesletsrecount") # => true
+    puts "All tests have finished"
+
+
 # Phase III:
 # Write a method #third_anagram? 
 # That solves the problem by sorting both strings alphabetically. 
