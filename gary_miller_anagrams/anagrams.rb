@@ -126,23 +126,7 @@
         merge_sort(str1.split("")) == merge_sort(str2.split(""))
     end
 
-    puts second_anagram?("gizmo", "sally")    #=> false
-    puts second_anagram?("elvis", "lives")    #=> true
-    puts second_anagram?("b", "c") # => false
-    puts second_anagram?("i", "i") # => true
-    puts second_anagram?("to", "it") # => false
-    puts second_anagram?("ok", "ko") # => true
-    puts second_anagram?("bee", "see") # => false
-    puts second_anagram?("cat", "act") # => true
-    puts second_anagram?("blue", "clue") # => false
-    puts second_anagram?("know", "wonk") # => true
-    puts second_anagram?("phone", "penot") # => false
-    puts second_anagram?("theeyes", "theysee") # => true
-    puts second_anagram?("hippopotamus", "hippo") # => false
-    puts second_anagram?("twelveplusone", "elevenplustwo") # => true
-    puts second_anagram?("notananagramer", "butyougettheidea") # => false
-    puts second_anagram?("electionresults", "liesletsrecount") # => true
-    puts "All tests have finished"
+        # Merge Sort: O(n*lg(n))
 
         mid_idx = array.length / 2
         merge(
@@ -169,6 +153,24 @@
 
         merged_array + left + right
     end
+
+    puts third_anagram?("gizmo", "sally")    #=> false
+    puts third_anagram?("elvis", "lives")    #=> true
+    puts third_anagram?("b", "c") # => false
+    puts third_anagram?("i", "i") # => true
+    puts third_anagram?("to", "it") # => false
+    puts third_anagram?("ok", "ko") # => true
+    puts third_anagram?("bee", "see") # => false
+    puts third_anagram?("cat", "act") # => true
+    puts third_anagram?("blue", "clue") # => false
+    puts third_anagram?("know", "wonk") # => true
+    puts third_anagram?("phone", "penot") # => false
+    puts third_anagram?("theeyes", "theysee") # => true
+    puts third_anagram?("hippopotamus", "hippo") # => false
+    puts third_anagram?("twelveplusone", "elevenplustwo") # => true
+    puts third_anagram?("notananagramer", "butyougettheidea") # => false
+    puts third_anagram?("electionresults", "liesletsrecount") # => true
+    puts "All third_anagram? tests have finished"
 
 # Phase IV:
 # Write one more method #fourth_anagram?. 
