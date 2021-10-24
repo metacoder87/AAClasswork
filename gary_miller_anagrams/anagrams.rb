@@ -144,11 +144,7 @@
     puts second_anagram?("electionresults", "liesletsrecount") # => true
     puts "All tests have finished"
 
-      # Merge Sort: O(n*lg(n))
-    def merge_sort (string, &prc)
-        return string if string.length <= 1
-        array = string.split("")
-        mid_idx = string.length / 2
+        mid_idx = array.length / 2
         merge(
             merge_sort(array.take(mid_idx), &prc),
             merge_sort(array.drop(mid_idx), &prc),
