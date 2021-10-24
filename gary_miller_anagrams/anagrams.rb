@@ -106,7 +106,7 @@
     puts second_anagram?("twelveplusone", "elevenplustwo") # => true
     puts second_anagram?("notananagramer", "butyougettheidea") # => false
     puts second_anagram?("electionresults", "liesletsrecount") # => true
-    puts "All tests have finished"
+    puts "All second_anagram? tests have finished"
 
 
 # Phase III:
