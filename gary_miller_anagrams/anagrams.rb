@@ -219,5 +219,19 @@
 
 # Bonus: Do it with only one hash.
 
+    def bonus_anagram?(str1, str2) # => O(n)
+        hash1 = {}
+        str1.each_char do |char|
+            if str2.include?(char)
+                if hash1[char]
+                    hash1[char] += 1
+                else hash1[char] = 1
+                end
+            end
+        end
+        return true if hash1.values.inject(:+) == str1.length
+        return false
+    end
+
 # Discuss the time complexity of your solutions together, 
 # then call over your TA to look at them.
