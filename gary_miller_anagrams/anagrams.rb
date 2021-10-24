@@ -194,6 +194,25 @@
         end
         return hash1 == hash2
     end
+
+    puts fourth_anagram?("gizmo", "sally")    #=> false
+    puts fourth_anagram?("elvis", "lives")    #=> true
+    puts fourth_anagram?("b", "c") # => false
+    puts fourth_anagram?("i", "i") # => true
+    puts fourth_anagram?("to", "it") # => false
+    puts fourth_anagram?("ok", "ko") # => true
+    puts fourth_anagram?("bee", "see") # => false
+    puts fourth_anagram?("cat", "act") # => true
+    puts fourth_anagram?("blue", "clue") # => false
+    puts fourth_anagram?("know", "wonk") # => true
+    puts fourth_anagram?("phone", "penot") # => false
+    puts fourth_anagram?("theeyes", "theysee") # => true
+    puts fourth_anagram?("hippopotamus", "hippo") # => false
+    puts fourth_anagram?("twelveplusone", "elevenplustwo") # => true
+    puts fourth_anagram?("notananagramer", "butyougettheidea") # => false
+    puts fourth_anagram?("electionresults", "liesletsrecount") # => true
+    puts "All fourth_anagram? tests have finished"
+
 # What is the time complexity?
 
 # Bonus: Do it with only one hash.
