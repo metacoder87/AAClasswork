@@ -127,6 +127,8 @@
     end
 
         # Merge Sort: O(n*lg(n))
+    def merge_sort (array, &prc)
+        return array if array.length <= 1
 
         mid_idx = array.length / 2
         merge(
@@ -233,5 +235,28 @@
         return false
     end
 
+
+    puts bonus_anagram?("gizmo", "sally")    #=> false
+    puts bonus_anagram?("elvis", "lives")    #=> true
+    puts bonus_anagram?("b", "c") # => false
+    puts bonus_anagram?("i", "i") # => true
+    puts bonus_anagram?("to", "it") # => false
+    puts bonus_anagram?("ok", "ko") # => true
+    puts bonus_anagram?("bee", "see") # => false
+    puts bonus_anagram?("cat", "act") # => true
+    puts bonus_anagram?("blue", "clue") # => false
+    puts bonus_anagram?("know", "wonk") # => true
+    puts bonus_anagram?("phone", "penot") # => false
+    puts bonus_anagram?("theeyes", "theysee") # => true
+    puts bonus_anagram?("hippopotamus", "hippo") # => false
+    puts bonus_anagram?("twelveplusone", "elevenplustwo") # => true
+    puts bonus_anagram?("notananagramer", "butyougettheidea") # => false
+    puts bonus_anagram?("electionresults", "liesletsrecount") # => true
+    puts "All bonus_anagram? tests have finished"
+        
+
 # Discuss the time complexity of your solutions together, 
 # then call over your TA to look at them.
+        # The time complexity of bonus_anagram? is O(n)
+        # but it will only require half of the 
+        # linear time as fourth_anagram?
