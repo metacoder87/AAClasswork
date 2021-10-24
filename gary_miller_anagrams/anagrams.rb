@@ -55,6 +55,7 @@
     # Commented out these last tests because they take a few minutes each test
     # puts first_anagram?("hippopotamus", "hippo") # => false
     # puts first_anagram?("twelveplusone", "elevenplustwo") # => true
+    puts "All first_anagram? tests have finished"
 
 
 
