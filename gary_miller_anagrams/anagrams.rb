@@ -159,7 +159,7 @@
     # NB: In Ruby, shift is an O(1) operation. This is not true of all languages.
     def merge(left, right, &prc)
         merged_array = []
-        prc = Proc.new { |fish1, fish2| fish1.length <=> fish2.length } unless block_given?
+        prc = Proc.new { |char1, char2| char1 <=> char2 } unless block_given?
         until left.empty? || right.empty?
             case prc.call(left.first, right.first)
                 when -1
