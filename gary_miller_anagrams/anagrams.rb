@@ -177,6 +177,23 @@
 # This time, use two Hashes to store the number of 
 # times each letter appears in both words. Compare the resulting hashes.
 
+    def fourth_anagram?(str1, str2) # => O(n)
+        hash1 = {}
+        str1.each_char do |char|
+            if hash1[char]
+                hash1[char] += 1
+            else hash1[char] = 1
+            end
+        end
+        hash2 = {}
+        str2.each_char do |char|
+            if hash2[char]
+                hash2[char] += 1
+            else hash2[char] = 1
+            end
+        end
+        return hash1 == hash2
+    end
 # What is the time complexity?
 
 # Bonus: Do it with only one hash.
