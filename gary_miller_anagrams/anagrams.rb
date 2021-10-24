@@ -214,6 +214,8 @@
     puts "All fourth_anagram? tests have finished"
 
 # What is the time complexity?
+    # This algorithm runs through the input string so 
+    # fourth_anagram? has an O(n) linear time complexity
 
 # Bonus: Do it with only one hash.
 
