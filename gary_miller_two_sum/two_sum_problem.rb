@@ -48,6 +48,30 @@
 
 # Once you're done, write a comment with your solution's time complexity.
 
+    def bad_two_sum?(arr, target) # => O(n^2) Quadratic Time
+        bad_sums = {}
+        arr.each_with_index do |num1, idx|
+            arr.each_with_index do |num2, i|
+                if bad_sums[num1] && bad_sums[num1].include?(num2)
+                    next
+                elsif bad_sums[num2] && bad_sums[num2].include?(num1)
+                    next
+                else
+                    if num1 + num2 == target
+                        return true unless idx == i
+                    else
+                        if bad_sums[num1]
+                            
+                        else bad_sums[num1] = []
+                        end
+                        bad_sums[num1] << num2
+                    end
+                end
+            end
+        end
+        return false
+    end
+
 
 # Sorting
 # As a person of elevated algorithmic sensibilities, 
