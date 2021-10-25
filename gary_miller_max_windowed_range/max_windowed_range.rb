@@ -286,6 +286,53 @@ end
 # than just the value with new element to the store.
 # Think about how to do this and what information to store.
 
+class MinMaxStack
+
+    def initialize
+    @store = []
+    @max_value = nil
+    @min_value = nil
+  end
+
+  def peek
+    @store.last
+  end
+
+  def size
+    @store.count
+  end
+
+  def empty?
+    @store.empty?
+  end
+
+  def pop
+    @store.pop
+  end
+
+  def push(new_ele)
+    @store << new_ele
+    if @max_value.nil?
+        @max_value = new_ele
+    elsif @min_value.nil?
+        @min_value = new_ele
+    elsif @max_value < new_ele
+        @max_value = new_ele
+    elsif @min_value > new_ele
+        @min_value = new_ele
+    end
+  end
+
+  def max
+    @max_value
+  end
+
+  def min
+    @min_value
+  end
+
+end
+
 # Implement peek, size, empty?, max, min, pop, push methods on your MinMaxStack.
 
 
