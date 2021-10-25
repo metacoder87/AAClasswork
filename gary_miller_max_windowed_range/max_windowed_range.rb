@@ -255,12 +255,12 @@ end
             @stack1.empty? && @stack2.empty?
         end
 
-        def enqueue(new_ele)
-
+        def enqueue
+            @stack2.push(@stack1.pop)
         end
 
         def dequeue
-
+            @stack2.pop
         end
 
     end
@@ -288,11 +288,13 @@ end
 
 # Implement peek, size, empty?, max, min, pop, push methods on your MinMaxStack.
 
+
 # Phase 6: MinMaxStackQueue
 # Similar to MyStack (phase 3) was used to build StackQueue (phase 4),
 # use your MinMaxStack (phase 5) to build a MinMaxStackQueue.
 
 # What methods are needed to solve this problem in O(n) time?
+
 
 # Phase 7: Max Windowed Range
 # Armed with a working MinMaxStackQueue, this problem should be much easier.
