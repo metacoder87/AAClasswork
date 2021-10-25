@@ -381,11 +381,16 @@ class MinMaxStackQueue
   end
 
   def max
-    [@stack_in.max_value, @stack_out.max_value].sort.last
+    maxes = []
+    maxes << @stack_in.max_value unless @stack_in.empty? 
+    maxes << @stack_out.max_value unless @stack_out.empty?
+    maxes.max
   end
 
   def min
-    [@stack_in.min_value, @stack_out.min_value].sort.first
+    mins = []
+    mins << @stack_in.min_value unless @stack_in.empty? 
+    mins << @stack_out.min_value unless @stack_out.empty?
   end
 
   private
