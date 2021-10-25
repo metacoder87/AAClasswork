@@ -173,6 +173,15 @@ puts "Finished running okay_two_sum? tests"
         end
         return false
     end
+
+puts two_sum?(arr, 6) # => should be true
+puts two_sum?(arr, 10) # => should be false
+puts two_sum?(arr, 8) # => true
+puts two_sum?(long_array, 2218) # => false
+puts two_sum?(long_array, 1257) # => true
+puts two_sum?(long_array, 5040) # => false
+puts "Finished running two_sum? tests"
+
 # Once you're finished, make sure you understand the time complexity of 
 # your solutions and then call over your TA and show them what you've got. 
 # Defend to them why each of your solutions
