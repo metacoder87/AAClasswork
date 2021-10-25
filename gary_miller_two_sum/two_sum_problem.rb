@@ -127,6 +127,20 @@ puts "Finished running bad_two_sum? tests"
 # One way involves using a very cheap algorithm that can only be used 
 # on sorted data sets. What are some such algorithms you know?)
 
+    def okay_two_sum?(arr, target) # => O(n*log(n))
+        merge_sort(arr).bsearch do |ele|
+            if arr.include?(target - ele)
+                if target / 2 == ele
+                    if arr.index(ele) != arr.rindex(ele)
+                        return true
+                    end
+                else return true
+                end
+            end
+        end
+        return false
+    end
+
 
 # Hash Map
 # Finally, it's time to bust out the big guns: a hash map. 
