@@ -356,6 +356,46 @@ end
 
 # What methods are needed to solve this problem in O(n) time?
 
+class MinMaxStackQueue
+
+  def initialize
+    @stack_in = MinMaxStack.new
+    @stack_out = MinMaxStack.new
+  end
+
+  def size
+    @stack_in.size + @stack_out.size
+  end
+
+  def empty?
+    @stack_in.empty? && @stack_out.empty?
+  end
+
+  def enqueue(new_ele)
+    @stack_in.push(new_ele)
+  end
+
+  def dequeue
+    requeue if @stack_out.empty?
+    @stack_out.pop
+  end
+
+  def max
+    [@stack_in.max_value, @stack_out.max_value].sort.last
+  end
+
+  def min
+    [@stack_in.min_value, @stack_out.min_value].sort.first
+  end
+
+  private
+
+  def requeue
+    @stack_out.push(@stack_in.pop) until @stack_in.empty?
+  end
+
+end
+
 
 # Phase 7: Max Windowed Range
 # Armed with a working MinMaxStackQueue, this problem should be much easier.
