@@ -77,7 +77,8 @@ long_array = (0..1000).to_a.shuffle.drop(50)
 puts bad_two_sum?(arr, 6) # => should be true
 puts bad_two_sum?(arr, 10) # => should be false
 puts bad_two_sum?(long_array, 1257) # => true
-puts bad_two_sum?(long_array, 5040) # => false
+# puts bad_two_sum?(long_array, 5040) # => false
+puts "Finished running bad_two_sum? tests"
 
 # Sorting
 # As a person of elevated algorithmic sensibilities, 
