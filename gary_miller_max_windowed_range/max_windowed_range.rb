@@ -37,10 +37,26 @@
 # Implement this approach in a method, windowed_max_range(array, window_size). 
 # Make sure your code passes the following test cases:
 
-# windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
-# windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
-# windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
-# windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8
+    def windowed_max_range(array, window_size) # O(n^2)
+        current_max_range = nil
+        array.each_with_index do |num, i| # O(n)
+            window = array.slice(i..window_size - 1) # O(n)
+            range = window.max - window.min # O(n)
+            if current_max_range
+                if range > current_max_range
+                    current_max_range = range
+                end
+            else current_max_range = range 
+            end
+            window_size += 1
+        end
+        return current_max_range
+    end
+
+puts windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8 # true
+puts windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5 # true
+puts windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8 # true
+puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8 # true
 
 # Think about the time complexity of your method. 
 # How many iterations are required at each step? 
