@@ -405,4 +405,26 @@ end
 # Make sure all the test cases pass, and that you
 # both understand the time complexity of this solution.
 
+def windowed_max_range(array, window_size)
+  queue = MinMaxStackQueue.new
+  max_range = nil
+
+  array.each do |val|
+    queue.enqueue(val)
+    queue.dequeue if queue.size > window_size
+
+    if queue.size == window_size
+      current_range = queue.max - queue.min
+      max_range = current_range if current_range > max_range
+    end
+  end
+
+  return max_range 
+end
+
+puts windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8 # true
+puts windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5 # true
+puts windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8 # true
+puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8 # true
+
 # Code Review: Request for a TA Code review at the end of this phase.
