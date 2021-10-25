@@ -295,16 +295,12 @@ end
 
 class MinMaxStack
 
-    attr_reader :max_value, :min_value
-
     def initialize
     @store = MyStack.new
-    @max_value = nil
-    @min_value = nil
   end
 
   def peek
-    @store.peek
+    @store.peek[:value] unless empty?
   end
 
   def size
@@ -316,33 +312,33 @@ class MinMaxStack
   end
 
   def pop
-    @store.pop
+    @store.pop[:value] unless empty?
+  end
+
+  def max
+    @store.peek[:max] unless empty?
+  end
+
+  def min
+    @store.peek[:min] unless empty?
   end
 
   def push(new_ele)
-    @store.push(new_ele)
-    update_min(new_ele)
-    update_max(new_ele)
+    @store.push({
+      max: update_max(new_ele),
+      min: update_min(new_ele),
+      value: new_ele
+    })
   end
 
   private
 
   def update_max(new_ele)
-    if @max_value.nil?
-        @max_value = new_ele
-
-    elsif @max_value < new_ele
-        @max_value = new_ele
-    end
+    empty? ? new_ele : [max, new_ele].max
   end
 
   def update_min(new_ele)
-    if @min_value.nil?
-        @min_value = new_ele
-    
-    elsif @min_value > new_ele
-        @min_value = new_ele
-    end
+    empty? ? new_ele : [min, new_ele].min
   end
 
 end
@@ -382,15 +378,16 @@ class MinMaxStackQueue
 
   def max
     maxes = []
-    maxes << @stack_in.max_value unless @stack_in.empty? 
-    maxes << @stack_out.max_value unless @stack_out.empty?
+    maxes << @stack_in.max unless @stack_in.empty? 
+    maxes << @stack_out.max unless @stack_out.empty?
     maxes.max
   end
 
   def min
     mins = []
-    mins << @stack_in.min_value unless @stack_in.empty? 
-    mins << @stack_out.min_value unless @stack_out.empty?
+    mins << @stack_in.min unless @stack_in.empty? 
+    mins << @stack_out.min unless @stack_out.empty?
+    mins.min
   end
 
   private
@@ -413,14 +410,14 @@ end
 def windowed_max_range(array, window_size)
   queue = MinMaxStackQueue.new
   max_range = nil
-
+  
   array.each do |val|
     queue.enqueue(val)
     queue.dequeue if queue.size > window_size
 
     if queue.size == window_size
       current_range = queue.max - queue.min
-      max_range = current_range if current_range > max_range
+      max_range = current_range if !max_range || current_range > max_range
     end
   end
 
