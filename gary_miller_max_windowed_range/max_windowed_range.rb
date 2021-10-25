@@ -23,6 +23,8 @@
 # Be able to explain the time complexity of your solution
 # Know the differences between a stack and a queue
 # Be able to use simple data structures to build more complicated ones
+
+
 # Phase 1: Naive Solution
 # One approach to solving this problem would be:
 
@@ -59,7 +61,7 @@ puts windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8 # true
 puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8 # true
 
 # Think about the time complexity of your method. 
-# How many iterations are required at each step? 
+# How many iterations are required at each step?
 # What is its overall time complexity in Big-O notation?
 
 # Analysis
@@ -94,6 +96,8 @@ puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8 # true
 # StackQueue
 # MinMaxStack
 # MinMaxStackQueue
+
+
 # Phase 2: MyQueue
 # Since the window only moves one index at a time, 
 # it would be nicer to represent it as a queue. 
@@ -124,12 +128,35 @@ puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8 # true
 # Implement a Queue class. 
 # Use the following initialize method as a starting point:
 
-# class MyQueue
-#   def initialize
-#     @store = []
-#   end
-# end
+class MyQueue
+
+  def initialize
+    @store = []
+  end
+
+  def peek
+    @store.last
+  end
+
+  def size
+    @store.count
+  end
+
+  def empty?
+    @store.empty?
+  end
+
+  def enqueue(new_ele)
+    @store.unshift(new_ele)
+  end
+
+  def dequeue
+    @store.pop
+  end
+
+end
 # Implement peek, size, empty?, enqueue, and dequeue methods on your Queue.
+
 
 # Phase 3: MyStack
 # We want to find the max window range of array in O(n) time,
