@@ -241,7 +241,32 @@ end
 # As the slinky descends down a stair step, the top
 # of a slinky becomes the bottom of the slinky...
 
+    class StackQueue
+
+        def initialize
+            @stack1, @stack2 = MyStack.new, MyStack.new
+        end
+
+        def size
+            @stack1.count + @stack2.count
+        end
+
+        def empty?
+            @stack1.empty? && @stack2.empty?
+        end
+
+        def enqueue(new_ele)
+
+        end
+
+        def dequeue
+
+        end
+
+    end
+
 # Code Review: Request for a TA code review at the end of this phase.
+
 
 # Phase 5: MinMaxStack
 # Before we move on, let's take a step back to our MyStack class.
