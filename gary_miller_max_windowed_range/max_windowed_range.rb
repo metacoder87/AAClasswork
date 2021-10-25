@@ -188,12 +188,35 @@ end
 # Implement a Stack class.
 # Use the following initialize method as a starting point:
 
-# class MyStack
-#   def initialize
-#     @store = []
-#   end
-# end
+class MyStack
+
+  def initialize
+    @store = []
+  end
+
+  def peek
+    @store.last
+  end
+
+  def size
+    @store.count
+  end
+
+  def empty?
+    @store.empty?
+  end
+
+  def pop
+    @store.pop
+  end
+
+  def push(new_ele)
+    @store << new_ele
+  end
+
+end
 # Implement peek, size, empty?, pop and push methods on your Stack.
+
 
 # Phase 4: StackQueue
 # With that done, we're going to implement a queue again, but with a twist: 
