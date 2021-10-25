@@ -244,23 +244,30 @@ end
     class StackQueue
 
         def initialize
-            @stack1, @stack2 = MyStack.new, MyStack.new
+            @stack_in, @stack_out = MyStack.new, MyStack.new
         end
 
         def size
-            @stack1.count + @stack2.count
+            @stack_in.size + @stack_out.size
         end
 
         def empty?
-            @stack1.empty? && @stack2.empty?
+            @stack_in.empty? && @stack_out.empty?
         end
 
-        def enqueue
-            @stack2.push(@stack1.pop)
+        def enqueue(new_ele)
+            @stack_in.push(new_ele)
         end
 
         def dequeue
-            @stack2.pop
+          requeue if @stack_out.empty?
+          @stack_out.pop
+        end
+
+        private
+
+        def requeue
+          @stack_out.push(@stack_in.pop) until @stack_in.empty?
         end
 
     end
