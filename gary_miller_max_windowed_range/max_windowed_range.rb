@@ -295,18 +295,20 @@ end
 
 class MinMaxStack
 
+    attr_reader :max_value, :min_value
+
     def initialize
-    @store = []
+    @store = MyStack.new
     @max_value = nil
     @min_value = nil
   end
 
   def peek
-    @store.last
+    @store.peek
   end
 
   def size
-    @store.count
+    @store.size
   end
 
   def empty?
@@ -318,24 +320,29 @@ class MinMaxStack
   end
 
   def push(new_ele)
-    @store << new_ele
+    @store.push(new_ele)
+    update_min(new_ele)
+    update_max(new_ele)
+  end
+
+  private
+
+  def update_max(new_ele)
     if @max_value.nil?
         @max_value = new_ele
-    elsif @min_value.nil?
-        @min_value = new_ele
+
     elsif @max_value < new_ele
         @max_value = new_ele
-    elsif @min_value > new_ele
-        @min_value = new_ele
     end
   end
 
-  def max
-    @max_value
-  end
-
-  def min
-    @min_value
+  def update_min(new_ele)
+    if @min_value.nil?
+        @min_value = new_ele
+    
+    elsif @min_value > new_ele
+        @min_value = new_ele
+    end
   end
 
 end
