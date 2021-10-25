@@ -89,7 +89,12 @@ puts "Finished running bad_two_sum? tests"
 # Sort your data, then try to solve the problem.
 
 # What does sorting do to the lower bound of your time complexity?
+    # By sorting before searching the lower bound is reduced from O(n^2) to O(n*log(n))
+
 # How might sorting that make the problem easier?
+    # Sorting makes the problem much easier by opening up cheap
+    # algorithms like bsearch with O(log(n)) to quickly search the array
+
 # Write a second solution, called okay_two_sum?, which uses sorting. 
 # Make sure it works correctly.
 
