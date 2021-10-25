@@ -141,6 +141,13 @@ puts "Finished running bad_two_sum? tests"
         return false
     end
 
+puts okay_two_sum?(arr, 6) # => should be true
+puts okay_two_sum?(arr, 10) # => should be false
+puts okay_two_sum?(arr, 8) # => true
+puts okay_two_sum?(long_array, 2218) # => false
+puts okay_two_sum?(long_array, 1257) # => true
+puts okay_two_sum?(long_array, 5040) # => false
+puts "Finished running okay_two_sum? tests"
 
 # Hash Map
 # Finally, it's time to bust out the big guns: a hash map. 
