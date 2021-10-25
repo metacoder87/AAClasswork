@@ -62,7 +62,9 @@ puts windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8 # true
 
 # Think about the time complexity of your method. 
 # How many iterations are required at each step?
+    # Complete iteration and 2 iterations of the window at each step
 # What is its overall time complexity in Big-O notation?
+    # The overall time complexity is quadratic time or O(n^2)
 
 # Analysis
 # It turns out that it is quite costly to calculate the min and 
