@@ -164,6 +164,15 @@ puts "Finished running okay_two_sum? tests"
 # See if you can solve the two_sum? problem 
 # in linear time now, using your hash map.
 
+    def two_sum?(arr, target) # => O(n)
+        hash = {}
+        arr.each do |num| 
+            found = hash[target - num]
+            return true if found
+            hash[num] = target - num
+        end
+        return false
+    end
 # Once you're finished, make sure you understand the time complexity of 
 # your solutions and then call over your TA and show them what you've got. 
 # Defend to them why each of your solutions
