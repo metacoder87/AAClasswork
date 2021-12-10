@@ -79,6 +79,10 @@ input, select, textarea, label {
   display: block;
 }
 
+label[for="expertise"], label[for="rating"] {
+  display: none;
+}
+
 input[type="radio"] {
     -webkit-appearance: none;
     width: 27px;
@@ -108,3 +112,10 @@ h2 + .user_review {
     border-top: 1px solid black;
 }
 
+select {
+  margin: 10px 10px 10px 10px;
+}
+
+select, text, textarea {
+  width: 50%;
+}
