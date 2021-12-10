@@ -21,6 +21,7 @@ aside {
   width: 180px;
   margin-right: 15px;
   display: inline-block;
+  vertical-align: top;
 }
 
 h1 {
@@ -51,8 +52,22 @@ header > img {
   list-style: square inside;
 }
 
+.ingredients-list li {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.directions li {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 ol {
   list-style: upper-roman inside;
+}
+ol li {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .user_review h4 {
