@@ -31,3 +31,15 @@ li {
 img {
     max-width: 100%;
 }
+
+aside {
+    display: inline-block;
+    margin-right: 15px;
+    width: 18%;
+}
+
+section {
+    display: inline-block;
+    margin-left: 5px;
+    width: 78%;
+}
