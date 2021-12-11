@@ -3,6 +3,21 @@ body, header, img, nav, ul, li, aside, h2, section, h1, figure, p, ol, form, lab
     padding: 0px 0px 0px 0px;
     border: 0px 0px 0px 0px;
 }
+
+header img {
+    float: left;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+nav {
+    float: right;
+}
+
 body {
     font: inherit;
     line-height: 1.5;
