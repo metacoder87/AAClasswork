@@ -6,6 +6,11 @@ body, header, img, nav, ul, li, aside, h2, section, h1, figure, p, ol, form, lab
 
 header {
     display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    display: flex;
 }
 
 body {
