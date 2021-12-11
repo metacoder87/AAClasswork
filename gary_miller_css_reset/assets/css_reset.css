@@ -4,21 +4,12 @@ body, header, img, nav, ul, li, aside, h2, section, h1, figure, p, ol, form, lab
     border: 0px 0px 0px 0px;
 }
 
-header img {
-    float: left;
-}
-
-nav {
-    float: right;
-}
-
 body {
     font: inherit;
     line-height: 1.5;
 }
 
 li {
-    display: block;
     text-align: left;
 }
 
@@ -27,13 +18,9 @@ img {
 }
 
 aside {
-    display: inline-block;
-    margin-right: 15px;
     width: 18%;
 }
 
 section {
-    display: inline-block;
-    margin-left: 5px;
     width: 78%;
 }
