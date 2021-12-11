@@ -8,6 +8,7 @@ body {
 
 h1 {
   font-size: 38px;
+  margin-bottom: 15px;
 }
 
 h2 {
@@ -23,9 +24,9 @@ ul li a, figcaption a {
 
 /* This selector selects only IMMEDIATE (1 level deep) image element children
 of the header element */
-header > img {
+/* header > img {
   width: 100px;
-}
+} */
 
 /* Selects all elements with the class attribute "ingredients-list" */
 .ingredients-list {
@@ -62,10 +63,12 @@ input:last-child {
 
 input:last-child:hover {
     -webkit-filter: brightness(90%);
+    filter: opacity(90%);
 }
 
 ol li:nth-of-type(2n) {
   background-color: whitesmoke;
+  margin: 10px 0;
 }
 
 h2 + .user_review {
