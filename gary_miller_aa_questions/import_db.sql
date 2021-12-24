@@ -85,3 +85,9 @@ INSERT INTO
 VALUES
     (NULL, (SELECT id FROM users WHERE lname = 'Marley'), (SELECT id FROM questions WHERE title = 'Social Life?'), ('I myself spend my time smoking ganja, playing music, and talking politics.')),
     (NULL, (SELECT id FROM users WHERE lname = 'Lee'), (SELECT id FROM questions WHERE title = 'Social Life?'), ('I could teach you gung fu. I will bring my pads and heavy bag. They are in my trunk right now.'));
+
+INSERT INTO
+    replies (parent_reply_id, replier_id, question_id, body)
+VALUES
+    ((SELECT id FROM replies WHERE body = 'I could teach you gung fu. I will bring my pads and heavy bag. They are in my trunk right now.'), (SELECT id FROM users WHERE lname = 'Wayne'), (SELECT id FROM questions WHERE title = 'Social Life?'), 'I would like to spare with another Bruce who can hold their own. As long as Bob brings that ganja.');
+
