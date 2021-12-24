@@ -53,3 +53,13 @@ CREATE TABLE question_likes (
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 
+--SEED TABLE DATA
+
+INSERT INTO
+    users (fname, lname)
+VALUES
+    ('Bruce', 'Lee'),
+    ('Bruce', 'Wayne'),
+    ('Bob', 'Marley'),
+    ('Atlas', 'Anomolous');
+
