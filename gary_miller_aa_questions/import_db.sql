@@ -16,3 +16,14 @@ CREATE TABLE questions (
     
     FOREIGN KEY (questioner_id) REFERENCES users(id)
 );
+
+--Question Follows
+
+CREATE TABLE question_follows (
+    id INTEGER PRIMARY KEY,
+    follower_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+
+    FOREIGN KEY (follower_id) REFERENCES users(id),
+    FOREIGN KEY (question_id) REFERENCES questions(id)
+);
