@@ -71,3 +71,12 @@ VALUES
     ((SELECT id FROM users WHERE lname = 'Marley'), 'Get Up, Stand Up!', 'How can I get the world to listen to my songs?'),
     ((SELECT id FROM users WHERE lname = 'Anomolous'), 'How to Bring Change?', 'How much software do I have to write on my own before I can get a big company to give me a shot?');
 
+INSERT INTO
+    question_follows (follower_id, question_id)
+VALUES
+    ((SELECT id FROM users WHERE lname = 'Anomolous'), (SELECT id FROM questions WHERE title = 'Pointing Finger')),
+    ((SELECT id FROM users WHERE lname = 'Anomolous'), (SELECT id FROM questions WHERE title = 'Social Life?')),
+    ((SELECT id FROM users WHERE lname = 'Anomolous'), (SELECT id FROM questions WHERE title = 'Get Up, Stand Up!')),
+    ((SELECT id FROM users WHERE lname = 'Wayne'), (SELECT id FROM questions WHERE title = 'Pointing Finger')),
+    ((SELECT id FROM users WHERE lname = 'Marley'), (SELECT id FROM questions WHERE title = 'Pointing Finger'));
+
