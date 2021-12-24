@@ -91,3 +91,11 @@ INSERT INTO
 VALUES
     ((SELECT id FROM replies WHERE body = 'I could teach you gung fu. I will bring my pads and heavy bag. They are in my trunk right now.'), (SELECT id FROM users WHERE lname = 'Wayne'), (SELECT id FROM questions WHERE title = 'Social Life?'), 'I would like to spare with another Bruce who can hold their own. As long as Bob brings that ganja.');
 
+INSERT INTO
+    question_likes (liker_id, question_id)
+VALUES
+    ((SELECT id FROM users WHERE lname = 'Anomolous'), (SELECT id FROM questions WHERE title = 'Pointing Finger')),
+    ((SELECT id FROM users WHERE lname = 'Anomolous'), (SELECT id FROM questions WHERE title = 'Social Life?')),
+    ((SELECT id FROM users WHERE lname = 'Anomolous'), (SELECT id FROM questions WHERE title = 'Get Up, Stand Up!')),
+    ((SELECT id FROM users WHERE lname = 'Lee'), (SELECT id FROM questions WHERE title = 'Social Life?')),
+    ((SELECT id FROM users WHERE lname = 'Marley'), (SELECT id FROM questions WHERE title = 'Social Life?'));
