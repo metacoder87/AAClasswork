@@ -41,3 +41,15 @@ CREATE TABLE replies (
     FOREIGN KEY (replier_id) REFERENCES users(id),
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
+
+--Question Likes
+
+CREATE TABLE question_likes (
+    id INTEGER PRIMARY KEY,
+    liker_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+
+    FOREIGN KEY (liker_id) REFERENCES users(id),
+    FOREIGN KEY (question_id) REFERENCES questions(id)
+);
+
