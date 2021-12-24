@@ -63,3 +63,11 @@ VALUES
     ('Bob', 'Marley'),
     ('Atlas', 'Anomolous');
 
+INSERT INTO
+    questions (questioner_id, title, body)
+VALUES
+    ((SELECT id FROM users WHERE lname = 'Lee'), 'Pointing Finger', 'Is one form of martial art better than another, and if so which one?'),
+    ((SELECT id FROM users WHERE lname = 'Wayne'), 'Social Life?', 'What do rich guy play boys do for fun?'),
+    ((SELECT id FROM users WHERE lname = 'Marley'), 'Get Up, Stand Up!', 'How can I get the world to listen to my songs?'),
+    ((SELECT id FROM users WHERE lname = 'Anomolous'), 'How to Bring Change?', 'How much software do I have to write on my own before I can get a big company to give me a shot?');
+
