@@ -1,3 +1,6 @@
+--Necessary for SQLite to obey foreign keys
+PRAGMA foreign_keys = ON;
+
 --Users
 
 CREATE TABLE users (
