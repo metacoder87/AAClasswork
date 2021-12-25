@@ -59,6 +59,18 @@ end
 
 class QuestionFollow
 
+    self.find_by_id(id)
+        qfollow = QuestionDatabase.instance.execute(<<-SQL, id)
+            SELECT
+                *
+            FROM
+                question_follows
+            WHERE
+                id = ?
+        SQL
+        return nil unless qfollow.length > 0
+    end
+
 end
 
 class Reply
