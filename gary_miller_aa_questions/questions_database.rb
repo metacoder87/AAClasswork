@@ -24,6 +24,19 @@ class User
         SQL
         return nil unless user.length > 0
     end
+
+    self.find_by_name(fname, lname)
+        user = QuestionDatabase.instance.execute(<<-SQL, fname, lname)
+            SELECT
+                *
+            FROM
+                users
+            WHERE
+                fname = ?
+                lname = ?
+        SQL
+        return nil unless user.length > 0
+    end
 end
 
 class Question
