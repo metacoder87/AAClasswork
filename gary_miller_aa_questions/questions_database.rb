@@ -36,6 +36,32 @@ class User
                 lname = ?
         SQL
         return nil unless user.length > 0
+
+        User.new(user.first)
+    end
+
+    self.find_by_fname(fname)
+        user = QuestionDatabase.instance.execute(<<-SQL, fname)
+            SELECT
+                *
+            FROM
+                users
+            WHERE
+                fname = ?
+        SQL
+        return nil unless user.length > 0
+    end
+
+    self.find_by_lname(lname)
+        user = QuestionDatabase.instance.execute(<<-SQL, lname)
+            SELECT
+                *
+            FROM
+                users
+            WHERE
+                lname = ?
+        SQL
+        return nil unless user.length > 0
     end
 end
 
