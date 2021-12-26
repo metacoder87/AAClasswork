@@ -1,3 +1,7 @@
+require_relative 'questions_database'
+require_relative 'user'
+require_relative 'question'
+
 class QuestionLike
 
     def self.find_by_id(id)
