@@ -70,4 +70,8 @@ class Reply
             options.values_at('id', 'parent_reply_id', 'replier_id', 'question_id', 'body')
     end
 
+    def author
+        User.find_by_id(replier_id)
+    end
+
 end
