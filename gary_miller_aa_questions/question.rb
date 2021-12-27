@@ -23,36 +23,36 @@ class Question
                 questions
             WHERE
                 id = ?
-        SQL
+            SQL
         return nil unless question.length > 0
 
         Question.new(question.first)
     end
 
-    def self.find_by_questioner_id(questioner_id)
-        hashed = { questioner_id: questioner_id }
-        questioner = QuestionsDatabase.instance.execute(<<-SQL, hashed)
-        SELECT
-            *
-        FROM
-            questions
-        WHERE
-            questions.questioner_id = :questioner_id
-        SQL
+    def self.find_by_author_id(author_id)
+        hashed = { author_id: author_id }
+        question = QuestionsDatabase.instance.execute(<<-SQL, hashed)
+            SELECT
+                *
+            FROM
+                questions
+            WHERE
+                questions.questioner_id = :author_id
+            SQL
         
-        questioner.map { |data| Question.new(data) }
+        question.map { |data| Question.new(data) }
     end
 
     def self.find_by_title(title)
         titled = { title: title }
         question = QuestionsDatabase.instance.execute(<<-SQL, titled)
-        SELECT
-            *
-        FROM
-            questions
-        WHERE
-            questions.title = :title
-        SQL
+            SELECT
+                *
+            FROM
+                questions
+            WHERE
+                questions.title = :title
+            SQL
        question.map { |data| Question.new(data) }
     end
 
