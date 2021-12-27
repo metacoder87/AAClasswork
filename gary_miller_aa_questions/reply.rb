@@ -39,15 +39,15 @@ class Reply
         reply.map { |data| Reply.new(data) }
     end
 
-    def self.find_by_replier_id(replier_id)
-        hashed = { replier_id: replier_id }
+    def self.find_by_user_id(user_id)
+        hashed = { user_id: user_id }
         reply = QuestionsDatabase.instance.execute(<<-SQL, hashed)
             SELECT
                 *
             FROM
                 replies
             WHERE
-                replies.replier_id = :replier_id
+                replies.replier_id = :user_id
             SQL
         reply.map { |data| Reply.new(data) }
     end
