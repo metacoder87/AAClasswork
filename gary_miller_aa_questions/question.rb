@@ -67,4 +67,9 @@ class Question
     def author
         User.find_by_id(questioner_id)
     end
+
+    def replies
+        Reply.find_by_question_id(id)
+    end
+    
 end
