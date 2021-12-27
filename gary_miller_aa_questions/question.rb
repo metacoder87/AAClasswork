@@ -6,6 +6,15 @@ require_relative 'reply'
 
 class Question
 
+    def self.all
+        question = QuestionsDatabase.instance.execute(<<-SQL)
+            SELECT
+                *
+            FROM
+                questions
+            SQL
+    end
+
     def self.find_by_id(id)
         question = QuestionsDatabase.instance.execute(<<-SQL, id)
             SELECT
@@ -21,39 +30,38 @@ class Question
     end
 
     def self.find_by_questioner_id(questioner_id)
-        questioner = QuestionDatabse.instance.execute(<<-SQL, questioner_id)
+        hashed = { questioner_id: questioner_id }
+        questioner = QuestionsDatabase.instance.execute(<<-SQL, hashed)
         SELECT
             *
         FROM
             questions
         WHERE
-            questioner_id = ?
+            questions.questioner_id = :questioner_id
         SQL
-        return nil unless questioner.length > 0
+        
+        questioner.map { |data| Question.new(data) }
     end
 
     def self.find_by_title(title)
-        question = QuestionsDatabase.instance.execute(<<-SQL, title)
+        titled = { title: title }
+        question = QuestionsDatabase.instance.execute(<<-SQL, titled)
         SELECT
             *
         FROM
             questions
         WHERE
-            title = ?
+            questions.title = :title
         SQL
-        return nil unless question.length > 0
+       question.map { |data| Question.new(data) }
     end
-    
-    def self.find_by_body(body)
-        question = QuestionsDatabase.instance.execute(<<-SQL, body)
-        SELECT
-            *
-        FROM
-            questions
-        WHERE
-            body = ?
-        SQL
-        return nil unless question.length > 0
+
+    attr_reader :id, :questioner_id
+    attr_accessor :title, :body
+
+    def initialize(options)
+        @id, @questioner_id, @title, @body = 
+        options.values_at('id', 'questioner_id', 'title', 'body')
     end
     
 end
