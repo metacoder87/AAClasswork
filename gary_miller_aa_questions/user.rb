@@ -50,4 +50,9 @@ class User
     def initialize(options = {})
         @id, @fname, @lname = options.values_at('id', 'fname', 'lname')
     end
+
+    def authored_questions
+        Question.find_by_author_id(id)
+    end
+    
 end
