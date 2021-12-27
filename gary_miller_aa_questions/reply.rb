@@ -82,4 +82,8 @@ class Reply
         Reply.find_by_id(parent_reply_id)
     end
 
+    def child_replies
+        Reply.find_by_parent_reply_id(id)
+    end
+
 end
