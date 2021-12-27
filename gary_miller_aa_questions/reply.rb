@@ -4,16 +4,70 @@ require_relative 'question'
 
 class Reply
 
+    def self.all
+        reply = QuestionsDatabase.instance.execute(<<-SQL)
+            SELECT
+                *
+            FROM
+                replies
+            SQL
+    end
+
     def self.find_by_id(id)
-        reply = QuestionsDatabase.instance.execute(<<-SQL, id)
+        hashed = { id: id }
+        reply = QuestionsDatabase.instance.execute(<<-SQL, hashed)
             SELECT
                 *
             FROM
                 replies
             WHERE
-                id = ?
+                replies.id = :id
         SQL
-        return nil unless reply.length > 0
+        reply.map { |data| Reply.new(data) }
+    end
+
+    def self.find_by_parent_reply_id(parent_reply_id)
+        hashed = { parent_reply_id: parent_reply_id }
+        reply = QuestionsDatabase.instance.execute(<<-SQL, hashed)
+            SELECT
+                *
+            FROM
+                replies
+            WHERE
+                replies.parent_reply_id = :parent_reply_id
+            SQL
+        reply.map { |data| Reply.new(data) }
+    end
+
+    def self.find_by_replier_id(replier_id)
+        hashed = { replier_id: replier_id }
+        reply = QuestionsDatabase.instance.execute(<<-SQL, hashed)
+            SELECT
+                *
+            FROM
+                replies
+            WHERE
+                replies.replier_id = :replier_id
+            SQL
+        reply.map { |data| Reply.new(data) }
+    end
+
+    def self.find_by_question_id(question_id)
+        hashed = { question_id: question_id }
+        reply = QuestionsDatabase.instance.execute(<<-SQL, hashed)
+            SELECT
+                *
+            FROM
+                replies
+            WHERE
+                replies.question_id = :question_id
+            SQL
+        reply.map { |data| Reply.new(data) }
+    end
+
+    def initialize(options)
+        @id, @parent_reply_id = nil, @replier_id, @question_id, @body =
+            options.values_at('id', 'parent_reply_id', 'replier_id', 'question_id', 'body')
     end
 
 end
