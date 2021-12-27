@@ -74,4 +74,8 @@ class Reply
         User.find_by_id(replier_id)
     end
 
+    def question
+        Question.find_by_id(question_id)
+    end
+
 end
