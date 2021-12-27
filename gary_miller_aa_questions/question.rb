@@ -63,5 +63,8 @@ class Question
         @id, @questioner_id, @title, @body = 
         options.values_at('id', 'questioner_id', 'title', 'body')
     end
-    
+
+    def author
+        User.find_by_id(questioner_id)
+    end
 end
