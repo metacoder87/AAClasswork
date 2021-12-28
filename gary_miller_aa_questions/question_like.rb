@@ -63,6 +63,26 @@ class QuestionLike
         question.map { |data| Question.new(data) }
     end
 
+    def self.most_liked_questions(n)
+        question = QuestionsDatabase.instance.execute(<<-SQL, top: n)
+            SELECT
+                *
+            FROM
+                questions
+            JOIN
+                question_likes
+            ON
+                questions.id = question_likes.question_id
+            GROUP BY
+                questions.id
+            ORDER BY
+                COUNT(*) DESC
+            LIMIT
+                :top
+            SQL
+        question.map { |data| Question.new(data) }
+    end
+
     def self.find_by_id(id)
         hashed = { id: id }
         like = QuestionsDatabase.instance.execute(<<-SQL, hashed)
