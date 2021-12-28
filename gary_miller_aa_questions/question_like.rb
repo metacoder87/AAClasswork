@@ -28,6 +28,23 @@ class QuestionLike
                 question_likes.question_id = :question_id
             SQL
         likers.map { |data| User.new(data) }
+    end
+
+    def self.num_likes_for_question_id(question_id)
+        hashed = { question_id: question_id }
+        question_data = QuestionsDatabase.instance.execute(<<-SQL, hashed)
+            SELECT
+                COUNT(*) AS likes
+            FROM
+                questions
+            JOIN
+                question_likes
+            ON
+                questions.id = question_likes.question_id
+            WHERE
+                questions.id = :question_id
+        SQL
+    end
 
     def self.find_by_id(id)
         hashed = { id: id }
