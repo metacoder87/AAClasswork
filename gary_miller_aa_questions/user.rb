@@ -88,7 +88,7 @@ class User
         hashed = { fname: @fname, lname: @lname }
         
         if @id
-            QuestionsDatabase.instance.execute(<<-SQL, hashed.merge({ id: id }))
+            QuestionsDatabase.execute(<<-SQL, hashed.merge({ id: id }))
                 UPDATE
                     users
                 SET
@@ -97,7 +97,7 @@ class User
                     users.id = :id
             SQL
         else
-            QuestionsDatabase.instance.execute(<<-SQL, hashed)
+            QuestionsDatabase.execute(<<-SQL, hashed)
                 INSERT INTO
                     users (fname, lname)
                 VALUES
