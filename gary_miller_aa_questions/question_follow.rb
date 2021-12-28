@@ -30,6 +30,23 @@ class QuestionFollow
         follow.map { |data| User.new(data) }
     end
 
+    def self.followed_questions_for_user_id(user_id)
+        hashed = { user_id: user_id }
+        question = QuestionDatabase.instance.execute(<<-SQL, hashed)
+            SELECT
+                *
+            FROM
+                questions
+            JOIN
+                question_follows
+            ON
+                questions.id = question_follows.question_id
+            WHERE
+                question_follows.follower_id = :user_id
+            SQL
+        question.map { |data| Question.new(data) }
+    end
+
     def self.find_by_id(id)
         hashed = { id: id }
         follow = QuestionsDatabase.instance.execute(<<-SQL, hashed)
