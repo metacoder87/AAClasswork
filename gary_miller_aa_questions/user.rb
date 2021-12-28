@@ -67,4 +67,21 @@ class User
         QuestionLike.liked_questions_for_user_id(id)
     end
 
+    def average_karma
+        question = QuestionsDatabase.get_first_value(<<-SQL, user_id: id)
+            SELECT
+                CAST(COUNT(question_likes.id) AS FLOAT) /
+                COUNT(DISTINCT(questions.id)) AS karma_pts
+            FROM
+                questions
+            LEFT OUTER JOIN
+                question_likes
+            ON
+                question.id = question_likes.question_id
+            WHERE
+                questions.questioner_id = :user_id
+            SQL
+        question.map { |data| Question.new(data) }
+    end
+
 end
