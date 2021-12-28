@@ -15,7 +15,7 @@ class QuestionFollow
 
     def self.followers_for_question_id(question_id)
         hashed = { question_id: question_id }
-        follow = QuestionDatabase.instance.execute(<<-SQL, hashed)
+        follow = QuestionsDatabase.instance.execute(<<-SQL, hashed)
             SELECT
                 *
             FROM
@@ -32,7 +32,7 @@ class QuestionFollow
 
     def self.followed_questions_for_user_id(user_id)
         hashed = { user_id: user_id }
-        question = QuestionDatabase.instance.execute(<<-SQL, hashed)
+        question = QuestionsDatabase.instance.execute(<<-SQL, hashed)
             SELECT
                 *
             FROM
