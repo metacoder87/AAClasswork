@@ -70,6 +70,31 @@ class Reply
             options.values_at('id', 'parent_reply_id', 'replier_id', 'question_id', 'body')
     end
 
+    def save
+        hashed = { parent_reply_id: parent_reply_id, replier_id: replier_id, question_id: question_id, body: body }
+
+        if @id
+            QuestionsDatabase.execute(<<-SQL, hashed.merge( { id: id } ))
+                UPDATE
+                    replies
+                SET
+                    parent_reply_id = :parent_reply_id, replier_id = :replier_id, question_id = :question_id, body = :body
+                WHERE
+                    replies.id = :id
+            SQL
+        else
+            QuestionsDatabase.execute(<<-SQL, hashed)
+                INSERT INTO
+                    replies (parent_reply_id, replier_id, question_id, body)
+                VALUES
+                    (:parent_reply_id, :replier_id, :question_id, :body)
+            SQL
+
+            @id = QuestionsDatabase.last_insert_row_id
+        end
+        self
+    end
+
     def author
         User.find_by_id(replier_id)
     end
