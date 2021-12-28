@@ -47,6 +47,26 @@ class QuestionFollow
         question.map { |data| Question.new(data) }
     end
 
+    def self.most_followed_questions(n)
+        question = QuestionsDatabase.instance.execute(<<-SQL, top: n)
+            SELECT
+                *
+            FROM
+                questions
+            JOIN
+                question_follows
+            ON 
+                questions.id = question_follows.question_id
+            GROUP BY
+                questions.id
+            ORDER BY
+                COUNT(*) DESC
+            LIMIT
+                :top
+            SQL
+        question.map { |data| Question.new(data) }
+    end
+
     def self.find_by_id(id)
         hashed = { id: id }
         follow = QuestionsDatabase.instance.execute(<<-SQL, hashed)
