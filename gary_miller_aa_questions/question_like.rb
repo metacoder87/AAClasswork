@@ -13,6 +13,22 @@ class QuestionLike
             SQL
     end
 
+    def self.likers_for_question_id(question_id)
+        hashed = { question_id: question_id }
+        likers = QuestionsDatabase.instance.execute(<<-SQL, hashed)
+            SELECT
+                *
+            FROM
+                users
+            JOIN
+                question_likes
+            ON
+                users.id = question_likes.liker_id
+            WHERE
+                question_likes.question_id = :question_id
+            SQL
+        likers.map { |data| User.new(data) }
+
     def self.find_by_id(id)
         hashed = { id: id }
         like = QuestionsDatabase.instance.execute(<<-SQL, hashed)
