@@ -84,4 +84,29 @@ class User
         question.map { |data| Question.new(data) }
     end
 
+    def save
+        hashed = { fname: @fname, lname: @lname }
+        
+        if @id
+            QuestionsDatabase.instance.execute(<<-SQL, hashed.merge({ id: id }))
+                UPDATE
+                    users
+                SET
+                    fname = :fname, lname = :lname
+                WHERE
+                    users.id = :id
+            SQL
+        else
+            QuestionsDatabase.instance.execute(<<-SQL, hashed)
+                INSERT INTO
+                    users (fname, lname)
+                VALUES
+                    (:fname, :lname)
+            SQL
+
+            @id = QuestionsDatabase.last_insert_row_id
+        end
+        self
+    end
+
 end
