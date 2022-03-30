@@ -40,4 +40,8 @@ class Response < ApplicationRecord
             (:id IS NULL) OR (responses.id != :id)
         SQL
     end
+
+    def respondent_already_answered?
+        sibling_responses.exists?(respondent_id: self.respondent_id)
+    end
 end
