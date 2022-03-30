@@ -14,14 +14,23 @@ class Question < ApplicationRecord
     has_many :responses,
         through: :answer_choices,
         source: :responses
-    end
+    def results_all_sql
+        ac = AnswerChoice.find_by_sql([<<-SQL, id])
+        SELECT
+            answer_choices.text, COUNT(responses.id) AS num_responses
+        FROM
+            answer_choices
+            LEFT OUTER JOIN responses
+                ON answer_choices.id = responses.answer_choice_id
+            WHERE
+                answer_choices.question_id = ?
+            GROUP BY
+                answer_choices.id
+        SQL
 
-    def results_two_queries
-        results = {}
-        self.answer_choices.includes(:responses).each do |ac|
-            results[ac.text] = ac.responses.length
+        ac.inject({}) do |results, answer|
+            results[answer.text] = answer.num_responses; results
         end
-        return results
-    end
 
+    end
 end
