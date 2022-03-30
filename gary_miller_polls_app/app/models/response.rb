@@ -44,4 +44,14 @@ class Response < ApplicationRecord
     def respondent_already_answered?
         sibling_responses.exists?(respondent_id: self.respondent_id)
     end
+
+private
+
+    def not_duplicate_response
+        if respondent_already_answered?
+            errors[:respondent_id] << 'cannot vote more than once per question'
+        end
+    end
+
+    
 end
