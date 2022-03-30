@@ -10,4 +10,23 @@ class User < ApplicationRecord
         primary_key: :id,
         foreign_key: :respondent_id,
         class_name: 'Response'
+private
+
+    def polls_with_completion_counts
+        joins_sql = <<-SQL
+            LEFT OUTER JOIN (
+                SELECT
+                    *
+                FROM
+                    responses
+                WHERE
+                    respondent_id = #{self.id}
+            ) AS responses ON answer_choices.id = responses.answer_choice_id
+        SQL
+
+        Poll.joins(questions: :answer_choices)
+                .joins(joins_sql)
+                .group('polls.id')
+    end
+    
 end
