@@ -14,11 +14,12 @@ class Question < ApplicationRecord
     has_many :responses,
         through: :answer_choices,
         source: :responses
+    end
 
-    def results_n_plus_one
+    def results_two_queries
         results = {}
-        self.answer_choices.each do |ac|
-            results[ac.text] = ac.responses.count
+        self.answer_choices.includes(:responses).each do |ac|
+            results[ac.text] = ac.responses.length
         end
         return results
     end
