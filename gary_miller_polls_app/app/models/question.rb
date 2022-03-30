@@ -14,6 +14,23 @@ class Question < ApplicationRecord
     has_many :responses,
         through: :answer_choices,
         source: :responses
+
+    def results_n_plus_one
+        results = {}
+        self.answer_choices.each do |ac|
+            results[ac.text] = ac.responses.count
+        end
+        return results
+    end
+
+    def results_two_queries
+        results = {}
+        self.answer_choices.includes(:responses).each do |ac|
+            results[ac.text] = ac.responses.length
+        end
+        return results
+    end
+
     def results_all_sql
         ac = AnswerChoice.find_by_sql([<<-SQL, id])
         SELECT
@@ -32,5 +49,16 @@ class Question < ApplicationRecord
             results[answer.text] = answer.num_responses; results
         end
 
+    end
+
+    def results
+        ac = self.answer_choices
+                    .select('answer_choices.text, COUNT(responses.id) AS num_responses')
+                    .left_outer_joins(:responses)
+                    .group('answer_choices.id')
+
+        ac.inject({}) do |results, answer|
+            results[answer.text] = answer.num_responses; results
+        end
     end
 end
