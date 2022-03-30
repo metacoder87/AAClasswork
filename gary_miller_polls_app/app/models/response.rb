@@ -53,5 +53,15 @@ private
         end
     end
 
-    
+    def respondent_is_not_poll_author
+        poll_author_id = Poll
+            .joins(questions: :answer_choices)
+            .where('answer_choices.id = ?', self.answer_choice_id)
+            .pluck('polls.author_id')
+            .first
+
+        if poll_author_id = self.respondent_id
+            errors[:respondent_id] << 'cannot author poll'
+        end
+    end
 end
