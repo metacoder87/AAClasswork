@@ -43,7 +43,7 @@ class SQLObject
     # ...
     everything = DBConnection.execute(<<-SQL)
       SELECT
-        #{table_name}.*
+        *
       FROM
         #{table_name}
     SQL
@@ -53,10 +53,20 @@ class SQLObject
 
   def self.parse_all(results)
     # ...
+    results.map { |result| self.new(result) }
   end
 
   def self.find(id)
     # ...
+    results = DBConnection.execute(<<-SQL, id)
+      SELECT
+        *
+      FROM
+        #{table_name}
+      WHERE id = ?
+    SQL
+    
+    parse_all(results).first
   end
 
   def initialize(params = {})
@@ -66,7 +76,7 @@ class SQLObject
       if self.class.columns.include?(name)
         self.send("#{name}=", val)
       else
-        raise "name not found '#{name}'"
+        raise "unknown attribute '#{name}'"
       end
     end
   end
@@ -83,13 +93,36 @@ class SQLObject
 
   def insert
     # ...
+    columns = self.class.columns.drop(1)
+    names = columns.map(&:to_s).join(", ")
+    question_marks = (["?"] * columns.count).join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values.drop(1))
+      INSERT INTO
+        #{self.class.table_name} (#{names})
+      VALUES
+        (#{question_marks})
+    SQL
+    self.id = DBConnection.last_insert_row_id
   end
 
   def update
     # ...
+    set_line = self.class.columns
+      .map { |attr| "#{attr}= ?" }.join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values, id)
+      UPDATE
+        #{self.class.table_name}
+      SET
+        #{set_line}
+      WHERE
+        #{self.class.table_name}.id = ?
+    SQL
   end
 
   def save
     # ...
+    id.nil? ? insert : update
   end
 end
