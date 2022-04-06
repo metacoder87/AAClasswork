@@ -11,11 +11,12 @@ class AssocOptions
 
   def model_class
     # ...
-
+    @class_name.constantize
   end
 
   def table_name
     # ...
+    model_class.table_name
   end
 end
 
@@ -44,7 +45,7 @@ class HasManyOptions < AssocOptions
     }
 
     defaults.keys.each do |key|
-      self.send("#{key}", options[key] || defaults[key])
+      self.send("#{key}=", options[key] || defaults[key])
     end
   end
 end
